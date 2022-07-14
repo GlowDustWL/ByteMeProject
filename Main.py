@@ -1,5 +1,6 @@
 #Christian Znidarsic
 print("Hello world")
+#This is a merge from Christian
 
 #Libby Lewis
 print("This is Libby's first commit")
@@ -10,5 +11,3 @@ print("Joseph's First Commit --> Hello world")
 # Michaela
 print("hellllllllllloooooooooooooooooo - Michaela")
 print("Joseph's 2nd Commit")
-
-#Christian Znidarsic
