@@ -11,6 +11,11 @@ print("Learning more about branches and commits")
 
 # Michaela
 print("hellllllllllloooooooooooooooooo - Michaela")
+
+print("Joseph's 2nd Commit")
+
+print("Michaela's branch push")
+
 print("Joseph's 2nd Commit")
 
 # William
