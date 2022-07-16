@@ -3,34 +3,16 @@ import pygame
 from sys import exit
 import button
 
-<<<<<<< Updated upstream
-# Libby Lewis
-print("This is Libby's first commit")
-print("Testing Libby's First Branch")
-print("Testing again")
-=======
 # initialize pygame
 pygame.init()
->>>>>>> Stashed changes
 
 # declare variables
 width = 1600
 height = 900
 
-<<<<<<< Updated upstream
-# Michaela
-print("hellllllllllloooooooooooooooooo - Michaela")
-
-print("Joseph's 2nd Commit")
-
-print("Michaela's branch push")
-
-print("Joseph's 2nd Commit")
-=======
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Wheel of Jeopardy")
 clock = pygame.time.Clock()
->>>>>>> Stashed changes
 
 # surfaces
 background_1 = pygame.image.load('images/space_background.jpg').convert()
