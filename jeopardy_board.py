@@ -28,13 +28,17 @@ clock = pygame.time.Clock()
 background_1 = pygame.image.load('images/space_background.jpg').convert()
 background_1 = pygame.transform.scale(background_1, (width, height))
 
-# board box sizes
-x_dim = 100
-y_dim = 50
+# full board size
+full_x_dim = 600
+full_y_dim = 480
 
 # board padding
 x_pad = 10 
 y_pad = 10
+
+# board box sizes
+x_dim = (full_x_dim - x_pad*7)/6
+y_dim = (full_y_dim - y_pad*6)/5
 
 # title alignment
 title_x_start = 900
@@ -44,8 +48,6 @@ title_y_dim = y_dim + y_pad*2
 # board alignment
 full_x_start = 900
 full_y_start = title_y_start + title_y_dim + 10
-full_x_dim = x_dim*6+x_pad*(6+1)
-full_y_dim = y_dim*5+y_pad*(5+1)
 title_x_dim = full_x_dim
 
 # main screen with jeopardy board in corner
