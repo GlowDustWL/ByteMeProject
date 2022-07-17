@@ -1,10 +1,8 @@
 # Copied straight from Chris for test GUI setup
 
 # import statements
-from telnetlib import X3PAD
 import pygame
 from sys import exit
-import button
 
 # initialize pygame
 pygame.init()
