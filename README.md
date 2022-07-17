@@ -1,4 +1,11 @@
 # githubTest
 A test repository.
 
-The quick brown fox jumps over the lazy dog.
+# Branch control:
+make new branch from master: \
+git checkout -b [some branch name]
+
+# Commit and Push:
+git add . # adds all the files, can also git add [filename] \
+git commit -a 'commit message' \
+git push
