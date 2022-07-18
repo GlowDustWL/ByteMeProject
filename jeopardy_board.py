@@ -53,7 +53,6 @@ categories = ['will', 'libby', 'chris', 'joe', 'mich', 'xyz']
 # Dollar amount boxes
 dollar = ['$200', '$400', '$600', '$800', '$1000']
 
-
 # main screen with jeopardy board in corner
 def jeopardyBoard():
     while True:
