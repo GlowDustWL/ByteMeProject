@@ -1,22 +1,31 @@
 import random
 import sys
+from player import Player
 
 
 class Game:
     def __init__(self, spins=50):
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
-        self.questions = [
-            [['Question', 'Correct', 'Incorrect 1', 'Incorrect 2'] for i in range(5)] for j in range(6)]
-        self.current_round = 1
+        self.questions = []
+        self.read_database()
+        self.current_round = 1  # 1 base
         self.spin_total = spins
         self.spins_left = spins
-        self.current_player = 1
+        self.current_player = 0  # 0 base
         self.total_player = 2  # todo: increase later, allow parameter
+        self.players = []
+        for i in range(self.total_player):
+            self.players.append(Player("Player " + str(i+1)))
 
     # read database for questions & answers to populate internal data structures
     def read_database(self):
-        pass
+        # todo: add json file for data
+        self.questions = [
+            [['Question_placeholder?', 'Correct', 'Incorrect 1', 'Incorrect 2'] for i in range(5)] for j in range(6)]
+
+    def is_board_empty(self):
+        return not any(self.questions)
 
     # Among 18 sector, get a random spin result
     # either string or index num of category
@@ -30,26 +39,36 @@ class Game:
         return result % 6
 
     def next_player(self):
-        if self.current_player < self.total_player:
+        if self.current_player < self.total_player - 1:
             self.current_player += 1
         else:
-            self.current_player = 1
+            self.current_player = 0
 
     def get_category_next_question(self, category_index):
         return self.questions[category_index].pop(0)
+
+    # give the value of the question that just got popped
+    def get_category_value(self, category_index):
+        value = 1000 - len(self.questions[category_index]) * 200
+        if self.current_round == 2:
+            return value * 2
+        return value
 
     def question_sequence(self, category):
         # check if empty
         if len(self.questions[category]) == 0:
             print("Category is empty! Spin Again!")
             return
+        # get score value by checking how many questions remaining in category
+        print("Category " + str(category))
         if not self.question_prompt(
-                self.get_category_next_question(category)):
+                self.get_category_next_question(category), self.get_category_value(category)):
             self.next_player()
 
-    def question_prompt(self, question_item):
+    def question_prompt(self, question_item, value):
         # todo: add randomness
         # todo: add player class integration
+        print("For a value of " + str(value))
         print(question_item[0])
         print("1. " + question_item[1])
         print("2. " + question_item[2])
@@ -57,9 +76,15 @@ class Game:
         answer = int(input("Select the answer (1-3):"))
         if answer == 1:
             print("You are correct!")
+            self.players[self.current_player].add_score(value)
+            print("Your new score is: " +
+                  str(self.players[self.current_player].get_score()))
             return True
         else:
             print("You are incorrect.")
+            self.players[self.current_player].sub_score(value)
+            print("Your new score is: " +
+                  str(self.players[self.current_player].get_score()))
             return False
 
     # run playable demo
@@ -70,7 +95,7 @@ class Game:
             print("==========")
             print("This is round " + str(self.current_round))
             print(str(self.spins_left) + " spins remaining!")
-            print("Player " + str(self.current_player) + "'s turn")
+            print("Player " + str(self.current_player + 1) + "'s turn")
             input("Press Enter to spin...")
             self.spins_left -= 1
             spin_result = self.spin()
@@ -79,10 +104,12 @@ class Game:
                 if spin_result == 'lose turn':
                     self.next_player()
                 elif spin_result == 'free turn':
-                    # todo: add free turn token to player class instance
+                    self.players[self.current_player].add_token()
                     pass
                 elif spin_result == 'bankrupt':
-                    # todo: remove all points from player class instance
+                    self.players[self.current_player].zero_score()
+                    print("Your new score is: " +
+                          str(self.players[self.current_player].get_score()))
                     self.next_player()
                 elif spin_result == "player's choice":
                     # todo: add error checking
@@ -99,10 +126,22 @@ class Game:
                     pass
             else:
                 self.question_sequence(spin_result)
-            if self.spins_left <= 0:
+            if self.is_board_empty() or self.spins_left <= 0:
+                # reload board
+                # todo: use different questions
+                self.read_database()
                 print("Round " + str(self.current_round) + " over!")
+                print("The score for all players are...")
+                for i in range(self.total_player):
+                    print("Player " + str(i) + ": " +
+                          str(self.players[i].get_score()))
                 self.current_round += 1
                 self.spins_left = self.spin_total
+        winner = self.players[0]
+        for player in self.players:
+            if player.get_score() >= winner.get_score():
+                winner = player
+        print(str(winner.get_name()) + " is the winner!")
         return
 
 
