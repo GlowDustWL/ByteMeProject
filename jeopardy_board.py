@@ -48,6 +48,12 @@ full_x_start = 900
 full_y_start = title_y_start + title_y_dim + 10
 title_x_dim = full_x_dim
 
+# title boxes
+categories = ['will', 'libby', 'chris', 'joe', 'mich', 'xyz']
+# Dollar amount boxes
+dollar = ['$200', '$400', '$600', '$800', '$1000']
+
+
 # main screen with jeopardy board in corner
 def jeopardyBoard():
     while True:
@@ -56,16 +62,21 @@ def jeopardyBoard():
         # Draw title boxes
         pygame.draw.rect(background_1, dark_blue, pygame.Rect(title_x_start, title_y_start, title_x_dim, title_y_dim)) 
         for x in range (6):
-            pygame.draw.rect(background_1, light_blue, pygame.Rect(title_x_start+x_pad+x_dim*x+x_pad*x, \
-                        title_y_start+y_pad, x_dim, y_dim))\
-            # self.screen.blit(self.font.render('hellooo', True, color, color))
-        # Draw Big Board Rectangle
-        pygame.draw.rect(background_1, dark_blue, pygame.Rect(full_x_start, full_y_start, full_x_dim, full_y_dim))        
+            # Draw Big Board Rectangle
+            rect_obj = pygame.draw.rect(background_1, light_blue, pygame.Rect(title_x_start+x_pad+x_dim*x+x_pad*x, \
+                        title_y_start+y_pad, x_dim, y_dim))
+            text_surface_object = pygame.font.SysFont('freesansbold.ttf', 32).render(categories[x], True, light_purple)
+            text_rect = text_surface_object.get_rect(center=rect_obj.center)
+            screen.blit(text_surface_object, text_rect)       
         # Draw sub boxes
+        pygame.draw.rect(background_1, dark_blue, pygame.Rect(full_x_start, full_y_start, full_x_dim, full_y_dim)) 
         for x in range (6):
             for y in range (5):
-                pygame.draw.rect(background_1, light_blue, pygame.Rect(full_x_start+x_pad+x_dim*x+x_pad*x, \
-                        full_y_start+y_pad+y_dim*y+y_pad*y, x_dim, y_dim))
+                rect_obj = pygame.draw.rect(background_1, light_blue, pygame.Rect(title_x_start+x_pad+x_dim*x+x_pad*x, \
+                        title_y_start+y_pad+y_dim*y+y_pad*y+y_dim+3*y_pad, x_dim, y_dim))
+                text_surface_object = pygame.font.SysFont('freesansbold.ttf', 32).render(dollar[y], True, light_purple)
+                text_rect = text_surface_object.get_rect(center=rect_obj.center)
+                screen.blit(text_surface_object, text_rect)
         pygame.display.flip()       
         # event handlers
         for event in pygame.event.get():
