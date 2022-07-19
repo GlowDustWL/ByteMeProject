@@ -1,5 +1,6 @@
 import random
 import sys
+import json
 from player import Player
 
 
@@ -8,6 +9,8 @@ class Game:
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
+        # todo: remove this later
+        self.initialize_dummy_database()
         self.read_database()
         self.current_round = 1  # 1 base
         self.spin_total = spins
@@ -20,9 +23,15 @@ class Game:
 
     # read database for questions & answers to populate internal data structures
     def read_database(self):
-        # todo: add json file for data
-        self.questions = [
+        f = open("questions.json", "r")
+        self.questions = json.loads(f.read())
+
+    def initialize_dummy_database(self):
+        f = open("questions.json", "w")
+        questions = [
             [['Question_placeholder?', 'Correct', 'Incorrect 1', 'Incorrect 2'] for i in range(5)] for j in range(6)]
+        f.write(json.dumps(questions))
+        f.close
 
     def is_board_empty(self):
         return not any(self.questions)
@@ -76,13 +85,17 @@ class Game:
         answer = int(input("Select the answer (1-3):"))
         if answer == 1:
             print("You are correct!")
+            print("[LOG]: Calling Player.add_score")
             self.players[self.current_player].add_score(value)
+            print("[LOG]: Calling Player.get_score")
             print("Your new score is: " +
                   str(self.players[self.current_player].get_score()))
             return True
         else:
             print("You are incorrect.")
+            print("[LOG]: Calling Player.sub_score")
             self.players[self.current_player].sub_score(value)
+            print("[LOG]: Calling Player.get_score")
             print("Your new score is: " +
                   str(self.players[self.current_player].get_score()))
             return False
@@ -104,10 +117,13 @@ class Game:
                 if spin_result == 'lose turn':
                     self.next_player()
                 elif spin_result == 'free turn':
+                    print("[LOG]: Calling Player.add_token")
                     self.players[self.current_player].add_token()
                     pass
                 elif spin_result == 'bankrupt':
+                    print("[LOG]: Calling Player.zero_score")
                     self.players[self.current_player].zero_score()
+                    print("[LOG]: Calling Player.get_score")
                     print("Your new score is: " +
                           str(self.players[self.current_player].get_score()))
                     self.next_player()
@@ -133,6 +149,7 @@ class Game:
                 print("Round " + str(self.current_round) + " over!")
                 print("The score for all players are...")
                 for i in range(self.total_player):
+                    print("[LOG]: Calling Player.get_score")
                     print("Player " + str(i) + ": " +
                           str(self.players[i].get_score()))
                 self.current_round += 1
