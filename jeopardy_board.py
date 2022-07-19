@@ -1,5 +1,3 @@
-# Copied straight from Chris for test GUI setup
-
 # import statements
 import pygame
 from sys import exit
@@ -13,6 +11,7 @@ light_purple = (190, 25, 207)
 light_blue = (83, 239, 252)
 color = (255,0,0)
 color2 = (0, 255, 0)
+white = (255, 255, 255)
 
 # declare variables
 width = 1600
@@ -35,16 +34,16 @@ x_pad = 10
 y_pad = 10
 
 # board box sizes
-x_dim = (full_x_dim - x_pad*7)/6
-y_dim = (full_y_dim - y_pad*6)/5
+x_dim = (full_x_dim - x_pad*8)/6
+y_dim = (full_y_dim - y_pad*8)/6
 
 # title alignment
-title_x_start = 900
-title_y_start = 70
+title_x_start = 950
+title_y_start = 50
 title_y_dim = y_dim + y_pad*2
 
 # board alignment
-full_x_start = 900
+full_x_start = title_x_start
 full_y_start = title_y_start + title_y_dim + 10
 title_x_dim = full_x_dim
 
@@ -68,7 +67,7 @@ def jeopardyBoard():
             text_rect = text_surface_object.get_rect(center=rect_obj.center)
             screen.blit(text_surface_object, text_rect)       
         # Draw sub boxes
-        pygame.draw.rect(background_1, dark_blue, pygame.Rect(full_x_start, full_y_start, full_x_dim, full_y_dim)) 
+        pygame.draw.rect(background_1, dark_blue, pygame.Rect(full_x_start, full_y_start, full_x_dim, full_y_dim-y_dim-y_pad*2)) 
         for x in range (6):
             for y in range (5):
                 rect_obj = pygame.draw.rect(background_1, light_blue, pygame.Rect(title_x_start+x_pad+x_dim*x+x_pad*x, \
@@ -76,7 +75,27 @@ def jeopardyBoard():
                 text_surface_object = pygame.font.SysFont('freesansbold.ttf', 32).render(dollar[y], True, light_purple)
                 text_rect = text_surface_object.get_rect(center=rect_obj.center)
                 screen.blit(text_surface_object, text_rect)
-        pygame.display.flip()       
+        pygame.display.flip()     
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            50, 50, 600, 400),  2, 3)  # Wheel section
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            950, 50, 600, 490),  2, 3)  # Jeopardy section
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            680, 50, 240, 400),  2, 3)  # Player info section
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            50, 480, 870, 50),  2, 3)  # status/ user promp
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            50, 550, 870, 255),  2, 3)  # questions / answers
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            950, 555, 50, 50),  2, 3)  # asnwer question button: A
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            950, 620, 50, 50),  2, 3)  # asnwer question button: B
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            950, 685, 50, 50),  2, 3)  # asnwer question button: C
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            950, 750, 50, 50),  2, 3)  # asnwer question button: D
+        pygame.draw.rect(background_1, white, pygame.Rect(
+            1150, 652, 200, 50),  2, 3)  # Spin The Wheel !  
         # event handlers
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -87,4 +106,5 @@ def jeopardyBoard():
         pygame.display.update()
         clock.tick(60)
 
-jeopardyBoard()
+if __name__=="__main__":
+    jeopardyBoard()
