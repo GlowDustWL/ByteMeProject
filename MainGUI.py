@@ -1,38 +1,38 @@
+# MainGUI class
+
 # import statements
 import pygame
-#from sys import exit
-#import button
 import mainMenu
 import loadingScreen
 import playScreen
 import endScreen
 
 
-# initialize pygame
-pygame.init()
+class MainGUI():
+    def __init__(self):
+        self.height = 900
+        self.width = 1600
+        self.screen = pygame.display.set_mode((self.width, self.height))
+        self.clock = pygame.time.Clock()
+
+        # screens
+        self.menuScreen = mainMenu.MainMenu(
+            self.screen, self.clock, self.height, self.width)
+        self.loadingScreen = loadingScreen.LoadingScreen(
+            self.screen, self.clock, self.height, self.width)
+        self.playScreen = playScreen.PlayScreen(
+            self.screen, self.clock, self.height, self.width)
+        self.endScreen = endScreen.EndScreen(
+            self.screen, self.clock, self.height, self.width)
+
+    def play(self):
+        pygame.init()
+
+        while True:
+            if self.menuScreen.getInput():
+                if self.loadingScreen.getInput():
+                    if self.playScreen.getInput():
+                        self.endScreen.getInput()
 
 
-# declare variables
-height = 900
-width = 1600
-
-
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Wheel of Jeopardy!")
-clock = pygame.time.Clock()
-
-
-# create objects for each screen
-menuScreen = mainMenu.MainMenu(screen, clock, height, width)
-# the information screen
-loadingScreen = loadingScreen.LoadingScreen(screen, clock, height, width)
-playScreen = playScreen.PlayScreen(screen, clock, height, width)
-endScreen = endScreen.EndScreen(screen, clock, height, width)
-
-# loop that iterates to drive game window state.
-while True:
-
-    if menuScreen.getInput():
-        if loadingScreen.getInput():
-            if playScreen.getInput():
-                endScreen.getInput()
+game = MainGUI().play()
