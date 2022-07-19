@@ -2,6 +2,7 @@
 import pygame
 from sys import exit
 import button
+from jeopardy_board import jeopardyBoard
 
 # initialize pygame
 pygame.init()
@@ -71,29 +72,9 @@ def playScreen():
             if back_button.clicked:
                 # mainMenu()
                 loop = False
-
-        # Drawing Rectangle
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            50, 50, 600, 400),  2, 3)  # Wheel section
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            950, 50, 600, 480),  2, 3)  # Jeopardy section
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            680, 50, 240, 400),  2, 3)  # Player info section
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            50, 480, 870, 50),  2, 3)  # status/ user promp
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            50, 550, 870, 255),  2, 3)  # questions / answers
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            950, 555, 50, 50),  2, 3)  # asnwer question button: A
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            950, 620, 50, 50),  2, 3)  # asnwer question button: B
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            950, 685, 50, 50),  2, 3)  # asnwer question button: C
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            950, 750, 50, 50),  2, 3)  # asnwer question button: D
-        pygame.draw.rect(background_play, white, pygame.Rect(
-            1150, 652, 200, 50),  2, 3)  # Spin The Wheel !
-
+        # Drawing Jeopardy Board and rectangles
+        jeopardyBoard()
+    
         # update the game state
         pygame.display.update()
         clock.tick(60)
