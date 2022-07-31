@@ -1,6 +1,7 @@
 # MainGUI class
 
 # import statements
+from turtle import screensize
 import pygame
 import mainMenu
 import loadingScreen
@@ -10,9 +11,11 @@ import endScreen
 
 class MainGUI():
     def __init__(self):
+
         self.height = 900
         self.width = 1600
-        self.screen = pygame.display.set_mode((self.width, self.height))
+        self.screen = pygame.display.set_mode(
+            (self.width, self.height))
         self.clock = pygame.time.Clock()
 
         # screens

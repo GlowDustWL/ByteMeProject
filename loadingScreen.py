@@ -11,8 +11,8 @@ class LoadingScreen():
         self.height = height
         self.width = width
         self.background_input = pygame.image.load(
-            'images/space_background.jpg').convert()
-        self.background = pygame.transform.scale(
+            'images/space_background.jpeg').convert()
+        self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
 
     # main menu

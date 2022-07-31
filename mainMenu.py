@@ -11,14 +11,16 @@ class MainMenu():
         self.height = height
         self.width = width
         self.background_input = pygame.image.load(
-            'images/space_background.jpg').convert()
-        self.background = pygame.transform.scale(
+            'images/space_background.jpeg').convert()
+        self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
 
     # main menu
 
     def getInput(self):
         text = textTitle.TextTitle("Wheel of Jeopardy", self.width/2, 150)
+        # self.screen.blit(self.background, (0, 0))
+        # pygame.display.update()
         while True:
 
             # buttons
