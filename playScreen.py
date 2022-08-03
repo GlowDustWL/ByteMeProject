@@ -61,6 +61,15 @@ class PlayScreen():
         narration = textDisplay.TextDisplay(
             str(numPlayers), 26, 480, 507)
 
+        # create text for each player to display scores
+        nameTextArray = []
+        scoreTextArray = []
+        for x in range(len(game.players)):
+            nameTextArray.append(textDisplay.TextDisplay(
+                game.players[x].name, 26, self.width/2, self.height - 810 + 70*x))
+            scoreTextArray.append(textDisplay.TextDisplay(
+                str(game.players[x].score), 26, self.width/2, self.height - 780 + 70*x))
+
         # self.screen.blit(self.background, (0, 0))
 
         show_spin = True
@@ -84,6 +93,12 @@ class PlayScreen():
             spinCountNum.draw(self.screen)
             narration.draw(self.screen)
 
+            # draw player names/scores
+            for x in nameTextArray:
+                x.draw(self.screen)
+            for x in scoreTextArray:
+                x.draw(self.screen)
+
             if show_spin:
                 spin_button.draw(self.screen)
 
@@ -106,6 +121,8 @@ class PlayScreen():
                     wheelText.setText(str(spin_result))
                     spinCountNum.setText(str(game.spins_left))
                     # show_spin = False
+                    game.players[0].add_score(500)
+                    scoreTextArray[0].setText(str(game.players[0].score))
 
             # update the game state
             pygame.display.update()
