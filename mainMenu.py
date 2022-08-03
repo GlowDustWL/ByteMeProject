@@ -24,9 +24,10 @@ class MainMenu():
         while True:
 
             # buttons
-            start_button = button.Button("START", self.width/2, self.height/2)
+            start_button = button.Button(
+                "START", 36, self.width/2, self.height/2)
             exit_button = button.Button(
-                "EXIT", self.width/2, self.height/2 + 50)
+                "EXIT", 36, self.width/2, self.height/2 + 50)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))

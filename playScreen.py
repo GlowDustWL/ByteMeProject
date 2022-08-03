@@ -23,9 +23,9 @@ class PlayScreen():
 
     # main menu
 
-    def getInput(self):
+    def getInput(self, numPlayers):
         # initialize game instance
-        game = MainDriver.Game()
+        game = MainDriver.Game(numPlayers)
 
         # drawing rectangleS
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
@@ -54,8 +54,12 @@ class PlayScreen():
         # drawing text
         wheelText = textDisplay.TextDisplay(
             "", 46, 350, 250)
-        spinCount = textDisplay.TextDisplay(
-            "Spins left: " + str(game.spins_left), 26, 150, 425)
+        spinCountText = textDisplay.TextDisplay(
+            "Spins left: ", 26, 150, 425)
+        spinCountNum = textDisplay.TextDisplay(
+            str(game.spins_left), 26, 230, 425)
+        narration = textDisplay.TextDisplay(
+            str(numPlayers), 26, 480, 507)
 
         # self.screen.blit(self.background, (0, 0))
 
@@ -65,18 +69,20 @@ class PlayScreen():
 
             # buttons
             game_completed_button = button.Button(
-                "GAME COMPLETED", self.width*(1 - 1/8), self.height - 50)
+                "GAME COMPLETED", 32, self.width*(1 - 1/8), self.height - 50)
             quit_to_main_button = button.Button(
-                "QUIT TO MAIN", self.width/10, self.height - 50)
+                "QUIT TO MAIN", 32, self.width/10, self.height - 50)
             spin_button = button.Button(
-                "SPIN", 600, 425)
+                "SPIN", 32, 600, 425)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))
             game_completed_button.draw(self.screen)
             quit_to_main_button.draw(self.screen)
             wheelText.draw(self.screen)
-            spinCount.draw(self.screen)
+            spinCountText.draw(self.screen)
+            spinCountNum.draw(self.screen)
+            narration.draw(self.screen)
 
             if show_spin:
                 spin_button.draw(self.screen)
@@ -98,8 +104,7 @@ class PlayScreen():
                     spin_result = game.spin()
                     game.spins_left -= 1
                     wheelText.setText(str(spin_result))
-                    spinCount.setText(
-                        "Spins left: " + str(game.spins_left))
+                    spinCountNum.setText(str(game.spins_left))
                     # show_spin = False
 
             # update the game state

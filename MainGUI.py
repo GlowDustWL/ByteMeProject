@@ -18,6 +18,9 @@ class MainGUI():
             (self.width, self.height))
         self.clock = pygame.time.Clock()
 
+        # player count
+        self.numPlayers = 0
+
         # screens
         self.menuScreen = mainMenu.MainMenu(
             self.screen, self.clock, self.height, self.width)
@@ -34,7 +37,8 @@ class MainGUI():
         while True:
             if self.menuScreen.getInput():
                 if self.loadingScreen.getInput():
-                    if self.playScreen.getInput():
+                    self.numPlayers = self.loadingScreen.numPlayers
+                    if self.playScreen.getInput(self.numPlayers):
                         self.endScreen.getInput()
 
 

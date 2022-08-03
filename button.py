@@ -4,8 +4,8 @@ import pygame
 
 
 class Button():
-    def __init__(self, text_input, x, y):
-        font = pygame.font.Font('freesansbold.ttf', 32)
+    def __init__(self, text_input, font_size, x, y):
+        font = pygame.font.Font('freesansbold.ttf', font_size)
         white = (255, 255, 255)
         blue = (0, 0, 128)
         self.x_pos = x
