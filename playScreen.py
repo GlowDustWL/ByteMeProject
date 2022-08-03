@@ -46,8 +46,8 @@ class PlayScreen():
             950, 685, 50, 50),  2, 3)  # asnwer question button: C
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
             950, 750, 50, 50),  2, 3)  # asnwer question button: D
-        pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-            1150, 652, 200, 50),  2, 3)  # Spin The Wheel !
+        # pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+        #     1150, 652, 200, 50),  2, 3)  # Spin The Wheel !
         # pygame.gfxdraw.rectangle(self.background, pygame.Rect(
         #     50, 50, 600, 400), self.box_color)
 
@@ -82,7 +82,7 @@ class PlayScreen():
             quit_to_main_button = button.Button(
                 "QUIT TO MAIN", 32, self.width/10, self.height - 50)
             spin_button = button.Button(
-                "SPIN", 32, 600, 425)
+                "SPIN", 46, 1250, 680)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))
