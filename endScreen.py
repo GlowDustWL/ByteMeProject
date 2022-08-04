@@ -11,8 +11,8 @@ class EndScreen():
         self.height = height
         self.width = width
         self.background_input = pygame.image.load(
-            'images/space_background.jpg').convert()
-        self.background = pygame.transform.scale(
+            'images/space_background.jpeg').convert()
+        self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
 
     # main menu
@@ -20,12 +20,13 @@ class EndScreen():
     def getInput(self):
         text = textMedium.TextMedium(
             "Thank you for Playing!", self.width/2, self.height/2)
+        # self.screen.blit(self.background, (0, 0))
         loop = True
         while loop:
 
             # buttons
             continue_button = button.Button(
-                "CONTINUE", self.width*(1 - 1/8), self.height - 50)
+                "CONTINUE", 32, self.width*(1 - 1/8), self.height - 50)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))

@@ -1,6 +1,7 @@
 # MainGUI class
 
 # import statements
+from turtle import screensize
 import pygame
 import mainMenu
 import loadingScreen
@@ -10,10 +11,15 @@ import endScreen
 
 class MainGUI():
     def __init__(self):
+
         self.height = 900
         self.width = 1600
-        self.screen = pygame.display.set_mode((self.width, self.height))
+        self.screen = pygame.display.set_mode(
+            (self.width, self.height))
         self.clock = pygame.time.Clock()
+
+        # player count
+        self.numPlayers = 0
 
         # screens
         self.menuScreen = mainMenu.MainMenu(
@@ -30,8 +36,10 @@ class MainGUI():
 
         while True:
             if self.menuScreen.getInput():
+                self.numPlayers = self.menuScreen.numPlayers
                 if self.loadingScreen.getInput():
-                    if self.playScreen.getInput():
+                    # self.numPlayers = self.loadingScreen.numPlayers
+                    if self.playScreen.getInput(self.numPlayers):
                         self.endScreen.getInput()
 
 

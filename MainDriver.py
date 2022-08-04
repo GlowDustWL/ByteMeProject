@@ -5,7 +5,7 @@ from player import Player
 
 
 class Game:
-    def __init__(self, spins=50):
+    def __init__(self, numPlayers, spins=50):
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
@@ -16,7 +16,7 @@ class Game:
         self.spin_total = spins
         self.spins_left = spins
         self.current_player = 0  # 0 base
-        self.total_player = 2  # todo: increase later, allow parameter
+        self.total_player = numPlayers  # todo: increase later, allow parameter
         self.players = []
         for i in range(self.total_player):
             self.players.append(Player("Player " + str(i+1)))
