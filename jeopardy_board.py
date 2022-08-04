@@ -70,3 +70,9 @@ class JeopardyBoard:
                 text_rect = text_surface_object.get_rect(
                     center=rect_obj.center)
                 surface.blit(text_surface_object, text_rect)
+
+    def removeSquare():
+        pass
+
+    def highlightSquare():
+        pass
