@@ -5,6 +5,7 @@ import pygame.gfxdraw
 import MainDriver
 import textDisplay
 import textTitle
+import jeopardy_board
 
 
 class PlayScreen():
@@ -30,8 +31,8 @@ class PlayScreen():
         # drawing rectangleS
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
             50, 50, 600, 400),  2, 3)  # Wheel section
-        pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-            950, 50, 600, 480),  2, 3)  # Jeopardy section
+        # pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+        #     950, 50, 600, 480),  2, 3)  # Jeopardy section
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
             680, 50, 240, 400),  2, 3)  # Player info section
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
@@ -59,7 +60,7 @@ class PlayScreen():
         spinCountNum = textDisplay.TextDisplay(
             str(game.spins_left), 26, 230, 425)
         narration = textDisplay.TextDisplay(
-            str(numPlayers), 26, 480, 507)
+            "Press \"SPIN\" to spin the wheel.", 26, 480, 507)
 
         # create text for each player to display scores
         nameTextArray = []
@@ -71,6 +72,7 @@ class PlayScreen():
                 str(game.players[x].score), 26, self.width/2, self.height - 780 + 70*x))
 
         # self.screen.blit(self.background, (0, 0))
+        board = jeopardy_board.JeopardyBoard()
 
         show_spin = True
         loop = True
@@ -92,6 +94,7 @@ class PlayScreen():
             spinCountText.draw(self.screen)
             spinCountNum.draw(self.screen)
             narration.draw(self.screen)
+            board.draw(self.screen)
 
             # draw player names/scores
             for x in nameTextArray:
@@ -124,6 +127,21 @@ class PlayScreen():
                     game.players[0].add_score(500)
                     scoreTextArray[0].setText(str(game.players[0].score))
 
-            # update the game state
+                    # game logic
+                    if type(spin_result) == str:
+                        if spin_result == 'lose turn':
+                            game.next_player()
+                            print(game.current_player)
+                        elif spin_result == 'free turn':
+                            game.players[game.current_player].add_token()
+                            narration.setText(
+                                "Player " + str(game.current_player + 1) + " gets a free turn.")
+                        elif spin_result == 'bankrupt':
+                            game.players[game.current_player].zero_score()
+                            print(str(game.players[game.current_player].score))
+                        elif spin_result == 'player\'s choice':
+                            pass
+
+                            # update the game state
             pygame.display.update()
             self.clock.tick(60)

@@ -36,8 +36,9 @@ class MainGUI():
 
         while True:
             if self.menuScreen.getInput():
+                self.numPlayers = self.menuScreen.numPlayers
                 if self.loadingScreen.getInput():
-                    self.numPlayers = self.loadingScreen.numPlayers
+                    # self.numPlayers = self.loadingScreen.numPlayers
                     if self.playScreen.getInput(self.numPlayers):
                         self.endScreen.getInput()
 
