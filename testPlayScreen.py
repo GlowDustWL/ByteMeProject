@@ -37,12 +37,7 @@ class MainGUI():
         pygame.init()
 
         while True:
-            if self.menuScreen.getInput():
-                self.numPlayers = self.menuScreen.numPlayers
-                if self.loadingScreen.getInput():
-                    # self.numPlayers = self.loadingScreen.numPlayers
-                    if self.playScreen.getInput(self.numPlayers):
-                        self.endScreen.getInput()
+            self.playScreen.getInput(2)
 
 
 game = MainGUI().play()

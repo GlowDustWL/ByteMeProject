@@ -6,10 +6,11 @@ import MainDriver
 import textDisplay
 import textTitle
 import jeopardyBoard
+import wheel
 
 
 class PlayScreen():
-    def __init__(self, screen, clock, height, width):
+    def __init__(self, screen, clock, height, width, categories):
         self.screen = screen
         self.clock = clock
         self.height = height
@@ -19,6 +20,8 @@ class PlayScreen():
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.box_color = (255, 255, 255)
+        # title boxes
+        self.categories = categories
 
         # self.game = MainDriver.Game()
 
@@ -73,6 +76,7 @@ class PlayScreen():
 
         # self.screen.blit(self.background, (0, 0))
         board = jeopardyBoard.JeopardyBoard()
+        myWheel = wheel.Wheel()
 
         show_spin = True
         loop = True
@@ -94,7 +98,7 @@ class PlayScreen():
             spinCountText.draw(self.screen)
             spinCountNum.draw(self.screen)
             narration.draw(self.screen)
-            board.draw(self.screen)
+            board.draw(self.screen, self.categories)
             # Remove squares from board, grid layout zero-indexed, test example
             x_remove = 0
             y_remove = 3
@@ -103,6 +107,9 @@ class PlayScreen():
             x_highlight = 2
             y_highlight = 0
             board.highlightSquare(self.screen, x_highlight, y_highlight)
+
+            # Draw wheel
+            myWheel.draw(self.screen)
 
 
             # draw player names/scores
