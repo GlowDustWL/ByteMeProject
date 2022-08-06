@@ -5,7 +5,7 @@ import pygame.gfxdraw
 import MainDriver
 import textDisplay
 import textTitle
-import jeopardy_board
+import jeopardyBoard
 
 
 class PlayScreen():
@@ -72,7 +72,7 @@ class PlayScreen():
                 str(game.players[x].score), 26, self.width/2, self.height - 780 + 70*x))
 
         # self.screen.blit(self.background, (0, 0))
-        board = jeopardy_board.JeopardyBoard()
+        board = jeopardyBoard.JeopardyBoard()
 
         show_spin = True
         loop = True
@@ -95,6 +95,15 @@ class PlayScreen():
             spinCountNum.draw(self.screen)
             narration.draw(self.screen)
             board.draw(self.screen)
+            # Remove squares from board, grid layout zero-indexed, test example
+            x_remove = 0
+            y_remove = 3
+            board.removeSquare(self.screen, x_remove, y_remove)
+            # Highlight squares from board, grid layout zero-indexed, test example
+            x_highlight = 2
+            y_highlight = 0
+            board.highlightSquare(self.screen, x_highlight, y_highlight)
+
 
             # draw player names/scores
             for x in nameTextArray:

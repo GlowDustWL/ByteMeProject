@@ -71,8 +71,15 @@ class JeopardyBoard:
                     center=rect_obj.center)
                 surface.blit(text_surface_object, text_rect)
 
-    def removeSquare():
-        pass
+    def removeSquare(self, surface, x, y):
+        rect_obj = pygame.draw.rect(surface, self.light_blue, pygame.Rect(self.title_x_start+self.x_pad+self.x_dim*x+self.x_pad*x,
+                                                                          self.title_y_start+self.y_pad+self.y_dim*y+self.y_pad*y+self.y_dim+3*self.y_pad, self.x_dim, self.y_dim))
 
-    def highlightSquare():
-        pass
+    def highlightSquare(self, surface, x, y):
+        rect_obj = pygame.draw.rect(surface, self.light_purple, pygame.Rect(self.title_x_start+self.x_pad+self.x_dim*x+self.x_pad*x,
+                                                                          self.title_y_start+self.y_pad+self.y_dim*y+self.y_pad*y+self.y_dim+3*self.y_pad, self.x_dim, self.y_dim))
+        text_surface_object = pygame.font.SysFont(
+                    'freesansbold.ttf', 32).render(self.dollar[y], True, self.light_blue)
+        text_rect = text_surface_object.get_rect(
+            center=rect_obj.center)
+        surface.blit(text_surface_object, text_rect)
