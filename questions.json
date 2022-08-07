@@ -2,7 +2,7 @@
     [
         [
             "Mars"
-        ]
+        ],
         [
             "What is the number of moons orbiting Mars?",
             "2",
@@ -41,34 +41,42 @@
     ],
     [
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2"
+            "Space"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2"
+            "First human to travel into space?",
+            "Yuri Gagarin",
+            "Alan Shepard",
+            "Vladimir Komarov",
+            "Neil Armstrong"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2"
+            "The first human, made object to orbit",
+            "Sputnik 1",
+            "Apollo 1",
+            "Salyut 1",
+            "None of the above 2"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2"
+            "First spacewalk by living being?",
+            "Aleksei Leonov",
+            "Neil Armstrong",
+            "None of the above",
+            "Yuri Gagarin"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2"
+            "The first flight of the space shuttle progarm by NASA was launched in",
+            "1981",
+            "1980",
+            "1979",
+            "1982"
+        ],
+        [
+            "Planets are moving towards each other was noticed by?",
+            "Copernicus",
+            "Isaac",
+            "Gagarian",
+            "Edwin"
         ]
     ],
     [
