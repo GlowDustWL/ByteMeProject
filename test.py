@@ -10,6 +10,7 @@
  
 # Import a library of functions called 'pygame'
 import pygame
+import time
  
 # Initialize the game engine
 pygame.init()
@@ -71,14 +72,15 @@ while not done:
     # text = pygame.transform.flip(text, False, True)
     # screen.blit(text, [30, 20])
     
- 
+
     # Animated rotation
     text = font.render("Rotating text", True, BLACK)
-    #text = pygame.transform.rotate(text, text_rotate_degrees)
-    text = pygame.transform.rotate(text, 30)
+    text = pygame.transform.rotate(text, text_rotate_degrees)
     text_rotate_degrees += 1
+    #text = pygame.transform.rotate(text, 90)
     screen.blit(text, [100, 50])
- 
+    time.sleep(0.2)
+    
     # Go ahead and update the screen with what we've drawn.
     # This MUST happen after all the other drawing commands.
     pygame.display.flip()
