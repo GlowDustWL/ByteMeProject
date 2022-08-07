@@ -57,13 +57,25 @@ class PlayScreen():
 
         # drawing text
         wheelText = textDisplay.TextDisplay(
-            "", 46, 350, 250)
+            "", 46, 1250, 750)
         spinCountText = textDisplay.TextDisplay(
             "Spins left: ", 26, 150, 425)
         spinCountNum = textDisplay.TextDisplay(
             str(game.spins_left), 26, 230, 425)
         narration = textDisplay.TextDisplay(
-            "Press \"SPIN\" to spin the wheel.", 26, 480, 507)
+            "Press \"SPIN\" to spin the wheel.", 26, 1265, 630)
+
+        # Questions/Answer Display
+        questionText = textDisplay.TextDisplay(
+            "This is question 1", 26, 480, 507)
+        ansAText = textDisplay.TextDisplay(
+            "answer A", 26, 125, 550+32)
+        ansBText = textDisplay.TextDisplay(
+            "answer B", 26, 125, 550+32+63*1)
+        ansCText = textDisplay.TextDisplay(
+            "answer C", 26, 125, 550+32+63*2)
+        ansDText = textDisplay.TextDisplay(
+            "answer D", 26, 125, 550+32+63*3)
 
         # create text for each player to display scores
         nameTextArray = []
@@ -99,6 +111,12 @@ class PlayScreen():
             spinCountNum.draw(self.screen)
             narration.draw(self.screen)
             board.draw(self.screen, self.categories)
+            ansAText.draw(self.screen)
+            ansBText.draw(self.screen)
+            ansCText.draw(self.screen)
+            ansDText.draw(self.screen)
+            questionText.draw(self.screen)
+
             # Remove squares from board, grid layout zero-indexed, test example
             x_remove = 0
             y_remove = 3
