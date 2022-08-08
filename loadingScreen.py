@@ -29,13 +29,23 @@ class LoadingScreen():
 
         # list for player names
         for i in range(numPlayers):
-            self.playerList.append("")
+            self.playerList.append("Enter Name Here")
 
         # Testing
-        self.playerList[0] = "Player 1"
+        #self.playerList[0] = "Player 1"
 
-        user_input_1 = inputBox.InputBox(
-            self.playerList[0], 32, self.width/2 - 75, self.height/2)
+        # create text for each player to display scores
+        nameTextArray = []
+        for i in range(numPlayers):
+            nameTextArray.append(textDisplay.TextDisplay(
+                ("Player " + str(i+1)), 26, self.width/2 - 120, self.height - 480 + 100*i))
+
+        input_boxes = []
+        for i in range(numPlayers):
+            input_boxes.append(inputBox.InputBox(
+                self.playerList[i], 32, self.width/2, self.height - 500 + 100*i))
+        # user_input_1 = inputBox.InputBox(
+        #    self.playerList[0], 32, self.width/2 - 75, self.height/2)
 
         loop = True
         while loop:
@@ -68,6 +78,10 @@ class LoadingScreen():
             # playerNum_5.draw(self.screen)
             playerNameText.draw(self.screen)
 
+            # draw player names/scores
+            for x in nameTextArray:
+                x.draw(self.screen)
+
             # event handlers
             for event in pygame.event.get():
                 # game window handlers
@@ -92,29 +106,58 @@ class LoadingScreen():
                     loop = False
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    for x in input_boxes:
+                        if x.input_rect.collidepoint(event.pos):
+                            x.clicked = True
+                            x.current_color = x.active_color
+                            self.playerList[input_boxes.index(x)] = ""
+                        else:
+                            x.clicked = False
+                            x.current_color = x.passive_color
                     print("in mouse down")
-                    if user_input_1.input_rect.collidepoint(event.pos):
-                        user_input_1.clicked = True
-                        user_input_1.current_color = user_input_1.active_color
-                    else:
-                        user_input_1.clicked = False
-                        user_input_1.current_color = user_input_1.passive_color
+                    # if user_input_1.input_rect.collidepoint(event.pos):
+                    #    user_input_1.clicked = True
+                    #    user_input_1.current_color = user_input_1.active_color
+                    # else:
+                    #    user_input_1.clicked = False
+                    #    user_input_1.current_color = user_input_1.passive_color
                 if event.type == pygame.KEYDOWN:
-                    print("in keydown")
-                    if event.key == pygame.K_BACKSPACE:
-                        self.playerList[0] = self.playerList[0][:-1]
-                    elif event.key == pygame.K_RETURN:
-                        user_input_1.clicked = False
-                        user_input_1.current_color = user_input_1.passive_color
-                    elif event.key == pygame.K_KP_ENTER:
-                        user_input_1.clicked = False
-                        user_input_1.current_color = user_input_1.passive_color
-                    else:
-                        print("in player list")
-                        self.playerList[0] += event.unicode
-                        print(self.playerList[0])
+                    #current_box = input_boxes[0]
+                    #player_num = 0
+                    for x in input_boxes:
+                        if x.clicked:
+                            player_num = input_boxes.index(x)
+                            #current_box = x
+                            #player_num = input_boxes.index(x)
+                            if event.key == pygame.K_BACKSPACE:
+                                self.playerList[player_num] = self.playerList[player_num][:-1]
+                            elif event.key == pygame.K_RETURN:
+                                x.clicked = False
+                                x.current_color = x.passive_color
+                            elif event.key == pygame.K_KP_ENTER:
+                                x.clicked = False
+                                x.current_color = x.passive_color
+                            else:
+                                self.playerList[player_num] += event.unicode
+                    #print("in keydown")
+                    # if event.key == pygame.K_BACKSPACE:
+                    #    self.playerList[0] = self.playerList[0][:-1]
+                    # elif event.key == pygame.K_RETURN:
+                    #    user_input_1.clicked = False
+                    #    user_input_1.current_color = user_input_1.passive_color
+                    # elif event.key == pygame.K_KP_ENTER:
+                    #    user_input_1.clicked = False
+                    #    user_input_1.current_color = user_input_1.passive_color
+                    # else:
+                    #    print("in player list")
+                    #    self.playerList[0] += event.unicode
+                    #    print(self.playerList[0])
 
-            user_input_1.draw(self.screen, self.playerList[0])
+            #j = 0
+            for x in input_boxes:
+                x.draw(self.screen, self.playerList[input_boxes.index(x)])
+                #j += 1
+            #user_input_1.draw(self.screen, self.playerList[0])
 
             # other handlers
             # ...

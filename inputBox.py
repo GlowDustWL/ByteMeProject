@@ -24,3 +24,6 @@ class InputBox():
         surface.blit(text_surface, (self.input_rect.x+5, self.input_rect.y+5))
         self.input_rect.w = max(100, text_surface.get_width()+10)
         pygame.display.flip()
+
+    def clear(self):
+        self.text_input = ""
