@@ -120,7 +120,6 @@
         ]
     ],
     [
-
         [
             "Planets & Stars"
         ],
@@ -200,46 +199,46 @@
                 "the Moho separates denser rocks below from less dense rocks above",
                 "seismic waves speed up as they pass across the Moho heading downward"
             ]
+        ]
+    ],
+    [
+        [
+            "Deep Space"
         ],
         [
-            [
-                "Deep Space"
-            ],
-            [
-                "What kind of space lies between stars??",
-                "Interstellar space",
-                "Intergalactic space",
-                "Interplanetary space",
-                "Intergalactellar space"
-            ],
-            [
-                "What is in 'empty' Space?",
-                "Hydrogen atoms and subatomic particles",
-                "Nothing, it's a perfect vacuum",
-                "There's a very small amount of air",
-                "Heavy atoms pulverized by the tremendous pressure"
-            ],
-            [
-                "Our solar system is a ...",
-                "Heliocentric",
-                "Lunacentric",
-                "Geocentric",
-                "Galacentric"
-            ],
-            [
-                "If the earth revolves around teh sun, what does the sun revolve around?",
-                "The milky way galaxy",
-                "Nothing, the sun stays still beceuase of gravity",
-                "The revoles around the universal center",
-                "The sun revolves around the great attractor"
-            ],
-            [
-                "What happens when a star is not massive enough for its supernova to form a black hole?",
-                "It becomes a neutron star",
-                "It becomes a class K star",
-                "It becomes a pulsar",
-                "It becomes a mini black hole"
-            ]
+            "What kind of space lies between stars??",
+            "Interstellar space",
+            "Intergalactic space",
+            "Interplanetary space",
+            "Intergalactellar space"
+        ],
+        [
+            "What is in 'empty' Space?",
+            "Hydrogen atoms and subatomic particles",
+            "Nothing, it's a perfect vacuum",
+            "There's a very small amount of air",
+            "Heavy atoms pulverized by the tremendous pressure"
+        ],
+        [
+            "Our solar system is a ...",
+            "Heliocentric",
+            "Lunacentric",
+            "Geocentric",
+            "Galacentric"
+        ],
+        [
+            "If the earth revolves around teh sun, what does the sun revolve around?",
+            "The milky way galaxy",
+            "Nothing, the sun stays still beceuase of gravity",
+            "The revoles around the universal center",
+            "The sun revolves around the great attractor"
+        ],
+        [
+            "What happens when a star is not massive enough for its supernova to form a black hole?",
+            "It becomes a neutron star",
+            "It becomes a class K star",
+            "It becomes a pulsar",
+            "It becomes a mini black hole"
         ]
     ]
 ]
