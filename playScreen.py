@@ -46,6 +46,9 @@ class PlayScreen():
         self.categories.append(database[5][0])
         self.categories = flattenList(self.categories)
 
+        print(database[0][1][0])
+        print(database[4][1][0])
+
         # drawing rectangleS
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
             50, 50, 600, 400),  2, 3)  # Wheel section
