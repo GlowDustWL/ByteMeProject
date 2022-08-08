@@ -7,10 +7,12 @@ import textDisplay
 import textTitle
 import jeopardyBoard
 import wheel
+from flattenList import flattenList
+import textDisplayLeft
 
 
 class PlayScreen():
-    def __init__(self, screen, clock, height, width, categories):
+    def __init__(self, screen, clock, height, width):
         self.screen = screen
         self.clock = clock
         self.height = height
@@ -21,7 +23,9 @@ class PlayScreen():
             self.background_input, (self.width, self.height))
         self.box_color = (255, 255, 255)
         # title boxes
-        self.categories = categories
+        self.categories = []
+        self.questions = []
+        self.answers = [[]]
 
         # self.game = MainDriver.Game()
 
@@ -30,6 +34,17 @@ class PlayScreen():
     def getInput(self, numPlayers):
         # initialize game instance
         game = MainDriver.Game(numPlayers)
+
+        # pull questions in 
+        database = game.questions
+        # parse categories to be displayed
+        self.categories.append(database[0][0])
+        self.categories.append(database[1][0])
+        self.categories.append(database[2][0])
+        self.categories.append(database[3][0])
+        self.categories.append(database[4][0])
+        self.categories.append(database[5][0])
+        self.categories = flattenList(self.categories)
 
         # drawing rectangleS
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
@@ -67,15 +82,15 @@ class PlayScreen():
 
         # Questions/Answer Display
         questionText = textDisplay.TextDisplay(
-            "This is question 1", 26, 480, 507)
-        ansAText = textDisplay.TextDisplay(
-            "answer A", 26, 125, 550+32)
-        ansBText = textDisplay.TextDisplay(
-            "answer B", 26, 125, 550+32+63*1)
-        ansCText = textDisplay.TextDisplay(
-            "answer C", 26, 125, 550+32+63*2)
-        ansDText = textDisplay.TextDisplay(
-            "answer D", 26, 125, 550+32+63*3)
+            "No question to answer yet", 26, 480, 507)
+        ansAText = textDisplayLeft.TextDisplayLeft(
+            "answer A", 26, 75, 550+20)
+        ansBText = textDisplayLeft.TextDisplayLeft(
+            "answer B", 26, 75, 550+20+63*1)
+        ansCText = textDisplayLeft.TextDisplayLeft(
+            "answer C", 26, 75, 550+20+63*2)
+        ansDText = textDisplayLeft.TextDisplayLeft(
+            "answer D", 26, 75, 550+20+63*3)
 
         # create text for each player to display scores
         nameTextArray = []
@@ -117,14 +132,15 @@ class PlayScreen():
             ansDText.draw(self.screen)
             questionText.draw(self.screen)
 
-            # Remove squares from board, grid layout zero-indexed, test example
-            x_remove = 0
-            y_remove = 3
-            board.removeSquare(self.screen, x_remove, y_remove)
-            # Highlight squares from board, grid layout zero-indexed, test example
-            x_highlight = 2
-            y_highlight = 0
-            board.highlightSquare(self.screen, x_highlight, y_highlight)
+            # Jeopardy board highlight/removal examples
+            # # Remove squares from board, grid layout zero-indexed, test example
+            # x_remove = 0
+            # y_remove = 3
+            # board.removeSquare(self.screen, x_remove, y_remove)
+            # # Highlight squares from board, grid layout zero-indexed, test example
+            # x_highlight = 2
+            # y_highlight = 0
+            # board.highlightSquare(self.screen, x_highlight, y_highlight)
 
             # Draw wheel
             myWheel.draw(self.screen)
@@ -160,6 +176,7 @@ class PlayScreen():
                     # show_spin = False
                     game.players[0].add_score(500)
                     scoreTextArray[0].setText(str(game.players[0].score))
+                    print(spin_result)
 
                     # game logic
                     if type(spin_result) == str:
@@ -175,6 +192,13 @@ class PlayScreen():
                             print(str(game.players[game.current_player].score))
                         elif spin_result == 'player\'s choice':
                             pass
+                    else: # spin result  is a category number
+                        print(len(database))
+                        questionText.setText(database[spin_result][1][0])
+                        ansAText.setText(database[spin_result][1][1])
+                        ansBText.setText(database[spin_result][1][2])
+                        ansCText.setText(database[spin_result][1][3])
+                        ansDText.setText(database[spin_result][1][4])
 
                             # update the game state
             pygame.display.update()

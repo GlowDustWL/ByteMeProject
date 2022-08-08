@@ -17,8 +17,6 @@ class MainGUI():
         self.screen = pygame.display.set_mode(
             (self.width, self.height))
         self.clock = pygame.time.Clock()
-        # title boxes
-        self.categories = ['will', 'libby', 'chris', 'joe', 'mich', 'xyz']
 
         # player count
         self.numPlayers = 0
@@ -29,7 +27,7 @@ class MainGUI():
         self.loadingScreen = loadingScreen.LoadingScreen(
             self.screen, self.clock, self.height, self.width)
         self.playScreen = playScreen.PlayScreen(
-            self.screen, self.clock, self.height, self.width, self.categories)
+            self.screen, self.clock, self.height, self.width)
         self.endScreen = endScreen.EndScreen(
             self.screen, self.clock, self.height, self.width)
 

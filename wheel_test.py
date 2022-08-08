@@ -20,6 +20,9 @@ class Wheel:
         self.sections = ["lose", "free", "bankrupt", "player's choice", "opponents", "spin again",
                         "cat 1", "cat 2", "cat 3", "cat 4", "cat 5", "cat 6"]
 
+        self.background_input = pygame.image.load(
+            'images/space_background.jpeg').convert()
+
     def draw(self, surface):
 
         # get mouse position
