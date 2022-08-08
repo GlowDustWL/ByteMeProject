@@ -120,117 +120,126 @@
         ]
     ],
     [
-        ["Cat3"],
+
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
+            "Planets & Stars"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
+            "Identify the planet whose length of the days and tilt of its axis are almost identical to those of the earth?",
+            "Mars",
+            "Uranus",
+            "Neptune",
+            "Saturn"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
+            "Stars appear to move from",
+            "East to west",
+            "West to east",
+            "North to south",
+            "South to west"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
+            "The speed of rotation of the earth is the highest?",
+            "along the equator",
+            "at the North-Pole",
+            "along the Tropic of Cancer",
+            "along the Arctic Circle"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
+            "What is the gap between the orbit of mars and jupiter called?",
+            "Asteroids",
+            "Comets",
+            "Metepr",
+            "Meteorite"
+        ],
+        [
+            "What element isthe main component of most stars?",
+            "hydrogen",
+            "nitrogen",
+            "oxygen",
+            "iron"
         ]
     ],
     [
-        ["Cat4"],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
+            "Earth"
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
+            [
+                "The closest star to the Earth is __ ?",
+                "Sun",
+                "Sirius",
+                "Deneb",
+                "Rigel"
+            ],
+            [
+                "What is the approximate distance from the surface to the center of he Earth?",
+                "4,000 miles",
+                "10,000 miles",
+                "40,000 miles",
+                "1,000 miles"
+            ],
+            [
+                "The reservoirs of gas and petroleum under the surface of Earth are __ ?",
+                "permeable rocks",
+                "igneous rocks",
+                "sedimentary rocks",
+                "metamorphic rocks"
+            ],
+            [
+                "Where is the Earth's magnetic field generated?",
+                "in the outer core",
+                "in the mantle",
+                "in the crust",
+                "in the inner core"
+            ],
+            [
+                "Which of the following statements about the Moho is false?",
+                "the Moho marks the top of a partially molten layer",
+                "the Moho separates the crust from the mantle",
+                "the Moho separates denser rocks below from less dense rocks above",
+                "seismic waves speed up as they pass across the Moho heading downward"
+            ]
         ],
         [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
-        ],
-        [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
-        ],
-        [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
-        ]
-    ],
-    [
-        ["Cat5"],
-        [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
-        ],
-        [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
-        ],
-        [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
-        ],
-        [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
-        ],
-        [
-            "Question_placeholder?",
-            "Correct",
-            "Incorrect 1",
-            "Incorrect 2",
-            "Incorrect 3"
+            [
+                "Deep Space"
+            ],
+            [
+                "What kind of space lies between stars??",
+                "Interstellar space",
+                "Intergalactic space",
+                "Interplanetary space",
+                "Intergalactellar space"
+            ],
+            [
+                "What is in 'empty' Space?",
+                "Hydrogen atoms and subatomic particles",
+                "Nothing, it's a perfect vacuum",
+                "There's a very small amount of air",
+                "Heavy atoms pulverized by the tremendous pressure"
+            ],
+            [
+                "Our solar system is a ...",
+                "Heliocentric",
+                "Lunacentric",
+                "Geocentric",
+                "Galacentric"
+            ],
+            [
+                "If the earth revolves around teh sun, what does the sun revolve around?",
+                "The milky way galaxy",
+                "Nothing, the sun stays still beceuase of gravity",
+                "The revoles around the universal center",
+                "The sun revolves around the great attractor"
+            ],
+            [
+                "What happens when a star is not massive enough for its supernova to form a black hole?",
+                "It becomes a neutron star",
+                "It becomes a class K star",
+                "It becomes a pulsar",
+                "It becomes a mini black hole"
+            ]
         ]
     ]
 ]
