@@ -7,50 +7,20 @@ class InputBox():
     def __init__(self, text_input, font_size, x, y):
         print("in init")
         self.font = pygame.font.Font('freesansbold.ttf', font_size)
-        #self.active_color = (255, 255, 255)
         self.active_color = (0, 0, 128)
         self.passive_color = (0, 0, 50)
         self.x_pos = x
         self.y_pos = y
         self.text_input = text_input
-        self.input_rect = pygame.Rect(200, 200, 140, 32)
-        #self.passive_color = pygame.Color('lightskyblue3')
-        #self.active_color = pygame.Color('chartreuse4')
+        self.input_rect = pygame.Rect(self.x_pos, self.y_pos, 140, 32)
         self.current_color = self.passive_color
         self.text = self.font.render(self.text_input, True, (255, 255, 255))
-        #self.text_hover = font.render(self.text_input, True, blue)
-        #self.textRect = self.text.get_rect(center=(self.x_pos, self.y_pos))
-
         self.clicked = False
 
     def draw(self, surface, text_input):
-        #print("in draw")
         pygame.draw.rect(surface, self.current_color, self.input_rect)
         text_surface = self.font.render(
             text_input, True, (255, 255, 255))
-        print(self.text_input)
-        #self.text_input = text_input
-        print(self.text_input)
-        #text_surface = self.text
         surface.blit(text_surface, (self.input_rect.x+5, self.input_rect.y+5))
         self.input_rect.w = max(100, text_surface.get_width()+10)
         pygame.display.flip()
-        #action = False
-
-        #pos = pygame.mouse.get_pos()
-
-        # if self.textRect.collidepoint(pos):
-        #    if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-        #        self.clicked = True
-        #        action = True
-
-        #    if pygame.mouse.get_pressed()[0] == 0:
-        #        self.clicked = False
-
-        #    surface.blit(self.text_hover, self.textRect)
-        # else:
-        #    surface.blit(self.text, self.textRect)
-
-    def clicked(self):
-        self.clicked = True
-        self.color = self.active_color

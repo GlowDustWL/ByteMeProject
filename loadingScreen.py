@@ -32,16 +32,10 @@ class LoadingScreen():
             self.playerList.append("")
 
         # Testing
-        self.playerList[0] = "hi"
+        self.playerList[0] = "Player 1"
 
-        #input_rect = pygame.Rect(200, 200, 140, 32)
         user_input_1 = inputBox.InputBox(
-            self.playerList[0], 32, self.width/2, self.height-50)
-
-        #color_active = pygame.Color('lightskyblue3')
-        #color_passive = pygame.Color('chartreuse4')
-        #color = color_passive
-        #active_input = False
+            self.playerList[0], 32, self.width/2 - 75, self.height/2)
 
         loop = True
         while loop:
@@ -52,9 +46,6 @@ class LoadingScreen():
             back_button = button.Button(
                 "BACK", 32, self.width/10, self.height - 50)
 
-            # user_input_1 = inputBox.InputBox(
-            # "TEST", 32, self. width/2, self.height-50)
-
             # # player number entry buttons
             # playerNum_2 = button.Button(
             #     "2", 48, self.width/2 - 75, self.height/2)
@@ -64,8 +55,6 @@ class LoadingScreen():
             #     "4", 48, self.width//2 + 25, self.height/2)
             # playerNum_5 = button.Button(
             #     "5", 48, self.width//2 + 75, self.height/2)
-
-            #input_rect = pygame.Rect(200, 200, 140, 32)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))
@@ -78,10 +67,6 @@ class LoadingScreen():
             # playerNum_4.draw(self.screen)
             # playerNum_5.draw(self.screen)
             playerNameText.draw(self.screen)
-            #color_active = pygame.Color('lightskyblue3')
-            #color_passive = pygame.Color('chartreuse4')
-            #color = color_passive
-            #active_input = False
 
             # event handlers
             for event in pygame.event.get():
@@ -130,41 +115,9 @@ class LoadingScreen():
                         print(self.playerList[0])
 
             user_input_1.draw(self.screen, self.playerList[0])
-            pygame.display.flip()
-
-            # if event.type == pygame.MOUSEBUTTONDOWN:
-            #    if input_rect.collidepoint(event.pos):
-            #        active_input = True
-            #    else:
-            #        active_input = False
-            # if event.type == pygame.KEYDOWN:
-            #    if event.key == pygame.K_BACKSPACE:
-            #        self.playerList[0] = self.playerList[0][:-1]
-            #    elif event.key == pygame.K_RETURN:
-            #        active_input = False
-            #    elif event.key == pygame.K_KP_ENTER:
-            #        active_input = False
-            #    else:
-            #        self.playerList[0] += event.unicode
 
             # other handlers
             # ...
-
-            # if active_input:
-            #    color = color_active
-            # else:
-            #    color = color_passive
-
-            #base_font = pygame.font.Font(None, 32)
-            # pygame.draw.rect(
-            #    self.screen, user_input_1.current_color, user_input_1.input_rect)
-            # text_surface = base_font.render(
-            #    self.playerList[0], True, (255, 255, 255))
-            # self.screen.blit(
-            #    text_surface, (user_input_1.input_rect.x+5, user_input_1.input_rect.y+5))
-            #user_input_1.input_rect.w = max(100, text_surface.get_width()+10)
-
-            # pygame.display.flip()
 
             # update the game state
             pygame.display.update()
