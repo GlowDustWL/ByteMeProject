@@ -15,16 +15,22 @@ class LoadingScreen():
             'images/space_background.jpeg').convert()
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
-        # self.numPlayers = 0
+        self.playerList = []
 
     # main menu
 
-    def getInput(self):
+    def getInput(self, numPlayers):
         text = textDisplay.TextDisplay(
             "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)
         # # player number entry text
         # playerNumText = textDisplay.TextDisplay(
         #     "Select Number of Players", 48, self.width/2, self.height/2 - 120)
+
+        for i in range(numPlayers):
+            self.playerList.append("")
+
+        # Testing
+        self.playerList[0] = "hi"
 
         loop = True
         while loop:

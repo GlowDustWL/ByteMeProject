@@ -5,12 +5,12 @@ from player import Player
 
 
 class Game:
-    def __init__(self, numPlayers, spins=50):
+    def __init__(self, numPlayers, playerList, spins=50):
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
         # todo: remove this later
-        #self.initialize_dummy_database()
+        # self.initialize_dummy_database()
         self.read_database()
         self.current_round = 1  # 1 base
         self.spin_total = spins
@@ -19,13 +19,16 @@ class Game:
         self.total_player = numPlayers  # todo: increase later, allow parameter
         self.players = []
         for i in range(self.total_player):
-            self.players.append(Player("Player " + str(i+1)))
+            if (playerList[i] != ""):
+                self.players.append(Player(playerList[i]))
+            else:
+                self.players.append(Player("Player " + str(i+1)))
 
     # read database for questions & answers to populate internal data structures
     def read_database(self):
         f = open("questions.json", "r", encoding='utf8')
         self.questions = json.loads(f.read())
-        
+
     # def initialize_dummy_database(self):
     #     f = open("questions.json", "w")
     #     questions = [
