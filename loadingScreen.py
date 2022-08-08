@@ -98,12 +98,12 @@ class LoadingScreen():
                             # if backspace pressed, remove character
                             if event.key == pygame.K_BACKSPACE:
                                 self.playerList[player_num] = self.playerList[player_num][:-1]
-                            # if return pressed, change input to not clicked
-                            elif event.key == pygame.K_RETURN:
+                            # if return or keypad enter pressed, change input to not clicked
+                            elif (event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER):
                                 x.clicked = False
                                 x.current_color = x.passive_color
-                            # if keypad enter pressed, change input to not clicked
-                            elif event.key == pygame.K_KP_ENTER:
+                            # if tab pressed, change input to not clicked
+                            elif event.key == pygame.K_TAB:
                                 x.clicked = False
                                 x.current_color = x.passive_color
                             # if other key pressed, add unicode character to player name
