@@ -25,7 +25,7 @@ class LoadingScreen():
             "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)
         # # player name entry text
         playerNameText = textDisplay.TextDisplay(
-            "Enter Player Names", 48, self.width/2, self.height/2 - 120)
+            "Enter Player Names", 48, self.width/2, self.height/2 - 220)
 
         # list for player names
         for i in range(numPlayers):
@@ -38,12 +38,12 @@ class LoadingScreen():
         nameTextArray = []
         for i in range(numPlayers):
             nameTextArray.append(textDisplay.TextDisplay(
-                ("Player " + str(i+1)), 26, self.width/2 - 120, self.height - 480 + 100*i))
+                ("Player " + str(i+1)), 26, self.width/2 - 170, self.height - 580 + 100*i))
 
         input_boxes = []
         for i in range(numPlayers):
             input_boxes.append(inputBox.InputBox(
-                self.playerList[i], 32, self.width/2, self.height - 500 + 100*i))
+                self.playerList[i], 32, self.width/2 - 70, self.height - 600 + 100*i))
         # user_input_1 = inputBox.InputBox(
         #    self.playerList[0], 32, self.width/2 - 75, self.height/2)
 

@@ -19,7 +19,7 @@ class Game:
         self.total_player = numPlayers  # todo: increase later, allow parameter
         self.players = []
         for i in range(self.total_player):
-            if (playerList[i] != "Enter Name Here"):
+            if (playerList[i] != "Enter Name Here" and playerList[i] != ""):
                 self.players.append(Player(playerList[i]))
             else:
                 self.players.append(Player("Player " + str(i+1)))
