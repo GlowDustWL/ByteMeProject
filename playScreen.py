@@ -193,7 +193,6 @@ class PlayScreen():
                         elif spin_result == 'player\'s choice':
                             pass
                     else: # spin result  is a category number
-                        print(len(database))
                         questionText.setText(database[spin_result][1][0])
                         ansAText.setText(database[spin_result][1][1])
                         ansBText.setText(database[spin_result][1][2])
