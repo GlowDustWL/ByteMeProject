@@ -10,7 +10,7 @@ class Game:
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
         # todo: remove this later
-        self.initialize_dummy_database()
+        #self.initialize_dummy_database()
         self.read_database()
         self.current_round = 1  # 1 base
         self.spin_total = spins
@@ -23,15 +23,15 @@ class Game:
 
     # read database for questions & answers to populate internal data structures
     def read_database(self):
-        f = open("questions.json", "r")
+        f = open("questions.json", "r", encoding='utf8')
         self.questions = json.loads(f.read())
-
-    def initialize_dummy_database(self):
-        f = open("questions.json", "w")
-        questions = [
-            [['Question_placeholder?', 'Correct', 'Incorrect 1', 'Incorrect 2'] for i in range(5)] for j in range(6)]
-        f.write(json.dumps(questions))
-        f.close
+        
+    # def initialize_dummy_database(self):
+    #     f = open("questions.json", "w")
+    #     questions = [
+    #         [['Question_placeholder?', 'Correct', 'Incorrect 1', 'Incorrect 2'] for i in range(5)] for j in range(6)]
+    #     f.write(json.dumps(questions))
+    #     f.close
 
     def is_board_empty(self):
         return not any(self.questions)
