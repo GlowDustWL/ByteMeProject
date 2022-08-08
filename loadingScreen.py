@@ -29,23 +29,20 @@ class LoadingScreen():
 
         # list for player names
         for i in range(numPlayers):
+            # populated with 'Enter Name Here' for instructions
             self.playerList.append("Enter Name Here")
 
-        # Testing
-        #self.playerList[0] = "Player 1"
-
-        # create text for each player to display scores
+        # create text for each player to display player number
         nameTextArray = []
         for i in range(numPlayers):
             nameTextArray.append(textDisplay.TextDisplay(
                 ("Player " + str(i+1)), 26, self.width/2 - 170, self.height - 580 + 100*i))
 
+        # create array of input boxes for each player
         input_boxes = []
         for i in range(numPlayers):
             input_boxes.append(inputBox.InputBox(
                 self.playerList[i], 32, self.width/2 - 70, self.height - 600 + 100*i))
-        # user_input_1 = inputBox.InputBox(
-        #    self.playerList[0], 32, self.width/2 - 75, self.height/2)
 
         loop = True
         while loop:
@@ -56,29 +53,14 @@ class LoadingScreen():
             back_button = button.Button(
                 "BACK", 32, self.width/10, self.height - 50)
 
-            # # player number entry buttons
-            # playerNum_2 = button.Button(
-            #     "2", 48, self.width/2 - 75, self.height/2)
-            # playerNum_3 = button.Button(
-            #     "3", 48, self.width//2 - 25, self.height/2)
-            # playerNum_4 = button.Button(
-            #     "4", 48, self.width//2 + 25, self.height/2)
-            # playerNum_5 = button.Button(
-            #     "5", 48, self.width//2 + 75, self.height/2)
-
             # draw elements
             self.screen.blit(self.background, (0, 0))
             play_button.draw(self.screen)
             back_button.draw(self.screen)
             text.draw(self.screen)
-            # user_input_1.draw(self.screen)
-            # playerNum_2.draw(self.screen)
-            # playerNum_3.draw(self.screen)
-            # playerNum_4.draw(self.screen)
-            # playerNum_5.draw(self.screen)
             playerNameText.draw(self.screen)
 
-            # draw player names/scores
+            # draw player numbers
             for x in nameTextArray:
                 x.draw(self.screen)
 
@@ -88,79 +70,49 @@ class LoadingScreen():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     exit()
-                # if playerNum_2.clicked:
-                #     self.numPlayers = 2
-                #     return True
-                # if playerNum_3.clicked:
-                #     self.numPlayers = 3
-                #     return True
-                # if playerNum_4.clicked:
-                #     self.numPlayers = 4
-                #     return True
-                # if playerNum_5.clicked:
-                #     self.numPlayers = 5
-                #     return True
                 if play_button.clicked:
                     return True
                 if back_button.clicked:
                     loop = False
-
+                # check if input box clicked
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    # check which input box
                     for x in input_boxes:
                         if x.input_rect.collidepoint(event.pos):
                             x.clicked = True
+                            # update box color
                             x.current_color = x.active_color
+                            # remove 'enter name here' text
                             self.playerList[input_boxes.index(x)] = ""
                         else:
                             x.clicked = False
+                            # update box color
                             x.current_color = x.passive_color
-                    print("in mouse down")
-                    # if user_input_1.input_rect.collidepoint(event.pos):
-                    #    user_input_1.clicked = True
-                    #    user_input_1.current_color = user_input_1.active_color
-                    # else:
-                    #    user_input_1.clicked = False
-                    #    user_input_1.current_color = user_input_1.passive_color
+                # check if keyboard input given
                 if event.type == pygame.KEYDOWN:
-                    #current_box = input_boxes[0]
-                    #player_num = 0
+                    # check which input box
                     for x in input_boxes:
                         if x.clicked:
+                            # corresponding player number for input box
                             player_num = input_boxes.index(x)
-                            #current_box = x
-                            #player_num = input_boxes.index(x)
+                            # if backspace pressed, remove character
                             if event.key == pygame.K_BACKSPACE:
                                 self.playerList[player_num] = self.playerList[player_num][:-1]
+                            # if return pressed, change input to not clicked
                             elif event.key == pygame.K_RETURN:
                                 x.clicked = False
                                 x.current_color = x.passive_color
+                            # if keypad enter pressed, change input to not clicked
                             elif event.key == pygame.K_KP_ENTER:
                                 x.clicked = False
                                 x.current_color = x.passive_color
+                            # if other key pressed, add unicode character to player name
                             else:
                                 self.playerList[player_num] += event.unicode
-                    #print("in keydown")
-                    # if event.key == pygame.K_BACKSPACE:
-                    #    self.playerList[0] = self.playerList[0][:-1]
-                    # elif event.key == pygame.K_RETURN:
-                    #    user_input_1.clicked = False
-                    #    user_input_1.current_color = user_input_1.passive_color
-                    # elif event.key == pygame.K_KP_ENTER:
-                    #    user_input_1.clicked = False
-                    #    user_input_1.current_color = user_input_1.passive_color
-                    # else:
-                    #    print("in player list")
-                    #    self.playerList[0] += event.unicode
-                    #    print(self.playerList[0])
 
-            #j = 0
+            # draw input boxes
             for x in input_boxes:
                 x.draw(self.screen, self.playerList[input_boxes.index(x)])
-                #j += 1
-            #user_input_1.draw(self.screen, self.playerList[0])
-
-            # other handlers
-            # ...
 
             # update the game state
             pygame.display.update()
