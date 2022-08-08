@@ -8,9 +8,9 @@ class InputBox():
         print("in init")
         self.font = pygame.font.Font('freesansbold.ttf', font_size)
         # color for when receiving user input
-        self.active_color = (0, 0, 128)
+        self.active_color = (83, 239, 252)
         # color for when in passive state
-        self.passive_color = (0, 0, 50)
+        self.passive_color = (38, 54, 150)
         self.x_pos = x
         self.y_pos = y
         self.text_input = text_input

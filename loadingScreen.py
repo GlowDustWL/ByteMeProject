@@ -36,7 +36,7 @@ class LoadingScreen():
         nameTextArray = []
         for i in range(numPlayers):
             nameTextArray.append(textDisplay.TextDisplay(
-                ("Player " + str(i+1)), 26, self.width/2 - 170, self.height - 580 + 100*i))
+                ("Player " + str(i+1) + ":"), 26, self.width/2 - 170, self.height - 580 + 100*i))
 
         # create array of input boxes for each player
         input_boxes = []
