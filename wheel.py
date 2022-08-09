@@ -1,5 +1,6 @@
 # import statements
 import pygame
+import os
 clock = pygame.time.Clock()
 
 
@@ -7,7 +8,8 @@ class Wheel:
 
     def __init__(self):
         self.wheel_image = pygame.image.load(
-            r'images\wheel_revA.png')
+            os.path.join('images', 'wheel_revA.png'))
+
         self.wheel_image = pygame.transform.smoothscale(
             self.wheel_image, (375, 375))
 

@@ -32,11 +32,20 @@ class PlayScreen():
     # main menu
 
     def getInput(self, numPlayers):
+        def refresh_current_player_score():
+            scoreTextArray[game.current_player].setText(
+                str(game.players[game.current_player].score))
+
+        def refresh_current_player_indicator():
+            for x in range(len(game.players)):
+                nameTextArray[x].setText(
+                    game.players[x].name)
+            nameTextArray[game.current_player].setText(
+                "->"+game.players[game.current_player].name+"<-")
+
         # initialize game instance
         game = MainDriver.Game(numPlayers)
 
-        # pull questions in
-        database = game.questions
         # parse categories to be displayed
         self.categories.append(game.questions[0][0])
         self.categories.append(game.questions[1][0])
@@ -103,6 +112,7 @@ class PlayScreen():
                 game.players[x].name, 26, self.width/2, self.height - 810 + 70*x))
             scoreTextArray.append(textDisplay.TextDisplay(
                 str(game.players[x].score), 26, self.width/2, self.height - 780 + 70*x))
+        refresh_current_player_indicator()
 
         # self.screen.blit(self.background, (0, 0))
         board = jeopardyBoard.JeopardyBoard()
@@ -120,10 +130,23 @@ class PlayScreen():
             spin_button = button.Button(
                 "SPIN", 46, 1250, 680)
 
+            ansA_button = button.Button(
+                "X", 48, 975, 580)
+            ansB_button = button.Button(
+                "X", 48, 975, 645)
+            ansC_button = button.Button(
+                "X", 48, 975, 710)
+            ansD_button = button.Button(
+                "X", 48, 975, 775)
+
             # draw elements
             self.screen.blit(self.background, (0, 0))
             game_completed_button.draw(self.screen)
             quit_to_main_button.draw(self.screen)
+            ansA_button.draw(self.screen)
+            ansB_button.draw(self.screen)
+            ansC_button.draw(self.screen)
+            ansD_button.draw(self.screen)
             wheelText.draw(self.screen)
             spinCountText.draw(self.screen)
             spinCountNum.draw(self.screen)
@@ -168,6 +191,31 @@ class PlayScreen():
                 if quit_to_main_button.clicked:
                     loop = False
 
+                # answer selection handlers
+                if ansA_button.clicked:
+                    # for now ansA is always correct
+                    game.players[game.current_player].add_score(
+                        game.current_question_value)
+                    refresh_current_player_score()
+                if ansB_button.clicked:
+                    game.players[game.current_player].sub_score(
+                        game.current_question_value)
+                    refresh_current_player_score()
+                    game.next_player()
+                    refresh_current_player_indicator()
+                if ansC_button.clicked:
+                    game.players[game.current_player].sub_score(
+                        game.current_question_value)
+                    refresh_current_player_score()
+                    game.next_player()
+                    refresh_current_player_indicator()
+                if ansD_button.clicked:
+                    game.players[game.current_player].sub_score(
+                        game.current_question_value)
+                    refresh_current_player_score()
+                    game.next_player()
+                    refresh_current_player_indicator()
+
                 # other handlers
                 # ...
                 if spin_button.clicked:
@@ -178,14 +226,13 @@ class PlayScreen():
                     wheelText.setText(str(spin_result))
                     spinCountNum.setText(str(game.spins_left))
                     # show_spin = False
-                    game.players[0].add_score(500)
-                    scoreTextArray[0].setText(str(game.players[0].score))
                     print(spin_result)
 
                     # game logic
                     if type(spin_result) == str:
                         if spin_result == 'lose turn':
                             game.next_player()
+                            refresh_current_player_indicator()
                             print(game.current_player)
                         elif spin_result == 'free turn':
                             game.players[game.current_player].add_token()
@@ -197,12 +244,19 @@ class PlayScreen():
                         elif spin_result == 'player\'s choice':
                             pass
                     else:  # spin result  is a category number
-                        questionText.setText(database[spin_result][1][0])
-                        ansAText.setText(database[spin_result][1][1])
-                        ansBText.setText(database[spin_result][1][2])
-                        ansCText.setText(database[spin_result][1][3])
-                        ansDText.setText(database[spin_result][1][4])
-
+                        question = game.get_category_next_question(spin_result)
+                        if question != None:
+                            questionText.setText(question[0])
+                            ansAText.setText(question[1])
+                            ansBText.setText(question[2])
+                            ansCText.setText(question[3])
+                            ansDText.setText(question[4])
+                        else:
+                            questionText.setText("Category empty, Spin again!")
+                            ansAText.setText("")
+                            ansBText.setText("")
+                            ansCText.setText("")
+                            ansDText.setText("")
                         # update the game state
             pygame.display.update()
             self.clock.tick(60)
