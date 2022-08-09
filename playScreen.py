@@ -35,7 +35,7 @@ class PlayScreen():
         # initialize game instance
         game = MainDriver.Game(numPlayers)
 
-        # pull questions in 
+        # pull questions in
         database = game.questions
         # parse categories to be displayed
         self.categories.append(database[0][0])
@@ -148,7 +148,6 @@ class PlayScreen():
             # Draw wheel
             myWheel.draw(self.screen)
 
-
             # draw player names/scores
             for x in nameTextArray:
                 x.draw(self.screen)
@@ -172,6 +171,8 @@ class PlayScreen():
                 # other handlers
                 # ...
                 if spin_button.clicked:
+                    # attribute = angle in degrees
+                    myWheel.spin(self.screen, 360)
                     spin_result = game.spin()
                     game.spins_left -= 1
                     wheelText.setText(str(spin_result))
@@ -195,13 +196,13 @@ class PlayScreen():
                             print(str(game.players[game.current_player].score))
                         elif spin_result == 'player\'s choice':
                             pass
-                    else: # spin result  is a category number
+                    else:  # spin result  is a category number
                         questionText.setText(database[spin_result][1][0])
                         ansAText.setText(database[spin_result][1][1])
                         ansBText.setText(database[spin_result][1][2])
                         ansCText.setText(database[spin_result][1][3])
                         ansDText.setText(database[spin_result][1][4])
 
-                            # update the game state
+                        # update the game state
             pygame.display.update()
             self.clock.tick(60)
