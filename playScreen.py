@@ -35,19 +35,17 @@ class PlayScreen():
         # initialize game instance
         game = MainDriver.Game(numPlayers)
 
-        # pull questions in 
-        database = game.questions
         # parse categories to be displayed
-        self.categories.append(database[0][0])
-        self.categories.append(database[1][0])
-        self.categories.append(database[2][0])
-        self.categories.append(database[3][0])
-        self.categories.append(database[4][0])
-        self.categories.append(database[5][0])
+        self.categories.append(game.questions[0][0])
+        self.categories.append(game.questions[1][0])
+        self.categories.append(game.questions[2][0])
+        self.categories.append(game.questions[3][0])
+        self.categories.append(game.questions[4][0])
+        self.categories.append(game.questions[5][0])
         self.categories = flattenList(self.categories)
 
-        print(database[0][1][0])
-        print(database[4][1][0])
+        print(game.questions[0][1][0])
+        print(game.questions[4][1][0])
 
         # drawing rectangleS
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
@@ -148,7 +146,6 @@ class PlayScreen():
             # Draw wheel
             myWheel.draw(self.screen)
 
-
             # draw player names/scores
             for x in nameTextArray:
                 x.draw(self.screen)
@@ -195,13 +192,13 @@ class PlayScreen():
                             print(str(game.players[game.current_player].score))
                         elif spin_result == 'player\'s choice':
                             pass
-                    else: # spin result  is a category number
-                        questionText.setText(database[spin_result][1][0])
-                        ansAText.setText(database[spin_result][1][1])
-                        ansBText.setText(database[spin_result][1][2])
-                        ansCText.setText(database[spin_result][1][3])
-                        ansDText.setText(database[spin_result][1][4])
+                    else:  # spin result  is a category number
+                        questionText.setText(game.questions[spin_result][1][0])
+                        ansAText.setText(game.questions[spin_result][1][1])
+                        ansBText.setText(game.questions[spin_result][1][2])
+                        ansCText.setText(game.questions[spin_result][1][3])
+                        ansDText.setText(game.questions[spin_result][1][4])
 
-                            # update the game state
+                        # update the game state
             pygame.display.update()
             self.clock.tick(60)
