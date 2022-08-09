@@ -38,16 +38,16 @@ class PlayScreen():
         # pull questions in
         database = game.questions
         # parse categories to be displayed
-        self.categories.append(database[0][0])
-        self.categories.append(database[1][0])
-        self.categories.append(database[2][0])
-        self.categories.append(database[3][0])
-        self.categories.append(database[4][0])
-        self.categories.append(database[5][0])
+        self.categories.append(game.questions[0][0])
+        self.categories.append(game.questions[1][0])
+        self.categories.append(game.questions[2][0])
+        self.categories.append(game.questions[3][0])
+        self.categories.append(game.questions[4][0])
+        self.categories.append(game.questions[5][0])
         self.categories = flattenList(self.categories)
 
-        print(database[0][1][0])
-        print(database[4][1][0])
+        print(game.questions[0][1][0])
+        print(game.questions[4][1][0])
 
         # drawing rectangleS
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
