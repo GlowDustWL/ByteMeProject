@@ -21,6 +21,9 @@ class MainGUI():
         # player count
         self.numPlayers = 0
 
+        # player names
+        self.playerList = []
+
         # screens
         self.menuScreen = mainMenu.MainMenu(
             self.screen, self.clock, self.height, self.width)
@@ -37,9 +40,11 @@ class MainGUI():
         while True:
             if self.menuScreen.getInput():
                 self.numPlayers = self.menuScreen.numPlayers
-                if self.loadingScreen.getInput():
+                if self.loadingScreen.getInput(self.numPlayers):
+                    self.playerList = self.loadingScreen.playerList
                     # self.numPlayers = self.loadingScreen.numPlayers
-                    if self.playScreen.getInput(self.numPlayers):
+                    if self.playScreen.getInput(self.numPlayers,
+                                                self.playerList):
                         self.endScreen.getInput()
 
 

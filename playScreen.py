@@ -31,7 +31,7 @@ class PlayScreen():
 
     # main menu
 
-    def getInput(self, numPlayers):
+    def getInput(self, numPlayers, playerList):
         def refresh_current_player_score():
             scoreTextArray[game.current_player].setText(
                 str(game.players[game.current_player].score))
@@ -44,7 +44,7 @@ class PlayScreen():
                 "->"+game.players[game.current_player].name+"<-")
 
         # initialize game instance
-        game = MainDriver.Game(numPlayers)
+        game = MainDriver.Game(numPlayers, playerList)
 
         # parse categories to be displayed
         self.categories.append(game.questions[0][0])

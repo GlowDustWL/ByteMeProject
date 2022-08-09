@@ -5,7 +5,7 @@ from player import Player
 
 
 class Game:
-    def __init__(self, numPlayers, spins=50):
+    def __init__(self, numPlayers, playerList, spins=50):
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
@@ -19,8 +19,14 @@ class Game:
         self.current_player = 0  # 0 base
         self.total_player = numPlayers  # todo: increase later, allow parameter
         self.players = []
+        # create Player objects for each player
         for i in range(self.total_player):
-            self.players.append(Player("Player " + str(i+1)))
+            # user input name
+            if (playerList[i] != "Enter Name Here" and playerList[i] != ""):
+                self.players.append(Player(playerList[i]))
+            # user did not input name
+            else:
+                self.players.append(Player("Player " + str(i+1)))
 
     # read database for questions & answers to populate internal data structures
     def read_database(self):
