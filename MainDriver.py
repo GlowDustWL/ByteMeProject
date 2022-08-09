@@ -13,6 +13,7 @@ class Game:
         # self.initialize_dummy_database()
         self.read_database()
         self.current_round = 1  # 1 base
+        self.current_question_value = 0  # value of the current active question
         self.spin_total = spins
         self.spins_left = spins
         self.current_player = 0  # 0 base
@@ -60,11 +61,15 @@ class Game:
             self.current_player = 0
 
     def get_category_next_question(self, category_index):
-        return self.questions[category_index].pop(0)
+        # category name is always first element
+        if len(self.questions[category_index]) == 1:
+            return None
+        self.current_question_value = self.get_category_value(category_index)
+        return self.questions[category_index].pop(1)
 
     # give the value of the question that just got popped
     def get_category_value(self, category_index):
-        value = 1000 - len(self.questions[category_index]) * 200
+        value = 1000 - (len(self.questions[category_index]) - 2) * 200
         if self.current_round == 2:
             return value * 2
         return value
