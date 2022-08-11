@@ -21,12 +21,13 @@ class EndScreen():
         text = textMedium.TextMedium(
             "Thank you for Playing!", self.width/2, self.height/2)
         # self.screen.blit(self.background, (0, 0))
+
+        # buttons
+        continue_button = button.Button(
+            "CONTINUE", 32, self.width*(1 - 1/8), self.height - 50)
+
         loop = True
         while loop:
-
-            # buttons
-            continue_button = button.Button(
-                "CONTINUE", 32, self.width*(1 - 1/8), self.height - 50)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))

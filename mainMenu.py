@@ -28,23 +28,23 @@ class MainMenu():
         playerNumText = textDisplay.TextDisplay(
             "Select Number of Players", 48, self.width/2, self.height/2 - 120)
 
+        # buttons
+        # start_button = button.Button(
+        #     "START", 36, self.width/2, self.height/2)
+        exit_button = button.Button(
+            "EXIT", 36, self.width/2, self.height/2 + 50)
+
+        # player number entry buttons
+        playerNum_2 = button.Button(
+            "2", 36, self.width/2 - 75, self.height/2)
+        playerNum_3 = button.Button(
+            "3", 36, self.width//2 - 25, self.height/2)
+        playerNum_4 = button.Button(
+            "4", 36, self.width//2 + 25, self.height/2)
+        playerNum_5 = button.Button(
+            "5", 36, self.width//2 + 75, self.height/2)
+
         while True:
-
-            # buttons
-            # start_button = button.Button(
-            #     "START", 36, self.width/2, self.height/2)
-            exit_button = button.Button(
-                "EXIT", 36, self.width/2, self.height/2 + 50)
-
-            # player number entry buttons
-            playerNum_2 = button.Button(
-                "2", 36, self.width/2 - 75, self.height/2)
-            playerNum_3 = button.Button(
-                "3", 36, self.width//2 - 25, self.height/2)
-            playerNum_4 = button.Button(
-                "4", 36, self.width//2 + 25, self.height/2)
-            playerNum_5 = button.Button(
-                "5", 36, self.width//2 + 75, self.height/2)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))

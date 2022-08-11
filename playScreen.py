@@ -118,26 +118,26 @@ class PlayScreen():
         board = jeopardyBoard.JeopardyBoard()
         myWheel = wheel.Wheel()
 
+        # buttons
+        game_completed_button = button.Button(
+            "GAME COMPLETED", 32, self.width*(1 - 1/8), self.height - 50)
+        quit_to_main_button = button.Button(
+            "QUIT TO MAIN", 32, self.width/10, self.height - 50)
+        spin_button = button.Button(
+            "SPIN", 46, 1250, 680)
+
+        ansA_button = button.Button(
+            "X", 48, 975, 580)
+        ansB_button = button.Button(
+            "X", 48, 975, 645)
+        ansC_button = button.Button(
+            "X", 48, 975, 710)
+        ansD_button = button.Button(
+            "X", 48, 975, 775)
+
         show_spin = True
         loop = True
         while loop:
-
-            # buttons
-            game_completed_button = button.Button(
-                "GAME COMPLETED", 32, self.width*(1 - 1/8), self.height - 50)
-            quit_to_main_button = button.Button(
-                "QUIT TO MAIN", 32, self.width/10, self.height - 50)
-            spin_button = button.Button(
-                "SPIN", 46, 1250, 680)
-
-            ansA_button = button.Button(
-                "X", 48, 975, 580)
-            ansB_button = button.Button(
-                "X", 48, 975, 645)
-            ansC_button = button.Button(
-                "X", 48, 975, 710)
-            ansD_button = button.Button(
-                "X", 48, 975, 775)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))
