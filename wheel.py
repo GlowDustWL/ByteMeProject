@@ -20,7 +20,6 @@ class Wheel:
         #surface.blit(self.wheel_image, (150, 60))
         surface.blit(self.wheel_image, (350 - int(self.wheel_image.get_width() / 2),
                                         250 - int(self.wheel_image.get_height() / 2)))
-        pygame.display.flip()
 
     def spin(self, surface, angle):
         mainClock = pygame.time.Clock()
