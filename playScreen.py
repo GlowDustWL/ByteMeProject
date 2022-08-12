@@ -126,14 +126,21 @@ class PlayScreen():
         spin_button = button.Button(
             "SPIN", 46, 1250, 680)
 
-        ansA_button = button.Button(
-            "X", 48, 975, 580)
-        ansB_button = button.Button(
-            "X", 48, 975, 645)
-        ansC_button = button.Button(
-            "X", 48, 975, 710)
-        ansD_button = button.Button(
-            "X", 48, 975, 775)
+        # create array full of answer buttons from A to D
+        answerButtonArray = [button.Button(
+            "a", 48, 975, 580, False), button.Button(
+            "b", 48, 975, 645, False), button.Button(
+            "c", 48, 975, 710, False), button.Button(
+            "d", 48, 975, 775, False)]
+
+        # ansA_button = button.Button(
+        #     "X", 48, 975, 580, False)
+        # ansB_button = button.Button(
+        #     "X", 48, 975, 645, False)
+        # ansC_button = button.Button(
+        #     "X", 48, 975, 710, False)
+        # ansD_button = button.Button(
+        #     "X", 48, 975, 775, False)
 
         show_spin = True
         loop = True
@@ -143,10 +150,14 @@ class PlayScreen():
             self.screen.blit(self.background, (0, 0))
             game_completed_button.draw(self.screen)
             quit_to_main_button.draw(self.screen)
-            ansA_button.draw(self.screen)
-            ansB_button.draw(self.screen)
-            ansC_button.draw(self.screen)
-            ansD_button.draw(self.screen)
+
+            # ansA_button.draw(self.screen)
+            # ansB_button.draw(self.screen)
+            # ansC_button.draw(self.screen)
+            # ansD_button.draw(self.screen)
+            for x in range(0, 4):
+                answerButtonArray[x].draw(self.screen)
+
             wheelText.draw(self.screen)
             spinCountText.draw(self.screen)
             spinCountNum.draw(self.screen)
@@ -192,33 +203,53 @@ class PlayScreen():
                     loop = False
 
                 # answer selection handlers
-                if ansA_button.clicked:
-                    # for now ansA is always correct
-                    game.players[game.current_player].add_score(
-                        game.current_question_value)
-                    refresh_current_player_score()
-                if ansB_button.clicked:
-                    game.players[game.current_player].sub_score(
-                        game.current_question_value)
-                    refresh_current_player_score()
-                    game.next_player()
-                    refresh_current_player_indicator()
-                if ansC_button.clicked:
-                    game.players[game.current_player].sub_score(
-                        game.current_question_value)
-                    refresh_current_player_score()
-                    game.next_player()
-                    refresh_current_player_indicator()
-                if ansD_button.clicked:
-                    game.players[game.current_player].sub_score(
-                        game.current_question_value)
-                    refresh_current_player_score()
-                    game.next_player()
-                    refresh_current_player_indicator()
+                for x in range(0, 4):
+                    if answerButtonArray[x].clicked:
+                        if x == game.correctAnswer:
+                            # print('CORRECT ANSWER')
+                            game.players[game.current_player].add_score(
+                                game.current_question_value)
+                            refresh_current_player_score()
+                            # set all answer buttons to unclickable
+                            for x in range(0, 4):
+                                answerButtonArray[x].setClickable(False)
+                            # set the spin button to clickable
+                            spin_button.setClickable(True)
+                        else:
+                            game.players[game.current_player].sub_score(
+                                game.current_question_value)
+                            game.next_player()
+                            refresh_current_player_indicator()
+
+                # if ansA_button.clicked:
+                #     # for now ansA is always correct
+                #     game.players[game.current_player].add_score(
+                #         game.current_question_value)
+                #     refresh_current_player_score()
+                # if ansB_button.clicked:
+                #     game.players[game.current_player].sub_score(
+                #         game.current_question_value)
+                #     refresh_current_player_score()
+                #     game.next_player()
+                #     refresh_current_player_indicator()
+                # if ansC_button.clicked:
+                #     game.players[game.current_player].sub_score(
+                #         game.current_question_value)
+                #     refresh_current_player_score()
+                #     game.next_player()
+                #     refresh_current_player_indicator()
+                # if ansD_button.clicked:
+                #     game.players[game.current_player].sub_score(
+                #         game.current_question_value)
+                #     refresh_current_player_score()
+                #     game.next_player()
+                #     refresh_current_player_indicator()
 
                 # other handlers
                 # ...
                 if spin_button.clicked:
+                    # set the spin button to unclickable
+                    spin_button.setClickable(False)
                     # attribute = angle in degrees
                     myWheel.spin(self.screen, 360)
                     spin_result = game.spin()
@@ -227,23 +258,38 @@ class PlayScreen():
                     spinCountNum.setText(str(game.spins_left))
                     # show_spin = False
                     print(spin_result)
+                    # spin_button.clickable = False
 
                     # game logic
                     if type(spin_result) == str:
                         if spin_result == 'lose turn':
                             game.next_player()
-                            refresh_current_player_indicator()
                             print(game.current_player)
+                            spin_button.setClickable(True)
                         elif spin_result == 'free turn':
                             game.players[game.current_player].add_token()
                             narration.setText(
                                 "Player " + str(game.current_player + 1) + " gets a free turn.")
+                            spin_button.setClickable(True)
                         elif spin_result == 'bankrupt':
                             game.players[game.current_player].zero_score()
                             print(str(game.players[game.current_player].score))
+                            game.next_player()
+                            spin_button.setClickable(True)
                         elif spin_result == 'player\'s choice':
                             pass
+                        elif spin_result == "opponent's choice":
+                            pass
+                        elif spin_result == "spin again":
+                            pass
+                            spin_button.setClickable(True)
+                        refresh_current_player_indicator()
+
                     else:  # spin result  is a category number
+                        # set the four answer buttons to unclickable
+                        for x in range(0, 4):
+                            answerButtonArray[x].setClickable(True)
+
                         question = game.get_category_next_question(spin_result)
                         if question != None:
                             questionText.setText(question[0])
@@ -257,6 +303,7 @@ class PlayScreen():
                             ansBText.setText("")
                             ansCText.setText("")
                             ansDText.setText("")
-                        # update the game state
+
+            # update the game state
             pygame.display.update()
             self.clock.tick(60)

@@ -9,6 +9,7 @@ class Game:
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
+        self.correctAnswer = 0
         # todo: remove this later
         # self.initialize_dummy_database()
         self.read_database()
