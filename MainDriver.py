@@ -66,9 +66,14 @@ class Game:
         if len(self.questions[category_index]) == 1:
             return None
         self.current_question_value = self.get_category_value(category_index)
-        return self.questions[category_index].pop(1)
+
+        question = self.questions[category_index].pop(1)
+        print('INDEX BEING POPPED = ' + str(category_index))
+        return question
+        # return self.questions[category_index].pop(1)
 
     # give the value of the question that just got popped
+
     def get_category_value(self, category_index):
         value = 1000 - (len(self.questions[category_index]) - 2) * 200
         if self.current_round == 2:
