@@ -181,7 +181,7 @@ class PlayScreen():
 
                 # answer selection handlers
                 for x in range(0, 4):
-                    if answerButtonArray[x].clicked:
+                    if answerButtonArray[x].clicked and isinstance(spin_result, int):
                         if x == game.correctAnswer:
                             game.players[game.current_player].add_score(
                                 game.current_question_value)
@@ -261,6 +261,8 @@ class PlayScreen():
                             ansBText.setText("")
                             ansCText.setText("")
                             ansDText.setText("")
+                            spin_button.setClickable(True)
+
                         refresh_current_player_score()
                         refresh_current_player_indicator()
 
