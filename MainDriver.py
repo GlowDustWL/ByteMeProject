@@ -75,6 +75,11 @@ class Game:
             return value * 2
         return value
 
+    # give the current index of the provided category
+    def get_question_index(self, category_index):
+        question_index = 5 - len(self.questions[category_index])
+        return question_index
+
     def question_sequence(self, category):
         # check if empty
         if len(self.questions[category]) == 0:

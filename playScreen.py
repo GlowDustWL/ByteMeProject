@@ -133,15 +133,6 @@ class PlayScreen():
             "c", 48, 975, 710, False), button.Button(
             "d", 48, 975, 775, False)]
 
-        # ansA_button = button.Button(
-        #     "X", 48, 975, 580, False)
-        # ansB_button = button.Button(
-        #     "X", 48, 975, 645, False)
-        # ansC_button = button.Button(
-        #     "X", 48, 975, 710, False)
-        # ansD_button = button.Button(
-        #     "X", 48, 975, 775, False)
-
         show_spin = True
         loop = True
         while loop:
@@ -151,10 +142,6 @@ class PlayScreen():
             game_completed_button.draw(self.screen)
             quit_to_main_button.draw(self.screen)
 
-            # ansA_button.draw(self.screen)
-            # ansB_button.draw(self.screen)
-            # ansC_button.draw(self.screen)
-            # ansD_button.draw(self.screen)
             for x in range(0, 4):
                 answerButtonArray[x].draw(self.screen)
 
@@ -168,16 +155,6 @@ class PlayScreen():
             ansCText.draw(self.screen)
             ansDText.draw(self.screen)
             questionText.draw(self.screen)
-
-            # Jeopardy board highlight/removal examples
-            # # Remove squares from board, grid layout zero-indexed, test example
-            # x_remove = 0
-            # y_remove = 3
-            # board.removeSquare(self.screen, x_remove, y_remove)
-            # # Highlight squares from board, grid layout zero-indexed, test example
-            # x_highlight = 2
-            # y_highlight = 0
-            # board.highlightSquare(self.screen, x_highlight, y_highlight)
 
             # Draw wheel
             myWheel.draw(self.screen)
@@ -206,44 +183,23 @@ class PlayScreen():
                 for x in range(0, 4):
                     if answerButtonArray[x].clicked:
                         if x == game.correctAnswer:
-                            # print('CORRECT ANSWER')
                             game.players[game.current_player].add_score(
                                 game.current_question_value)
-                            refresh_current_player_score()
+                            board.removeSquare(
+                                self.screen, spin_result, game.get_question_index(spin_result))
                             # set all answer buttons to unclickable
                             for x in range(0, 4):
                                 answerButtonArray[x].setClickable(False)
                             # set the spin button to clickable
                             spin_button.setClickable(True)
                         else:
+                            # prevent incorrect answer from being selected twice
+                            answerButtonArray[x].setClickable(False)
                             game.players[game.current_player].sub_score(
                                 game.current_question_value)
                             game.next_player()
-                            refresh_current_player_indicator()
-
-                # if ansA_button.clicked:
-                #     # for now ansA is always correct
-                #     game.players[game.current_player].add_score(
-                #         game.current_question_value)
-                #     refresh_current_player_score()
-                # if ansB_button.clicked:
-                #     game.players[game.current_player].sub_score(
-                #         game.current_question_value)
-                #     refresh_current_player_score()
-                #     game.next_player()
-                #     refresh_current_player_indicator()
-                # if ansC_button.clicked:
-                #     game.players[game.current_player].sub_score(
-                #         game.current_question_value)
-                #     refresh_current_player_score()
-                #     game.next_player()
-                #     refresh_current_player_indicator()
-                # if ansD_button.clicked:
-                #     game.players[game.current_player].sub_score(
-                #         game.current_question_value)
-                #     refresh_current_player_score()
-                #     game.next_player()
-                #     refresh_current_player_indicator()
+                        refresh_current_player_score()
+                        refresh_current_player_indicator()
 
                 # other handlers
                 # ...
@@ -256,9 +212,7 @@ class PlayScreen():
                     game.spins_left -= 1
                     wheelText.setText(str(spin_result))
                     spinCountNum.setText(str(game.spins_left))
-                    # show_spin = False
                     print(spin_result)
-                    # spin_button.clickable = False
 
                     # game logic
                     if type(spin_result) == str:
@@ -273,22 +227,23 @@ class PlayScreen():
                             spin_button.setClickable(True)
                         elif spin_result == 'bankrupt':
                             game.players[game.current_player].zero_score()
+                            refresh_current_player_score()
                             print(str(game.players[game.current_player].score))
                             game.next_player()
                             spin_button.setClickable(True)
                         elif spin_result == 'player\'s choice':
+                            spin_button.setClickable(True)
                             pass
                         elif spin_result == "opponent's choice":
+                            spin_button.setClickable(True)
                             pass
                         elif spin_result == "spin again":
-                            pass
                             spin_button.setClickable(True)
+                            pass
+                        refresh_current_player_score()
                         refresh_current_player_indicator()
 
                     else:  # spin result  is a category number
-                        # set the four answer buttons to unclickable
-                        for x in range(0, 4):
-                            answerButtonArray[x].setClickable(True)
 
                         question = game.get_category_next_question(spin_result)
                         if question != None:
@@ -297,12 +252,17 @@ class PlayScreen():
                             ansBText.setText(question[2])
                             ansCText.setText(question[3])
                             ansDText.setText(question[4])
+                            # set the four answer buttons to clickable
+                            for x in range(0, 4):
+                                answerButtonArray[x].setClickable(True)
                         else:
                             questionText.setText("Category empty, Spin again!")
                             ansAText.setText("")
                             ansBText.setText("")
                             ansCText.setText("")
                             ansDText.setText("")
+                        refresh_current_player_score()
+                        refresh_current_player_indicator()
 
             # update the game state
             pygame.display.update()
