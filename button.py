@@ -38,6 +38,7 @@ class Button():
                 surface.blit(self.text_hover, self.textRect)
             else:
                 surface.blit(self.text, self.textRect)
+                self.clicked = False
         else:
             surface.blit(self.text_unclickable, self.textRect)
             self.clicked = False

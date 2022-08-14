@@ -195,6 +195,8 @@ class PlayScreen():
                 # TODO: complete game and load final score board screen
                 pass
 
+            spun = False
+
             # event handlers
             for event in pygame.event.get():
                 # game window handlers
@@ -230,7 +232,9 @@ class PlayScreen():
 
                 # other handlers
                 # ...
+
                 if spin_button.clicked:
+                    # spun = True
                     # set the spin button to unclickable
                     spin_button.setClickable(False)
                     # attribute = angle in degrees
@@ -246,27 +250,22 @@ class PlayScreen():
                         if spin_result == 'lose turn':
                             game.next_player()
                             print(game.current_player)
-                            spin_button.setClickable(True)
                         elif spin_result == 'free turn':
                             game.players[game.current_player].add_token()
                             narration.setText(
                                 "Player " + str(game.current_player + 1) + " gets a free turn.")
-                            spin_button.setClickable(True)
                         elif spin_result == 'bankrupt':
                             game.players[game.current_player].zero_score()
-                            refresh_all_player_score()
+                            # refresh_all_player_score()
                             print(str(game.players[game.current_player].score))
                             game.next_player()
-                            spin_button.setClickable(True)
                         elif spin_result == 'player\'s choice':
-                            spin_button.setClickable(True)
                             pass
                         elif spin_result == "opponent's choice":
-                            spin_button.setClickable(True)
                             pass
                         elif spin_result == "spin again":
-                            spin_button.setClickable(True)
                             pass
+                        spin_button.setClickable(True)
                         refresh_all_player_score()
                         refresh_current_player_indicator()
 
@@ -289,6 +288,8 @@ class PlayScreen():
 
                         refresh_all_player_score()
                         refresh_current_player_indicator()
+
+                    spin_button.clicked = False
 
             # update the game state
             pygame.display.update()

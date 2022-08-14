@@ -78,8 +78,11 @@ class Game:
         self.current_question_value = self.get_category_value(category_index)
 
         question = self.questions[category_index].pop(1)
-        print('INDEX BEING POPPED = ' + str(category_index))
+        # print('INDEX BEING POPPED = ' +
+        #       str(category_index) + ", " + str(question))
         # update board_empty flag
+        print('INDEX BEING POPPED = ' +
+              str(category_index) + ", " + str(5 - len(self.questions[category_index])))
         self.is_board_empty()
         return question
         # return self.questions[category_index].pop(1)
@@ -95,6 +98,8 @@ class Game:
     # give the current index of the provided category
     def get_question_index(self, category_index):
         question_index = 5 - len(self.questions[category_index])
+        print("QUESTION INDEX: " +
+              str(5 - len(self.questions[category_index])))
         return question_index
 
     def question_sequence(self, category):
