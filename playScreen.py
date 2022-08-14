@@ -7,6 +7,7 @@ import textDisplay
 import textTitle
 import jeopardyBoard
 import wheel
+import random
 from flattenList import flattenList
 import textDisplayLeft
 
@@ -32,9 +33,10 @@ class PlayScreen():
     # main menu
 
     def getInput(self, numPlayers, playerList):
-        def refresh_current_player_score():
-            scoreTextArray[game.current_player].setText(
-                str(game.players[game.current_player].score))
+        def refresh_all_player_score():
+            for x in range(len(game.players)):
+                scoreTextArray[x].setText(
+                    str(game.players[x].score))
 
         def refresh_current_player_indicator():
             for x in range(len(game.players)):
@@ -42,6 +44,15 @@ class PlayScreen():
                     game.players[x].name)
             nameTextArray[game.current_player].setText(
                 "->"+game.players[game.current_player].name+"<-")
+
+        def randomly_assign_answers():
+            tmp_list = [i for i in range(1, 5)]
+            random.shuffle(tmp_list)
+            game.correctAnswer = tmp_list.index(1)
+            ansAText.setText(question[tmp_list[0]])
+            ansBText.setText(question[tmp_list[1]])
+            ansCText.setText(question[tmp_list[2]])
+            ansDText.setText(question[tmp_list[3]])
 
         # initialize game instance
         game = MainDriver.Game(numPlayers, playerList)
@@ -198,7 +209,7 @@ class PlayScreen():
                             game.players[game.current_player].sub_score(
                                 game.current_question_value)
                             game.next_player()
-                        refresh_current_player_score()
+                        refresh_all_player_score()
                         refresh_current_player_indicator()
 
                 # other handlers
@@ -227,7 +238,7 @@ class PlayScreen():
                             spin_button.setClickable(True)
                         elif spin_result == 'bankrupt':
                             game.players[game.current_player].zero_score()
-                            refresh_current_player_score()
+                            refresh_all_player_score()
                             print(str(game.players[game.current_player].score))
                             game.next_player()
                             spin_button.setClickable(True)
@@ -240,7 +251,7 @@ class PlayScreen():
                         elif spin_result == "spin again":
                             spin_button.setClickable(True)
                             pass
-                        refresh_current_player_score()
+                        refresh_all_player_score()
                         refresh_current_player_indicator()
 
                     else:  # spin result  is a category number
@@ -248,10 +259,7 @@ class PlayScreen():
                         question = game.get_category_next_question(spin_result)
                         if question != None:
                             questionText.setText(question[0])
-                            ansAText.setText(question[1])
-                            ansBText.setText(question[2])
-                            ansCText.setText(question[3])
-                            ansDText.setText(question[4])
+                            randomly_assign_answers()
                             # set the four answer buttons to clickable
                             for x in range(0, 4):
                                 answerButtonArray[x].setClickable(True)
@@ -263,7 +271,7 @@ class PlayScreen():
                             ansDText.setText("")
                             spin_button.setClickable(True)
 
-                        refresh_current_player_score()
+                        refresh_all_player_score()
                         refresh_current_player_indicator()
 
             # update the game state

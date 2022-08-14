@@ -10,7 +10,6 @@ class Game:
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
         self.correctAnswer = 0
-        # todo: remove this later
         # self.initialize_dummy_database()
         self.read_database()
         self.current_round = 1  # 1 base
@@ -18,7 +17,7 @@ class Game:
         self.spin_total = spins
         self.spins_left = spins
         self.current_player = 0  # 0 base
-        self.total_player = numPlayers  # todo: increase later, allow parameter
+        self.total_player = numPlayers
         self.players = []
         # create Player objects for each player
         for i in range(self.total_player):
