@@ -179,6 +179,22 @@ class PlayScreen():
             if show_spin:
                 spin_button.draw(self.screen)
 
+            # round 2 logic
+            if game.spins_left <= 0 or game.board_empty:
+                # reload board
+                # todo: use different questions
+                game.read_database_two()
+                game.current_round += 1
+                game.spins_left = game.spin_total
+                game.board_empty = False
+                # todo: reload the whole jeopardy board
+                spinCountNum.setText(str(game.spins_left))
+                # todo: change active player to 0 but only after current turn is done
+
+            if game.current_round > 2:
+                # TODO: complete game and load final score board screen
+                pass
+
             # event handlers
             for event in pygame.event.get():
                 # game window handlers

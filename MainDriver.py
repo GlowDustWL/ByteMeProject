@@ -5,7 +5,7 @@ from player import Player
 
 
 class Game:
-    def __init__(self, numPlayers, playerList, spins=50):
+    def __init__(self, numPlayers, playerList, spins=10):
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
@@ -13,6 +13,7 @@ class Game:
         # self.initialize_dummy_database()
         self.read_database()
         self.current_round = 1  # 1 base
+        self.board_empty = False
         self.current_question_value = 0  # value of the current active question
         self.spin_total = spins
         self.spins_left = spins
@@ -33,6 +34,11 @@ class Game:
         f = open("questions.json", "r", encoding='utf8')
         self.questions = json.loads(f.read())
 
+    # read second database for questions & answers to populate internal data structures (again)
+    def read_database_two(self):
+        f = open("questions2.json", "r", encoding='utf8')
+        self.questions = json.loads(f.read())
+
     # def initialize_dummy_database(self):
     #     f = open("questions.json", "w")
     #     questions = [
@@ -41,7 +47,12 @@ class Game:
     #     f.close
 
     def is_board_empty(self):
-        return not any(self.questions)
+        for i in range(len(self.questions)):
+            if len(self.questions[i]) > 1:
+                self.board_empty = False
+                return False
+        self.board_empty = True
+        return True
 
     # Among 18 sector, get a random spin result
     # either string or index num of category
@@ -68,6 +79,8 @@ class Game:
 
         question = self.questions[category_index].pop(1)
         print('INDEX BEING POPPED = ' + str(category_index))
+        # update board_empty flag
+        self.is_board_empty()
         return question
         # return self.questions[category_index].pop(1)
 

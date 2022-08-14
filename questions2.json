@@ -1,0 +1,242 @@
+[
+    [
+        [
+            "Mars2"
+        ],
+        [
+            "What is the number of moons orbiting Mars?",
+            "2",
+            "4",
+            "7",
+            "1"
+        ],
+        [
+            "What is Mars also known as?",
+            "The Red Planet",
+            "Red Venus 1",
+            "The Dusty Planet 2",
+            "God Mars"
+        ],
+        [
+            "How long will the journey to Mars approximately last?",
+            "8 months",
+            "2 weeks",
+            "6 months",
+            "1 year 2 months"
+        ],
+        [
+            "How close is Mars to the Sun?",
+            "141 million miles",
+            "187 million miles",
+            "223 million miles",
+            "452 million miles"
+        ],
+        [
+            "Mars has the largest volcano in the solar system. What is it called?",
+            "Mount Mons",
+            "Mount Agamemnon",
+            "Mount Kratos",
+            "Mount Oblivion"
+        ]
+    ],
+    [
+        [
+            "Space"
+        ],
+        [
+            "First human to travel into space?",
+            "Yuri Gagarin",
+            "Alan Shepard",
+            "Vladimir Komarov",
+            "Neil Armstrong"
+        ],
+        [
+            "The first human-made object to orbit",
+            "Sputnik 1",
+            "Apollo 1",
+            "Salyut 1",
+            "None of the above 2"
+        ],
+        [
+            "First spacewalk by living being?",
+            "Aleksei Leonov",
+            "Neil Armstrong",
+            "None of the above",
+            "Yuri Gagarin"
+        ],
+        [
+            "The first flight of the space shuttle progarm by NASA was launched in",
+            "1981",
+            "1980",
+            "1979",
+            "1982"
+        ],
+        [
+            "Planets are moving towards each other was noticed by?",
+            "Copernicus",
+            "Isaac",
+            "Gagarian",
+            "Edwin"
+        ]
+    ],
+    [
+        [
+            "Black Hole2"
+        ],
+        [
+            "What is a black hole?",
+            "Evolutionary end point of a massive star",
+            "Bottom of a galaxy",
+            "Top of a galaxy",
+            "Comet that has turned black"
+        ],
+        [
+            "What is a black hole running back in time?",
+            "White hole",
+            "Worm hole",
+            "Green hole",
+            "nsect hole"
+        ],
+        [
+            "How much is the escape speed in Schwarzschild radius?",
+            "Speed of light",
+            " Speed of sound",
+            "Speed of aeroplane",
+            "Speed of rocket"
+        ],
+        [
+            "Who proposed that black holes can evaporate",
+            "Stephen Hawking",
+            "Karl Schwarzschild",
+            "John Oppenheimer",
+            "Julian Huxley"
+        ],
+        [
+            "What divides space time into “inside” and “outside?",
+            "Event horizon",
+            "Singularity",
+            "Gravity",
+            "Meteor"
+        ]
+    ],
+    [
+        [
+            "Planets & Stars2"
+        ],
+        [
+            "Identify the planet whose length of the days and tilt of its axis are almost identical to those of the earth?",
+            "Mars",
+            "Uranus",
+            "Neptune",
+            "Saturn"
+        ],
+        [
+            "Stars appear to move from",
+            "East to west",
+            "West to east",
+            "North to south",
+            "South to west"
+        ],
+        [
+            "The speed of rotation of the earth is the highest?",
+            "along the equator",
+            "at the North-Pole",
+            "along the Tropic of Cancer",
+            "along the Arctic Circle"
+        ],
+        [
+            "What is the gap between the orbit of mars and jupiter called?",
+            "Asteroids",
+            "Comets",
+            "Metepr",
+            "Meteorite"
+        ],
+        [
+            "What element isthe main component of most stars?",
+            "hydrogen",
+            "nitrogen",
+            "oxygen",
+            "iron"
+        ]
+    ],
+    [
+        [
+            "Earth2"
+        ],
+        [
+            "The closest star to the Earth is __ ?",
+            "Sun",
+            "Sirius",
+            "Deneb",
+            "Rigel"
+        ],
+        [
+            "What is the approximate distance from the surface to the center of he Earth?",
+            "4,000 miles",
+            "10,000 miles",
+            "40,000 miles",
+            "1,000 miles"
+        ],
+        [
+            "The reservoirs of gas and petroleum under the surface of Earth are __ ?",
+            "permeable rocks",
+            "igneous rocks",
+            "sedimentary rocks",
+            "metamorphic rocks"
+        ],
+        [
+            "Where is the Earth's magnetic field generated?",
+            "in the outer core",
+            "in the mantle",
+            "in the crust",
+            "in the inner core"
+        ],
+        [
+            "Which of the following statements about the Moho is false?",
+            "the Moho marks the top of a partially molten layer",
+            "the Moho separates the crust from the mantle",
+            "the Moho separates denser rocks below from less dense rocks above",
+            "seismic waves speed up as they pass across the Moho heading downward"
+        ]
+    ],
+    [
+        [
+            "Deep Space2"
+        ],
+        [
+            "What kind of space lies between stars??",
+            "Interstellar space",
+            "Intergalactic space",
+            "Interplanetary space",
+            "Intergalactellar space"
+        ],
+        [
+            "What is in 'empty' Space?",
+            "Hydrogen atoms and subatomic particles",
+            "Nothing, it's a perfect vacuum",
+            "There's a very small amount of air",
+            "Heavy atoms pulverized by the tremendous pressure"
+        ],
+        [
+            "Our solar system is a ...",
+            "Heliocentric",
+            "Lunacentric",
+            "Geocentric",
+            "Galacentric"
+        ],
+        [
+            "If the earth revolves around teh sun, what does the sun revolve around?",
+            "The milky way galaxy",
+            "Nothing, the sun stays still beceuase of gravity",
+            "The revoles around the universal center",
+            "The sun revolves around the great attractor"
+        ],
+        [
+            "What happens when a star is not massive enough for its supernova to form a black hole?",
+            "It becomes a neutron star",
+            "It becomes a class K star",
+            "It becomes a pulsar",
+            "It becomes a mini black hole"
+        ]
+    ]
+]
