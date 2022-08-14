@@ -9,15 +9,16 @@ class Game:
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
-        # todo: remove this later
+        self.correctAnswer = 0
         # self.initialize_dummy_database()
         self.read_database()
         self.current_round = 1  # 1 base
+        self.board_empty = False
         self.current_question_value = 0  # value of the current active question
         self.spin_total = spins
         self.spins_left = spins
         self.current_player = 0  # 0 base
-        self.total_player = numPlayers  # todo: increase later, allow parameter
+        self.total_player = numPlayers
         self.players = []
         # create Player objects for each player
         for i in range(self.total_player):
@@ -33,6 +34,11 @@ class Game:
         f = open("questions.json", "r", encoding='utf8')
         self.questions = json.loads(f.read())
 
+    # read second database for questions & answers to populate internal data structures (again)
+    def read_database_two(self):
+        f = open("questions2.json", "r", encoding='utf8')
+        self.questions = json.loads(f.read())
+
     # def initialize_dummy_database(self):
     #     f = open("questions.json", "w")
     #     questions = [
@@ -41,7 +47,12 @@ class Game:
     #     f.close
 
     def is_board_empty(self):
-        return not any(self.questions)
+        for i in range(len(self.questions)):
+            if len(self.questions[i]) > 1:
+                self.board_empty = False
+                return False
+        self.board_empty = True
+        return True
 
     # Among 18 sector, get a random spin result
     # either string or index num of category
@@ -65,14 +76,31 @@ class Game:
         if len(self.questions[category_index]) == 1:
             return None
         self.current_question_value = self.get_category_value(category_index)
-        return self.questions[category_index].pop(1)
+
+        question = self.questions[category_index].pop(1)
+        # print('INDEX BEING POPPED = ' +
+        #       str(category_index) + ", " + str(question))
+        # update board_empty flag
+        print('INDEX BEING POPPED = ' +
+              str(category_index) + ", " + str(5 - len(self.questions[category_index])))
+        self.is_board_empty()
+        return question
+        # return self.questions[category_index].pop(1)
 
     # give the value of the question that just got popped
+
     def get_category_value(self, category_index):
         value = 1000 - (len(self.questions[category_index]) - 2) * 200
         if self.current_round == 2:
             return value * 2
         return value
+
+    # give the current index of the provided category
+    def get_question_index(self, category_index):
+        question_index = 5 - len(self.questions[category_index])
+        print("QUESTION INDEX: " +
+              str(5 - len(self.questions[category_index])))
+        return question_index
 
     def question_sequence(self, category):
         # check if empty

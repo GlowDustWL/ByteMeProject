@@ -44,14 +44,14 @@ class LoadingScreen():
             input_boxes.append(inputBox.InputBox(
                 self.playerList[i], 32, self.width/2 - 70, self.height - 600 + 100*i))
 
+        # buttons
+        play_button = button.Button(
+            "PLAY", 32, self.width*(1 - 1/8), self.height - 50)
+        back_button = button.Button(
+            "BACK", 32, self.width/10, self.height - 50)
+
         loop = True
         while loop:
-
-            # buttons
-            play_button = button.Button(
-                "PLAY", 32, self.width*(1 - 1/8), self.height - 50)
-            back_button = button.Button(
-                "BACK", 32, self.width/10, self.height - 50)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))

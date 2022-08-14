@@ -7,6 +7,7 @@ import textDisplay
 import textTitle
 import jeopardyBoard
 import wheel
+import random
 from flattenList import flattenList
 import textDisplayLeft
 
@@ -32,9 +33,10 @@ class PlayScreen():
     # main menu
 
     def getInput(self, numPlayers, playerList):
-        def refresh_current_player_score():
-            scoreTextArray[game.current_player].setText(
-                str(game.players[game.current_player].score))
+        def refresh_all_player_score():
+            for x in range(len(game.players)):
+                scoreTextArray[x].setText(
+                    str(game.players[x].score))
 
         def refresh_current_player_indicator():
             for x in range(len(game.players)):
@@ -42,6 +44,15 @@ class PlayScreen():
                     game.players[x].name)
             nameTextArray[game.current_player].setText(
                 "->"+game.players[game.current_player].name+"<-")
+
+        def randomly_assign_answers():
+            tmp_list = [i for i in range(1, 5)]
+            random.shuffle(tmp_list)
+            game.correctAnswer = tmp_list.index(1)
+            ansAText.setText(question[tmp_list[0]])
+            ansBText.setText(question[tmp_list[1]])
+            ansCText.setText(question[tmp_list[2]])
+            ansDText.setText(question[tmp_list[3]])
 
         # initialize game instance
         game = MainDriver.Game(numPlayers, playerList)
@@ -118,35 +129,33 @@ class PlayScreen():
         board = jeopardyBoard.JeopardyBoard()
         myWheel = wheel.Wheel()
 
+        # buttons
+        game_completed_button = button.Button(
+            "GAME COMPLETED", 32, self.width*(1 - 1/8), self.height - 50)
+        quit_to_main_button = button.Button(
+            "QUIT TO MAIN", 32, self.width/10, self.height - 50)
+        spin_button = button.Button(
+            "SPIN", 46, 1250, 680)
+
+        # create array full of answer buttons from A to D
+        answerButtonArray = [button.Button(
+            "a", 48, 975, 580, False), button.Button(
+            "b", 48, 975, 645, False), button.Button(
+            "c", 48, 975, 710, False), button.Button(
+            "d", 48, 975, 775, False)]
+
         show_spin = True
         loop = True
         while loop:
-
-            # buttons
-            game_completed_button = button.Button(
-                "GAME COMPLETED", 32, self.width*(1 - 1/8), self.height - 50)
-            quit_to_main_button = button.Button(
-                "QUIT TO MAIN", 32, self.width/10, self.height - 50)
-            spin_button = button.Button(
-                "SPIN", 46, 1250, 680)
-
-            ansA_button = button.Button(
-                "X", 48, 975, 580)
-            ansB_button = button.Button(
-                "X", 48, 975, 645)
-            ansC_button = button.Button(
-                "X", 48, 975, 710)
-            ansD_button = button.Button(
-                "X", 48, 975, 775)
 
             # draw elements
             self.screen.blit(self.background, (0, 0))
             game_completed_button.draw(self.screen)
             quit_to_main_button.draw(self.screen)
-            ansA_button.draw(self.screen)
-            ansB_button.draw(self.screen)
-            ansC_button.draw(self.screen)
-            ansD_button.draw(self.screen)
+
+            for x in range(0, 4):
+                answerButtonArray[x].draw(self.screen)
+
             wheelText.draw(self.screen)
             spinCountText.draw(self.screen)
             spinCountNum.draw(self.screen)
@@ -157,16 +166,6 @@ class PlayScreen():
             ansCText.draw(self.screen)
             ansDText.draw(self.screen)
             questionText.draw(self.screen)
-
-            # Jeopardy board highlight/removal examples
-            # # Remove squares from board, grid layout zero-indexed, test example
-            # x_remove = 0
-            # y_remove = 3
-            # board.removeSquare(self.screen, x_remove, y_remove)
-            # # Highlight squares from board, grid layout zero-indexed, test example
-            # x_highlight = 2
-            # y_highlight = 0
-            # board.highlightSquare(self.screen, x_highlight, y_highlight)
 
             # Draw wheel
             myWheel.draw(self.screen)
@@ -180,6 +179,24 @@ class PlayScreen():
             if show_spin:
                 spin_button.draw(self.screen)
 
+            # round 2 logic
+            if game.spins_left <= 0 or game.board_empty:
+                # reload board
+                # todo: use different questions
+                game.read_database_two()
+                game.current_round += 1
+                game.spins_left = game.spin_total
+                game.board_empty = False
+                # todo: reload the whole jeopardy board
+                spinCountNum.setText(str(game.spins_left))
+                # todo: change active player to 0 but only after current turn is done
+
+            if game.current_round > 2:
+                # TODO: complete game and load final score board screen
+                pass
+
+            spun = False
+
             # event handlers
             for event in pygame.event.get():
                 # game window handlers
@@ -192,47 +209,46 @@ class PlayScreen():
                     loop = False
 
                 # answer selection handlers
-                if ansA_button.clicked:
-                    # for now ansA is always correct
-                    game.players[game.current_player].add_score(
-                        game.current_question_value)
-                    refresh_current_player_score()
-                if ansB_button.clicked:
-                    game.players[game.current_player].sub_score(
-                        game.current_question_value)
-                    refresh_current_player_score()
-                    game.next_player()
-                    refresh_current_player_indicator()
-                if ansC_button.clicked:
-                    game.players[game.current_player].sub_score(
-                        game.current_question_value)
-                    refresh_current_player_score()
-                    game.next_player()
-                    refresh_current_player_indicator()
-                if ansD_button.clicked:
-                    game.players[game.current_player].sub_score(
-                        game.current_question_value)
-                    refresh_current_player_score()
-                    game.next_player()
-                    refresh_current_player_indicator()
+                for x in range(0, 4):
+                    if answerButtonArray[x].clicked and isinstance(spin_result, int):
+                        if x == game.correctAnswer:
+                            game.players[game.current_player].add_score(
+                                game.current_question_value)
+                            board.removeSquare(
+                                self.screen, spin_result, game.get_question_index(spin_result))
+                            # set all answer buttons to unclickable
+                            for x in range(0, 4):
+                                answerButtonArray[x].setClickable(False)
+                            # set the spin button to clickable
+                            spin_button.setClickable(True)
+                        else:
+                            # prevent incorrect answer from being selected twice
+                            answerButtonArray[x].setClickable(False)
+                            game.players[game.current_player].sub_score(
+                                game.current_question_value)
+                            game.next_player()
+                        refresh_all_player_score()
+                        refresh_current_player_indicator()
 
                 # other handlers
                 # ...
+
                 if spin_button.clicked:
+                    # spun = True
+                    # set the spin button to unclickable
+                    spin_button.setClickable(False)
                     # attribute = angle in degrees
                     myWheel.spin(self.screen, 360)
                     spin_result = game.spin()
                     game.spins_left -= 1
                     wheelText.setText(str(spin_result))
                     spinCountNum.setText(str(game.spins_left))
-                    # show_spin = False
                     print(spin_result)
 
                     # game logic
                     if type(spin_result) == str:
                         if spin_result == 'lose turn':
                             game.next_player()
-                            refresh_current_player_indicator()
                             print(game.current_player)
                         elif spin_result == 'free turn':
                             game.players[game.current_player].add_token()
@@ -240,23 +256,41 @@ class PlayScreen():
                                 "Player " + str(game.current_player + 1) + " gets a free turn.")
                         elif spin_result == 'bankrupt':
                             game.players[game.current_player].zero_score()
+                            # refresh_all_player_score()
                             print(str(game.players[game.current_player].score))
+                            game.next_player()
                         elif spin_result == 'player\'s choice':
                             pass
+                        elif spin_result == "opponent's choice":
+                            pass
+                        elif spin_result == "spin again":
+                            pass
+                        spin_button.setClickable(True)
+                        refresh_all_player_score()
+                        refresh_current_player_indicator()
+
                     else:  # spin result  is a category number
+
                         question = game.get_category_next_question(spin_result)
                         if question != None:
                             questionText.setText(question[0])
-                            ansAText.setText(question[1])
-                            ansBText.setText(question[2])
-                            ansCText.setText(question[3])
-                            ansDText.setText(question[4])
+                            randomly_assign_answers()
+                            # set the four answer buttons to clickable
+                            for x in range(0, 4):
+                                answerButtonArray[x].setClickable(True)
                         else:
                             questionText.setText("Category empty, Spin again!")
                             ansAText.setText("")
                             ansBText.setText("")
                             ansCText.setText("")
                             ansDText.setText("")
-                        # update the game state
+                            spin_button.setClickable(True)
+
+                        refresh_all_player_score()
+                        refresh_current_player_indicator()
+
+                    spin_button.clicked = False
+
+            # update the game state
             pygame.display.update()
             self.clock.tick(60)
