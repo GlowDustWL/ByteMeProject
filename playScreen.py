@@ -77,17 +77,17 @@ class PlayScreen():
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
             680, 50, 240, 400),  2, 3)  # Player info section
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-            50, 480, 870, 50),  2, 3)  # status/ user promp
+            50, 480, 870, 90),  2, 3)  # status/ user promp
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-            50, 550, 870, 255),  2, 3)  # questions / answers
+            50, 585, 1000, 240),  2, 3)  # questions / answers
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-            950, 555, 50, 50),  2, 3)  # asnwer question button: A
+            1060, 587, 50, 50),  2, 3)  # asnwer question button: A
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-            950, 620, 50, 50),  2, 3)  # asnwer question button: B
+            1060, 650, 50, 50),  2, 3)  # asnwer question button: B
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-            950, 685, 50, 50),  2, 3)  # asnwer question button: C
+            1060, 712, 50, 50),  2, 3)  # asnwer question button: C
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-            950, 750, 50, 50),  2, 3)  # asnwer question button: D
+            1060, 773, 50, 50),  2, 3)  # asnwer question button: D
         # pygame.draw.rect(self.background, self.box_color, pygame.Rect(
         #     1150, 652, 200, 50),  2, 3)  # Spin The Wheel !
         # pygame.gfxdraw.rectangle(self.background, pygame.Rect(
@@ -101,19 +101,19 @@ class PlayScreen():
         spinCountNum = textDisplay.TextDisplay(
             str(game.spins_left), 26, 230, 425)
         narration = textDisplay.TextDisplay(
-            "Press \"SPIN\" to spin the wheel.", 26, 1265, 630)
+            "Press \"SPIN\" to spin the wheel.", 26, 1340, 677)
 
         # Questions/Answer Display
         questionText = textDisplay.TextDisplay(
             "No question to answer yet", 26, 480, 507)
         ansAText = textDisplayLeft.TextDisplayLeft(
-            "answer A", 26, 75, 550+20)
+            "answer A", 26, 75, 585+12)
         ansBText = textDisplayLeft.TextDisplayLeft(
-            "answer B", 26, 75, 550+20+63*1)
+            "answer B", 26, 75, 585+12+63*1)
         ansCText = textDisplayLeft.TextDisplayLeft(
-            "answer C", 26, 75, 550+20+63*2)
+            "answer C", 26, 75, 585+12+63*2)
         ansDText = textDisplayLeft.TextDisplayLeft(
-            "answer D", 26, 75, 550+20+63*3)
+            "answer D", 26, 75, 585+12+63*3)
 
         # create text for each player to display scores
         nameTextArray = []
@@ -135,14 +135,14 @@ class PlayScreen():
         quit_to_main_button = button.Button(
             "QUIT TO MAIN", 32, self.width/10, self.height - 50)
         spin_button = button.Button(
-            "SPIN", 46, 1250, 680)
+            "SPIN", 50, 1320, 727)
 
         # create array full of answer buttons from A to D
         answerButtonArray = [button.Button(
-            "a", 48, 975, 580, False), button.Button(
-            "b", 48, 975, 645, False), button.Button(
-            "c", 48, 975, 710, False), button.Button(
-            "d", 48, 975, 775, False)]
+            "a", 48, 1085, 587 + 22.5, False), button.Button(
+            "b", 48, 1085, 677, False), button.Button(
+            "c", 48, 1085, 735.5, False), button.Button(
+            "d", 48, 1085, 800.5, False)]
 
         show_spin = True
         loop = True
