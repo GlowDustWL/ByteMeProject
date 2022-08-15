@@ -93,6 +93,11 @@ class LoadingScreen():
                     # check which input box
                     for x in input_boxes:
                         if x.clicked:
+                            # character limit
+                            if (x.text_surface_width > 200):
+                                x.clicked = False
+                                x.current_color = x.passive_color
+                                break
                             # corresponding player number for input box
                             player_num = input_boxes.index(x)
                             # if backspace pressed, remove character
