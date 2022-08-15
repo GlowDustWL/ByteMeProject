@@ -2,6 +2,7 @@
 import pygame
 import button
 import textMedium
+import textDisplay
 
 
 class EndScreen():
@@ -22,16 +23,25 @@ class EndScreen():
         text = textMedium.TextMedium(
             "Thank you for Playing!", self.width/2, self.height/2 - 300)
         # self.screen.blit(self.background, (0, 0))
-        playerScoreIntro = textMedium.TextMedium(
-            "Final player scores:", self.width/2, self.height/2 - 200)
+        playerScoreIntro = textDisplay.TextDisplay(
+            "Final player scores:", 26, self.width/2, self.height/2 - 200)
+
+        # determining winner
+        winner = 0
+        for x in range(len(finalScores) - 1):
+            if (finalScores[x] > finalScores[x + 1]):
+                winner = x
+
+        winnerText = textMedium.TextMedium(
+            "The winner is " + playerList[winner] + "!", self.width/2, self.height/2 + 200)
 
         nameTextArray = []
         scoreTextArray = []
         for x in range(numPlayers):
-            nameTextArray.append(textMedium.TextMedium(
-                playerList[x] + ":", self.width/2 - 90, self.height - 550 + 70*x))
-            scoreTextArray.append(textMedium.TextMedium(
-                str(finalScores[x]), self.width/2 + 120, self.height - 550 + 70*x))
+            nameTextArray.append(textDisplay.TextDisplay(
+                playerList[x] + ":", 26, self.width/2 - 90, self.height - 550 + 70*x))
+            scoreTextArray.append(textDisplay.TextDisplay(
+                str(finalScores[x]), 26, self.width/2 + 100, self.height - 550 + 70*x))
 
         # buttons
         continue_button = button.Button(
@@ -45,6 +55,7 @@ class EndScreen():
             continue_button.draw(self.screen)
             text.draw(self.screen)
             playerScoreIntro.draw(self.screen)
+            winnerText.draw(self.screen)
 
             # draw player names/scores
             for x in nameTextArray:
