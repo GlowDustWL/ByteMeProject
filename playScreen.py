@@ -101,7 +101,7 @@ class PlayScreen():
         spinCountNum = textDisplay.TextDisplay(
             str(game.spins_left), 26, 230, 425)
         narration = textDisplay.TextDisplay(
-            "Press \"SPIN\" to spin the wheel.", 26, 1340, 630)
+            "Press \"SPIN\" to spin the wheel.", 26, 1340, 677)
 
         # Questions/Answer Display
         questionText = textDisplay.TextDisplay(
@@ -135,7 +135,7 @@ class PlayScreen():
         quit_to_main_button = button.Button(
             "QUIT TO MAIN", 32, self.width/10, self.height - 50)
         spin_button = button.Button(
-            "SPIN", 50, 1320, 680)
+            "SPIN", 50, 1320, 727)
 
         # create array full of answer buttons from A to D
         answerButtonArray = [button.Button(
