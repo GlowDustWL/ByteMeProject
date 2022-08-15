@@ -24,6 +24,9 @@ class MainGUI():
         # player names
         self.playerList = []
 
+        # player scores
+        self.playerScores = []
+
         # screens
         self.menuScreen = mainMenu.MainMenu(
             self.screen, self.clock, self.height, self.width)
@@ -45,7 +48,9 @@ class MainGUI():
                     # self.numPlayers = self.loadingScreen.numPlayers
                     if self.playScreen.getInput(self.numPlayers,
                                                 self.playerList):
-                        self.endScreen.getInput()
+                        self.playerScores = self.playScreen.finalScores
+                        self.endScreen.getInput(self.numPlayers, self.playerList,
+                                                self.playerScores)
 
 
 game = MainGUI().play()

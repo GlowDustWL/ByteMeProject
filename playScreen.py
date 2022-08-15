@@ -27,6 +27,7 @@ class PlayScreen():
         self.categories = []
         self.questions = []
         self.answers = [[]]
+        self.finalScores = []
 
         # self.game = MainDriver.Game()
 
@@ -37,6 +38,7 @@ class PlayScreen():
             for x in range(len(game.players)):
                 scoreTextArray[x].setText(
                     str(game.players[x].score))
+                self.finalScores[x] = game.players[x].score
 
         def refresh_current_player_indicator():
             for x in range(len(game.players)):
@@ -56,6 +58,10 @@ class PlayScreen():
 
         # initialize game instance
         game = MainDriver.Game(numPlayers, playerList)
+
+        # set up final score array
+        for x in range(len(game.players)):
+            self.finalScores.append(0)
 
         # parse categories to be displayed
         self.categories.append(game.questions[0][0])
