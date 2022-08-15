@@ -101,7 +101,7 @@ class PlayScreen():
 
         # drawing text
         wheelText = textDisplay.TextDisplay(
-            "", 46, 1250, 750)
+            "", 46, 1320, 780)
         spinCountText = textDisplay.TextDisplay(
             "Spins left: ", 26, 150, 425)
         spinCountNum = textDisplay.TextDisplay(
