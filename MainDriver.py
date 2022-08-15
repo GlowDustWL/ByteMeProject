@@ -27,6 +27,7 @@ class Game:
                 self.players.append(Player(playerList[i]))
             # user did not input name
             else:
+                playerList[i] = "Player " + str(i+1)
                 self.players.append(Player("Player " + str(i+1)))
 
     # read database for questions & answers to populate internal data structures
