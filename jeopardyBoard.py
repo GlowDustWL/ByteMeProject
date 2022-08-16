@@ -1,5 +1,6 @@
 # import statements
 import pygame
+import textDisplayBoardWrap
 
 
 class JeopardyBoard:
@@ -53,14 +54,9 @@ class JeopardyBoard:
         pygame.draw.rect(surface, self.dark_blue, pygame.Rect(
             self.title_x_start, self.title_y_start, self.title_x_dim, self.title_y_dim))
         for x in range(6):
-            # Draw Big Board Rectangle
-            rect_obj = pygame.draw.rect(surface, self.light_blue, pygame.Rect(self.title_x_start+self.x_pad+self.x_dim*x+self.x_pad*x,
-                                                                              self.title_y_start+self.y_pad, self.x_dim, self.y_dim))
-            text_surface_object = pygame.font.SysFont(
-                'freesansbold.ttf', 32).render(categories[x], True, self.light_purple)
-            text_rect = text_surface_object.get_rect(
-                center=rect_obj.center)
-            surface.blit(text_surface_object, text_rect)
+            thisBox = textDisplayBoardWrap.Pane(32)
+            thisBox.addText(surface, categories[x], self.x_dim, self.y_dim, self.title_x_start+self.x_pad +
+                            self.x_dim*x+self.x_pad*x, self.title_y_start+self.y_pad)
         # Draw sub boxes
         pygame.draw.rect(surface, self.dark_blue, pygame.Rect(
             self.full_x_start, self.full_y_start, self.full_x_dim, self.full_y_dim-self.y_dim-self.y_pad*2))
