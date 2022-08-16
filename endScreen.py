@@ -33,7 +33,7 @@ class EndScreen():
                 winner = x
 
         winnerText = textMedium.TextMedium(
-            "The winner is " + playerList[winner] + "!", self.width/2, self.height/2 + 200)
+            "The winner is " + playerList[winner] + "!", self.width/2, self.height/2 + 250)
 
         nameTextArray = []
         scoreTextArray = []
