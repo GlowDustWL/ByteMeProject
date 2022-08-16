@@ -10,6 +10,7 @@ import wheel
 import random
 from flattenList import flattenList
 import textDisplayLeft
+import textDisplayQuestionWrap
 
 
 class PlayScreen():
@@ -110,8 +111,8 @@ class PlayScreen():
             "Press \"SPIN\" to spin the wheel.", 26, 1340, 677)
 
         # Questions/Answer Display
-        questionText = textDisplay.TextDisplay(
-            "No question to answer yet", 26, 480, 507)
+        questionText = textDisplayQuestionWrap.Pane("No question to answer yet",
+                                                    32, 870, 90, 480, 507)
         ansAText = textDisplayLeft.TextDisplayLeft(
             "answer A", 26, 75, 585+12)
         ansBText = textDisplayLeft.TextDisplayLeft(
@@ -171,7 +172,7 @@ class PlayScreen():
             ansBText.draw(self.screen)
             ansCText.draw(self.screen)
             ansDText.draw(self.screen)
-            questionText.draw(self.screen)
+            questionText.draw(self.screen,)
 
             # Draw wheel
             myWheel.draw(self.screen)
@@ -279,13 +280,13 @@ class PlayScreen():
 
                         question = game.get_category_next_question(spin_result)
                         if question != None:
-                            questionText.setText(question[0])
+                            questionText.addText(question[0])
                             randomly_assign_answers()
                             # set the four answer buttons to clickable
                             for x in range(0, 4):
                                 answerButtonArray[x].setClickable(True)
                         else:
-                            questionText.setText("Category empty, Spin again!")
+                            questionText.addText("Category empty, Spin again!")
                             ansAText.setText("")
                             ansBText.setText("")
                             ansCText.setText("")
