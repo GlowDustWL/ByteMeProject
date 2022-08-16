@@ -172,7 +172,7 @@ class PlayScreen():
             ansBText.draw(self.screen)
             ansCText.draw(self.screen)
             ansDText.draw(self.screen)
-            questionText.draw(self.screen,)
+            questionText.draw(self.screen)
 
             # Draw wheel
             myWheel.draw(self.screen)

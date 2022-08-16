@@ -15,23 +15,29 @@ class Pane:
             self.text_input, True, self.white)
         self.text_rect = self.text_surface_object.get_rect(
             center=(self.x_top_left, self.y_top_left))
+        self.text_surface_object2 = self.font.render(
+            "", True, self.white)
+        self.text_rect2 = self.text_surface_object2.get_rect(
+            center=(self.x_top_left, self.y_top_left+self.ydim/2))
 
-    def setText(self, text, y_top_left):
-        self.text_surface_object = self.font.render(text, True, self.white)
+    def setText(self, s1, s2):
+        self.text_surface_object = self.font.render(s1, True, self.white)
         self.text_rect = self.text_surface_object.get_rect(
-            center=(self.x_top_left, y_top_left))
+            center=(self.x_top_left, self.y_top_left))
+        self.text_surface_object2 = self.font.render(s2, True, self.white)
+        self.text_rect2 = self.text_surface_object2.get_rect(
+            center=(self.x_top_left, self.y_top_left+self.ydim/2))
 
     def addText(self, text):
         size_x, size_y = self.font.size(text)
         if size_x > self.xdim:
             s1 = text[:len(text)//2]
             s2 = text[len(text)//2:]
-            print(s1)
-            print(s2)
-            self.setText(s1, self.y_top_left)
-            self.setText(s2, self.y_top_left+self.ydim/2)
         else:
-            self.setText(text, self.y_top_left)
+            s1 = text
+            s2 = ""
+        self.setText(s1, s2)
 
     def draw(self, surface):
         surface.blit(self.text_surface_object, self.text_rect)
+        surface.blit(self.text_surface_object2, self.text_rect2)
