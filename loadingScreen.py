@@ -17,9 +17,9 @@ class LoadingScreen():
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.playerList = []
+        self.box_color = (255, 255, 255)
 
     # main menu
-
     def getInput(self, numPlayers):
         text = textDisplay.TextDisplay(
             "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)
@@ -115,6 +115,10 @@ class LoadingScreen():
                             else:
                                 self.playerList[player_num] += event.unicode
 
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                680, 50, 240, 400),  2, 3)  # Player info section
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                50, 480, 870, 90),  2, 3)  # status/ user promp
             # draw input boxes
             for x in input_boxes:
                 x.draw(self.screen, self.playerList[input_boxes.index(x)])
