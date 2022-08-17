@@ -189,6 +189,7 @@ class PlayScreen():
             # round 2 logic
             if game.spins_left <= 0 or game.board_empty:
                 # reload board
+                board.showAllSquares()
                 # todo: use different questions
                 game.read_database_two()
                 game.current_round += 1

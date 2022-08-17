@@ -84,3 +84,8 @@ class JeopardyBoard:
         text_rect = text_surface_object.get_rect(
             center=rect_obj.center)
         surface.blit(text_surface_object, text_rect)
+
+    def showAllSquares(self):
+        for x in range(6):
+            for y in range(5):
+                self.showMatrix[x][y] = True
