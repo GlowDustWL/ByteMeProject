@@ -21,11 +21,9 @@ class LoadingScreen():
 
     # main menu
     def getInput(self, numPlayers):
-        text = textDisplay.TextDisplay(
-            "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)
         # # player name entry text
-        playerNameText = textDisplay.TextDisplay(
-            "Enter Player Names", 48, self.width/2, self.height/2 - 220)
+        playerNameText = textDisplay.TextDisplayPink(
+            "Enter Player Names", 48, self.width/2 + 470, self.height/2 - 300)
 
         # list for player names
         for i in range(numPlayers):
@@ -36,13 +34,13 @@ class LoadingScreen():
         nameTextArray = []
         for i in range(numPlayers):
             nameTextArray.append(textDisplay.TextDisplay(
-                ("Player " + str(i+1) + ":"), 26, self.width/2 - 170, self.height - 580 + 100*i))
+                ("Player " + str(i+1) + ":"), 26, self.width/2 + 300, self.height - 660 + 100*i))
 
         # create array of input boxes for each player
         input_boxes = []
         for i in range(numPlayers):
             input_boxes.append(inputBox.InputBox(
-                self.playerList[i], 32, self.width/2 - 70, self.height - 600 + 100*i))
+                self.playerList[i], 32, self.width/2 + 400, self.height - 680 + 100*i))
 
         # buttons
         play_button = button.Button(
@@ -57,7 +55,6 @@ class LoadingScreen():
             self.screen.blit(self.background, (0, 0))
             play_button.draw(self.screen)
             back_button.draw(self.screen)
-            text.draw(self.screen)
             playerNameText.draw(self.screen)
 
             # draw player numbers
@@ -116,9 +113,17 @@ class LoadingScreen():
                                 self.playerList[player_num] += event.unicode
 
             pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-                680, 50, 240, 400),  2, 3)  # Player info section
+                50, 50, 375, 225),  2, 3)  # Block #1
             pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-                50, 480, 870, 90),  2, 3)  # status/ user promp
+                50, 300, 375, 225),  2, 3)  # Block #2
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                50, 550, 375, 225),  2, 3)  # Block #3
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                450, 50, 550, 225),  2, 3)  # Info for Wheel, Player, Board
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                450, 300, 550, 225),  2, 3)  # Info for Prompt and questions
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                450, 550, 550, 225),  2, 3)  # Info for Spin wheel and flow info
             # draw input boxes
             for x in input_boxes:
                 x.draw(self.screen, self.playerList[input_boxes.index(x)])
