@@ -27,13 +27,23 @@ class EndScreen():
             "Final player scores:", 26, self.width/2, self.height/2 - 200)
 
         # determining winner
+        print("[LOG]: " + str(len(finalScores)))
         winner = 0
-        for x in range(len(finalScores) - 1):
-            if (finalScores[x] > finalScores[x + 1]):
+        for x in range(1, len(finalScores)):
+            print("[LOG]: Player " + str(x) + " " + str(finalScores[x]))
+            #print("[LOG]: Player " + str(x) + " " + str(finalScores[x+1]))
+            if (finalScores[winner] == finalScores[x]):
+                winner = 7
+                break
+            if (finalScores[winner] < finalScores[x]):
                 winner = x
 
-        winnerText = textMedium.TextMedium(
-            "The winner is " + playerList[winner] + "!", self.width/2, self.height/2 + 250)
+        if (winner == 7):
+            winnerText = textMedium.TextMedium(
+                "It's a tie!", self.width/2, self.height/2 + 250)
+        else:
+            winnerText = textMedium.TextMedium(
+                "The winner is " + playerList[winner] + "!", self.width/2, self.height/2 + 250)
 
         nameTextArray = []
         scoreTextArray = []

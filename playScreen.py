@@ -40,6 +40,8 @@ class PlayScreen():
                 scoreTextArray[x].setText(
                     str(game.players[x].score))
                 self.finalScores[x] = game.players[x].score
+                print("[LOG]: Player " + str(x) +
+                      " " + str(self.finalScores[x]))
 
         def refresh_current_player_indicator():
             for x in range(len(game.players)):
