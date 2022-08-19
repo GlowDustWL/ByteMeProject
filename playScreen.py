@@ -63,6 +63,7 @@ class PlayScreen():
         game = MainDriver.Game(numPlayers, playerList)
 
         # set up final score array
+        self.finalScores.clear()
         for x in range(len(game.players)):
             self.finalScores.append(0)
 
