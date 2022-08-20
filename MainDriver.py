@@ -5,7 +5,7 @@ from player import Player
 
 
 class Game:
-    def __init__(self, numPlayers, playerList, spins=2):
+    def __init__(self, numPlayers, playerList, spins=50):
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
