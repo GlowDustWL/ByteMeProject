@@ -265,7 +265,8 @@ class PlayScreen():
                             narration.setText(
                                 "Player " + str(game.current_player + 1) + " gets a free turn.")
                         elif spin_result == 'bankrupt':
-                            game.players[game.current_player].zero_score()
+                            if (game.players[game.current_player].score > 0):
+                                game.players[game.current_player].zero_score()
                             # refresh_all_player_score()
                             print(str(game.players[game.current_player].score))
                             game.next_player()
