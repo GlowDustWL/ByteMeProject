@@ -59,6 +59,13 @@ class PlayScreen():
             ansCText.setText(question[tmp_list[2]])
             ansDText.setText(question[tmp_list[3]])
 
+        def updateCategoryNames():
+            # parse categories to be displayed
+            self.categories.clear()
+            for x in range(6):
+                self.categories.append(game.questions[x][0])
+            self.categories = flattenList(self.categories)
+
         # initialize game instance
         game = MainDriver.Game(numPlayers, playerList)
 
@@ -68,13 +75,7 @@ class PlayScreen():
             self.finalScores.append(0)
 
         # parse categories to be displayed
-        self.categories.append(game.questions[0][0])
-        self.categories.append(game.questions[1][0])
-        self.categories.append(game.questions[2][0])
-        self.categories.append(game.questions[3][0])
-        self.categories.append(game.questions[4][0])
-        self.categories.append(game.questions[5][0])
-        self.categories = flattenList(self.categories)
+        updateCategoryNames()
 
         print(game.questions[0][1][0])
         print(game.questions[4][1][0])
@@ -191,7 +192,6 @@ class PlayScreen():
 
             # round 2 logic
             if game.spins_left <= 0 or game.board_empty:
-                # reload board
                 # todo: use different questions
                 game.read_database_two()
                 game.current_round += 1
@@ -199,6 +199,9 @@ class PlayScreen():
                 game.board_empty = False
                 # todo: reload the whole jeopardy board
                 spinCountNum.setText(str(game.spins_left))
+                # reload board
+                updateCategoryNames()
+                board.showAllSquares()
                 # todo: change active player to 0 but only after current turn is done
 
             if game.current_round > 2:
