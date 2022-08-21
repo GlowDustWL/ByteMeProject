@@ -19,6 +19,21 @@ class LoadingScreen():
         self.playerList = []
         self.box_color = (255, 255, 255)
 
+        self.info_screen_1 = pygame.image.load(
+            'images/loading_Screen_Info_1.png').convert()
+        self.loading_screen_pics_1 = pygame.transform.smoothscale(
+            self.info_screen_1, (369, 222))
+
+        self.info_screen_2 = pygame.image.load(
+            'images/questions_Prump.png').convert()
+        self.loading_screen_pics_2 = pygame.transform.smoothscale(
+            self.info_screen_2, (369, 222))
+
+        self.info_screen_3 = pygame.image.load(
+            'images/game_info_Player_info.png').convert()
+        self.loading_screen_pics_3 = pygame.transform.smoothscale(
+            self.info_screen_3, (369, 222))
+
     # main menu
     def getInput(self, numPlayers):
         # # player name entry text
@@ -53,9 +68,13 @@ class LoadingScreen():
 
             # draw elements
             self.screen.blit(self.background, (0, 0))
+            self.screen.blit(self.background, (0, 0))
             play_button.draw(self.screen)
             back_button.draw(self.screen)
             playerNameText.draw(self.screen)
+            self.screen.blit(self.loading_screen_pics_1, (52, 52))
+            self.screen.blit(self.loading_screen_pics_2, (52, 302))
+            self.screen.blit(self.loading_screen_pics_3, (52, 552))
 
             # draw player numbers
             for x in nameTextArray:
