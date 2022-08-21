@@ -21,6 +21,8 @@ class MainMenu():
     # main menu
 
     def getInput(self):
+        #playsound('space.mp3', False)
+
         text = textTitle.TextTitle("Wheel of Jeopardy", self.width/2, 150)
         # self.screen.blit(self.background, (0, 0))
         # pygame.display.update()
