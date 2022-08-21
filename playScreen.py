@@ -29,6 +29,7 @@ class PlayScreen():
         self.questions = []
         self.answers = [[]]
         self.finalScores = []
+        self.extraSpinFunctions = False
 
         # self.game = MainDriver.Game()
 
@@ -40,8 +41,8 @@ class PlayScreen():
                 scoreTextArray[x].setText(
                     str(game.players[x].score))
                 self.finalScores[x] = game.players[x].score
-                print("[LOG]: Player " + str(x) +
-                      " " + str(self.finalScores[x]))
+                # print("[LOG]: Player " + str(x) +
+                #       " " + str(self.finalScores[x]))
 
         def refresh_current_player_indicator():
             for x in range(len(game.players)):
@@ -77,8 +78,8 @@ class PlayScreen():
         # parse categories to be displayed
         updateCategoryNames()
 
-        print(game.questions[0][1][0])
-        print(game.questions[4][1][0])
+        # print(game.questions[0][1][0])
+        # print(game.questions[4][1][0])
 
         # drawing rectangleS
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
@@ -142,7 +143,7 @@ class PlayScreen():
 
         # buttons
         game_completed_button = button.Button(
-            "GAME COMPLETED", 32, self.width*(1 - 1/8), self.height - 50)
+            "SEE RESULTS", 32, self.width*(1 - 1/8), self.height - 50, False)
         quit_to_main_button = button.Button(
             "QUIT TO MAIN", 32, self.width/10, self.height - 50)
         spin_button = button.Button(
@@ -190,24 +191,6 @@ class PlayScreen():
             if show_spin:
                 spin_button.draw(self.screen)
 
-            # round 2 logic
-            if game.spins_left <= 0 or game.board_empty:
-                # todo: use different questions
-                game.read_database_two()
-                game.current_round += 1
-                game.spins_left = game.spin_total
-                game.board_empty = False
-                # todo: reload the whole jeopardy board
-                spinCountNum.setText(str(game.spins_left))
-                # reload board
-                updateCategoryNames()
-                board.showAllSquares()
-                # todo: change active player to 0 but only after current turn is done
-
-            if game.current_round > 2:
-                # TODO: complete game and load final score board screen
-                pass
-
             spun = False
 
             # event handlers
@@ -232,14 +215,41 @@ class PlayScreen():
                             # set all answer buttons to unclickable
                             for x in range(0, 4):
                                 answerButtonArray[x].setClickable(False)
-                            # set the spin button to clickable
-                            spin_button.setClickable(True)
+
+                            # round 2 logic
+                            if game.spins_left <= 0 or game.board_empty:
+                                game.current_round += 1
+
+                                if game.current_round > 2:
+                                    # TODO: complete game and load final score board screen
+                                    questionText.addText(
+                                        "Game over! Press \"SEE RESULTS\" to view game results.")
+                                    ansAText.setText("")
+                                    ansBText.setText("")
+                                    ansCText.setText("")
+                                    ansDText.setText("")
+                                    spin_button.setClickable(False)
+                                    game_completed_button.setClickable(True)
+                                    quit_to_main_button.setClickable(False)
+                                else:
+                                    self.extraSpinFunctions = True
+                                    questionText.addText(
+                                        "Round 1 over! Press \"SPIN\" to begin Round 2.")
+                                    ansAText.setText("")
+                                    ansBText.setText("")
+                                    ansCText.setText("")
+                                    ansDText.setText("")
+                                    spin_button.setClickable(True)
+
+                            else:
+                                spin_button.setClickable(True)
                         else:
                             # prevent incorrect answer from being selected twice
                             answerButtonArray[x].setClickable(False)
                             game.players[game.current_player].sub_score(
                                 game.current_question_value)
                             game.next_player()
+
                         refresh_all_player_score()
                         refresh_current_player_indicator()
 
@@ -247,6 +257,20 @@ class PlayScreen():
                 # ...
 
                 if spin_button.clicked:
+                    if self.extraSpinFunctions:
+                        # todo: use different questions
+                        game.read_database_two()
+                        # game.current_round += 1
+                        game.spins_left = game.spin_total
+                        game.board_empty = False
+                        # todo: reload the whole jeopardy board
+                        spinCountNum.setText(str(game.spins_left))
+                        # reload board
+                        updateCategoryNames()
+                        board.showAllSquares()
+                        # todo: change active player to 0 but only after current turn is done
+                        self.extraSpinFunctions = False
+
                     # spun = True
                     # set the spin button to unclickable
                     spin_button.setClickable(False)
@@ -262,7 +286,7 @@ class PlayScreen():
                     if type(spin_result) == str:
                         if spin_result == 'lose turn':
                             game.next_player()
-                            print(game.current_player)
+                            # print(game.current_player)
                         elif spin_result == 'free turn':
                             game.players[game.current_player].add_token()
                             narration.setText(
@@ -271,7 +295,7 @@ class PlayScreen():
                             if (game.players[game.current_player].score > 0):
                                 game.players[game.current_player].zero_score()
                             # refresh_all_player_score()
-                            print(str(game.players[game.current_player].score))
+                            # print(str(game.players[game.current_player].score))
                             game.next_player()
                         elif spin_result == 'player\'s choice':
                             pass
@@ -279,7 +303,41 @@ class PlayScreen():
                             pass
                         elif spin_result == "spin again":
                             pass
-                        spin_button.setClickable(True)
+
+                        questionText.addText("")
+                        ansAText.setText("")
+                        ansBText.setText("")
+                        ansCText.setText("")
+                        ansDText.setText("")
+
+                        # round 2 logic
+                        if game.spins_left <= 0 or game.board_empty:
+                            game.current_round += 1
+
+                            if game.current_round > 2:
+                                # TODO: complete game and load final score board screen
+                                questionText.addText(
+                                    "Game over! Press \"SEE RESULTS\" to view game results.")
+                                ansAText.setText("")
+                                ansBText.setText("")
+                                ansCText.setText("")
+                                ansDText.setText("")
+                                spin_button.setClickable(False)
+                                game_completed_button.setClickable(True)
+                                quit_to_main_button.setClickable(False)
+                            else:
+                                self.extraSpinFunctions = True
+                                questionText.addText(
+                                    "Round 1 over! Press \"SPIN\" to begin Round 2.")
+                                ansAText.setText("")
+                                ansBText.setText("")
+                                ansCText.setText("")
+                                ansDText.setText("")
+                                spin_button.setClickable(True)
+
+                        else:
+                            spin_button.setClickable(True)
+
                         refresh_all_player_score()
                         refresh_current_player_indicator()
 
