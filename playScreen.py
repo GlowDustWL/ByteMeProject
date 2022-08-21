@@ -44,9 +44,9 @@ class PlayScreen():
         def refresh_current_player_indicator():
             for x in range(len(game.players)):
                 nameTextArray[x].setText(
-                    game.players[x].name)
+                    game.players[x].name + " (" + str(game.players[x].free_token) + ")")
             nameTextArray[game.current_player].setText(
-                "->"+game.players[game.current_player].name+"<-")
+                "->"+nameTextArray[game.current_player].text_input+"<-")
 
         def randomly_assign_answers():
             tmp_list = [i for i in range(1, 5)]
@@ -233,7 +233,12 @@ class PlayScreen():
                             answerButtonArray[x].setClickable(False)
                             game.players[game.current_player].sub_score(
                                 game.current_question_value)
-                            game.next_player()
+                            if game.players[game.current_player].free_token > 0:
+                                narration.setText(
+                                    game.players[game.current_player].name + " uses a free turn token.")
+                                game.players[game.current_player].free_token -= 1
+                            else:
+                                game.next_player()
                         refresh_all_player_score()
                         refresh_current_player_indicator()
 
@@ -255,12 +260,17 @@ class PlayScreen():
                     # game logic
                     if type(spin_result) == str:
                         if spin_result == 'lose turn':
-                            game.next_player()
+                            if game.players[game.current_player].free_token > 0:
+                                narration.setText(
+                                    game.players[game.current_player].name + " uses a free turn token.")
+                                game.players[game.current_player].free_token -= 1
+                            else:
+                                game.next_player()
                             print(game.current_player)
                         elif spin_result == 'free turn':
                             game.players[game.current_player].add_token()
                             narration.setText(
-                                "Player " + str(game.current_player + 1) + " gets a free turn.")
+                                game.players[game.current_player].name + " gets a free turn token.")
                         elif spin_result == 'bankrupt':
                             game.players[game.current_player].zero_score()
                             # refresh_all_player_score()
