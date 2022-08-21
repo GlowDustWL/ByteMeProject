@@ -177,8 +177,6 @@ class PlayScreen():
             ansCText.draw(self.screen)
             ansDText.draw(self.screen)
             questionText.draw(self.screen)
-
-            # Draw wheel
             myWheel.draw(self.screen)
 
             # draw player names/scores
@@ -250,13 +248,12 @@ class PlayScreen():
                     # spun = True
                     # set the spin button to unclickable
                     spin_button.setClickable(False)
-                    # attribute = angle in degrees
-                    myWheel.spin(self.screen, 360)
                     spin_result = game.spin()
+                    myWheel.set_angle(spin_result)
+                    myWheel.spin(self.screen)
                     game.spins_left -= 1
                     wheelText.setText(str(spin_result))
                     spinCountNum.setText(str(game.spins_left))
-                    print(spin_result)
 
                     # game logic
                     if type(spin_result) == str:
@@ -286,6 +283,7 @@ class PlayScreen():
                     else:  # spin result  is a category number
 
                         question = game.get_category_next_question(spin_result)
+                        print(question)
                         if question != None:
                             questionText.addText(question[0])
                             randomly_assign_answers()
