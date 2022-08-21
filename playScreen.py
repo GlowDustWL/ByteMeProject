@@ -40,6 +40,8 @@ class PlayScreen():
                 scoreTextArray[x].setText(
                     str(game.players[x].score))
                 self.finalScores[x] = game.players[x].score
+                print("[LOG]: Player " + str(x) +
+                      " " + str(self.finalScores[x]))
 
         def refresh_current_player_indicator():
             for x in range(len(game.players)):
@@ -61,6 +63,7 @@ class PlayScreen():
         game = MainDriver.Game(numPlayers, playerList)
 
         # set up final score array
+        self.finalScores.clear()
         for x in range(len(game.players)):
             self.finalScores.append(0)
 
@@ -262,7 +265,8 @@ class PlayScreen():
                             narration.setText(
                                 "Player " + str(game.current_player + 1) + " gets a free turn.")
                         elif spin_result == 'bankrupt':
-                            game.players[game.current_player].zero_score()
+                            if (game.players[game.current_player].score > 0):
+                                game.players[game.current_player].zero_score()
                             # refresh_all_player_score()
                             print(str(game.players[game.current_player].score))
                             game.next_player()
