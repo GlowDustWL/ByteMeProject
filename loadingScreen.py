@@ -4,6 +4,7 @@ import button
 import inputBox
 import textMedium
 import textDisplay
+from playsound import playsound
 
 
 class LoadingScreen():
@@ -71,8 +72,10 @@ class LoadingScreen():
                     pygame.quit()
                     exit()
                 if play_button.clicked:
+                    playsound('selection.mp3', False)
                     return True
                 if back_button.clicked:
+                    playsound('back.mp3', False)
                     loop = False
                 # check if input box clicked
                 if event.type == pygame.MOUSEBUTTONDOWN:

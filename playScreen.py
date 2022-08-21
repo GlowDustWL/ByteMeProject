@@ -11,6 +11,7 @@ import random
 from flattenList import flattenList
 import textDisplayLeft
 import textDisplayQuestionWrap
+from playsound import playsound
 
 
 class PlayScreen():
@@ -214,8 +215,10 @@ class PlayScreen():
                     pygame.quit()
                     exit()
                 if game_completed_button.clicked:
+                    playsound('Selection.mp3', False)
                     return True
                 if quit_to_main_button.clicked:
+                    playsound('Back.mp3', False)
                     loop = False
 
                 # answer selection handlers
