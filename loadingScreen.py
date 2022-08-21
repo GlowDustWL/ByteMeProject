@@ -35,6 +35,7 @@ class LoadingScreen():
             self.info_screen_3, (369, 222))
 
     # main menu
+
     def getInput(self, numPlayers):
         # # player name entry text
         playerNameText = textDisplay.TextDisplayPink(
@@ -57,6 +58,20 @@ class LoadingScreen():
             input_boxes.append(inputBox.InputBox(
                 self.playerList[i], 32, self.width/2 + 400, self.height - 680 + 100*i))
 
+         # text_info_Screen_1
+        text_info_screen_1 = textDisplay.TextDisplay(
+            "The Wheel and Board are the two main components of this game. ", 16, 710, 68)
+        text_info_screen_12 = textDisplay.TextDisplay(
+            "You will not interact with either of them. The board will be displayed ", 16, 718, 89)
+        text_info_screen_13 = textDisplay.TextDisplay(
+            "on the left of the screen and will begin to spin after you click the spin ", 16, 721, 110)
+        text_info_screen_14 = textDisplay.TextDisplay(
+            "button. The Board will display the categories as well as the value ", 16, 709, 131)
+        text_info_screen_15 = textDisplay.TextDisplay(
+            "for each question. The Board will clear the question upon a correct ", 16, 717, 152)
+        text_info_screen_16 = textDisplay.TextDisplay(
+            "answer being given.  ", 16, 540, 173)
+
         # buttons
         play_button = button.Button(
             "PLAY", 32, self.width*(1 - 1/8), self.height - 50)
@@ -75,6 +90,12 @@ class LoadingScreen():
             self.screen.blit(self.loading_screen_pics_1, (52, 52))
             self.screen.blit(self.loading_screen_pics_2, (52, 302))
             self.screen.blit(self.loading_screen_pics_3, (52, 552))
+            text_info_screen_1.draw(self.screen)
+            text_info_screen_12.draw(self.screen)
+            text_info_screen_13.draw(self.screen)
+            text_info_screen_14.draw(self.screen)
+            text_info_screen_15.draw(self.screen)
+            text_info_screen_16.draw(self.screen)
 
             # draw player numbers
             for x in nameTextArray:
