@@ -23,7 +23,7 @@ class MainGUI():
         self.screen = pygame.display.set_mode(
             (self.width, self.height))
         self.clock = pygame.time.Clock()
-        self.t1 = threading.Thread(target=playsound('selection.mp3', False))
+        #self.t1 = threading.Thread(target=playsound('selection.mp3', False))
 
         # player count
         self.numPlayers = 0
@@ -51,19 +51,18 @@ class MainGUI():
     def play(self):
         pygame.init()
 
+        # Currently plays background music once then stops
         def loopSound():
             while True:
-                playsound('space.mp3', block=True)
-        print('before')
+                playsound('bkg_music.mp3', block=True)
         loopThread = threading.Thread(
             target=loopSound, name='backgroundMusicThread')
-        print('middle')
         loopThread.daemon = True
-        print('next')
         loopThread.start()
-        print('after')
 
         while True:
+            # Attempting to start and stop music using pyaudio instead of playsound
+
             #background_music = wave.open('space_9ljFoAnf.wav', 'rb')
             #p = pyaudio.PyAudio()
             #chunk = 1024
@@ -88,17 +87,15 @@ class MainGUI():
 
             # stream.stop_stream()
             # stream.start_stream()
-            # print('pizza')
             # stream.stop_stream()
             # stream.close()
-            # print('hi')
             # background_music.close()
-            # print('yes')
             # p.terminate()
+
+            # Attempting to loop music using multiprocessing and playsound
             # p = multiprocessing.Process(
             #    target=playsound, args=('space.mp3', False))
             # p.start()
-            # print('pizza')
             # p.terminate()
             # while True:
             #    if not self.t1.is_alive():

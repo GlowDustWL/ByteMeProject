@@ -3,6 +3,7 @@ import pygame
 import button
 import textMedium
 import textDisplay
+from playsound import playsound
 
 
 class EndScreen():
@@ -20,6 +21,7 @@ class EndScreen():
     # main menu
 
     def getInput(self, numPlayers, playerList, finalScores):
+        playsound('uplifting.mp3', False)
         text = textMedium.TextMedium(
             "Thank you for Playing!", self.width/2, self.height/2 - 300)
         # self.screen.blit(self.background, (0, 0))
