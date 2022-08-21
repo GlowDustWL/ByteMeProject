@@ -52,30 +52,44 @@ class MainGUI():
         pygame.init()
 
         # Currently plays background music once then stops
-        def loopSound():
-            while True:
-                playsound('bkg_music.mp3', block=True)
-        loopThread = threading.Thread(
-            target=loopSound, name='backgroundMusicThread')
-        loopThread.daemon = True
-        loopThread.start()
+        # def loopSound():
+        #    while True:
+        #        playsound('bkg_music.mp3', block=True)
+        # loopThread = threading.Thread(
+        #    target=loopSound, name='backgroundMusicThread')
+        #loopThread.daemon = True
+        # loopThread.start()
+
+        #background_music = wave.open('bkg_music.wav', 'rb')
+        #p = pyaudio.PyAudio()
+
+        # def callback(in_data, frame_count, time_info, status):
+        #    data = background_music.readframes(frame_count)
+        #    return (data, pyaudio.paContinue)
+
+        # stream = p.open(format=p.get_format_from_width(background_music.getsampwidth()),
+        #                channels=background_music.getnchannels(),
+        #                rate=background_music.getframerate(),
+        #                output=True,
+        #                stream_callback=callback)
 
         while True:
+            m = pygame.mixer.music
+            m.load('bkg_music.mp3')
+            m.play(-1)
+
             # Attempting to start and stop music using pyaudio instead of playsound
 
-            #background_music = wave.open('space_9ljFoAnf.wav', 'rb')
+            #background_music = wave.open('uplifting.wav', 'rb')
             #p = pyaudio.PyAudio()
             #chunk = 1024
-
-            # def callback(in_data, frame_count, time_info, status):
-            #    data = background_music.readframes(frame_count)
-            #    return (data, pyaudio.paContinue)
 
             # stream = p.open(format=p.get_format_from_width(background_music.getsampwidth()),
             #                channels=background_music.getnchannels(),
             #                rate=background_music.getframerate(),
-            #                output=True,
-            #                stream_callback=callback)
+            #                output=True)
+            # stream_callback=callback)
+
             #data = background_music.readframes(chunk)
             #loop = True
             # while loop:
@@ -84,6 +98,10 @@ class MainGUI():
             #    if data == b'':
             #        background_music.rewind()
             #        data = background_music.readframes(chunk)
+
+            # def callback(in_data, frame_count, time_info, status):
+            #    data = background_music.readframes(frame_count)
+            #    return (data, pyaudio.paContinue)
 
             # stream.stop_stream()
             # stream.start_stream()
@@ -105,6 +123,7 @@ class MainGUI():
             #playsound('space.mp3', False)
             if self.menuScreen.getInput():
                 self.numPlayers = self.menuScreen.numPlayers
+                # stream.stop_stream()
                 # stream.close()
                 # background_music.close()
                 # p.terminate()
@@ -112,9 +131,14 @@ class MainGUI():
                     self.playerList = self.loadingScreen.playerList
                     # self.numPlayers = self.loadingScreen.numPlayers
                     # p.terminate()
+                    # stream.stop_stream()
+                    # stream.close()
+                    # background_music.close()
+                    # p.terminate()
                     if self.playScreen.getInput(self.numPlayers,
                                                 self.playerList):
                         self.playerScores = self.playScreen.finalScores
+                        m.stop()
                         self.endScreen.getInput(self.numPlayers, self.playerList,
                                                 self.playerScores)
 

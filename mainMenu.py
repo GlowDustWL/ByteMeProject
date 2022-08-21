@@ -17,10 +17,12 @@ class MainMenu():
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.numPlayers = 0
+        #self.selection = pygame.mixer.Sound('selection.mp3')
 
     # main menu
 
     def getInput(self):
+        s = pygame.mixer.Sound
         #playsound('space.mp3', False)
 
         text = textTitle.TextTitle("Wheel of Jeopardy", self.width/2, 150)
@@ -74,6 +76,7 @@ class MainMenu():
                     exit()
                 if playerNum_2.clicked:
                     self.numPlayers = 2
+                    # s.play(self.selection)
                     playsound('selection.mp3', False)
                     return True
                 if playerNum_3.clicked:
