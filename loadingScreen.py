@@ -4,7 +4,7 @@ import button
 import inputBox
 import textMedium
 import textDisplay
-from playsound import playsound
+#from playsound import playsound
 
 
 class LoadingScreen():
@@ -22,6 +22,10 @@ class LoadingScreen():
     # main menu
 
     def getInput(self, numPlayers):
+        pygame.mixer.init()
+        selection = pygame.mixer.Sound('selection.mp3')
+        back = pygame.mixer.Sound('back.mp3')
+
         text = textDisplay.TextDisplay(
             "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)
         # # player name entry text
@@ -72,10 +76,12 @@ class LoadingScreen():
                     pygame.quit()
                     exit()
                 if play_button.clicked:
-                    playsound('selection.mp3', False)
+                    selection.play()
+                    #playsound('selection.mp3', False)
                     return True
                 if back_button.clicked:
-                    playsound('back.mp3', False)
+                    back.play()
+                    #playsound('back.mp3', False)
                     loop = False
                 # check if input box clicked
                 if event.type == pygame.MOUSEBUTTONDOWN:

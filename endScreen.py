@@ -3,7 +3,7 @@ import pygame
 import button
 import textMedium
 import textDisplay
-from playsound import playsound
+#from playsound import playsound
 
 
 class EndScreen():
@@ -61,7 +61,7 @@ class EndScreen():
 
         # draw first elements
         self.screen.blit(self.background, (0, 0))
-        # return_to_main.draw(self.screen)
+        return_to_main.draw(self.screen)
         text.draw(self.screen)
         playerScoreIntro.draw(self.screen)
         # draw player names/scores
@@ -80,6 +80,7 @@ class EndScreen():
         m.queue('uplifting.mp3')
         # m.play()
         pygame.time.wait(5500)
+        #self.screen.blit(self.background, (0, 0))
         winnerText.draw(self.screen)
         # pygame.display.update()
         # pygame.event.pump()

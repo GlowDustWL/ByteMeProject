@@ -3,7 +3,7 @@ import pygame
 import button
 import textTitle
 import textDisplay
-from playsound import playsound
+#from playsound import playsound
 
 
 class MainMenu():
@@ -22,8 +22,8 @@ class MainMenu():
     # main menu
 
     def getInput(self):
-        s = pygame.mixer.Sound
-        #playsound('space.mp3', False)
+        pygame.mixer.init()
+        selection = pygame.mixer.Sound('selection.mp3')
 
         text = textTitle.TextTitle("Wheel of Jeopardy", self.width/2, 150)
         # self.screen.blit(self.background, (0, 0))
@@ -77,19 +77,23 @@ class MainMenu():
                 if playerNum_2.clicked:
                     self.numPlayers = 2
                     # s.play(self.selection)
-                    playsound('selection.mp3', False)
+                    selection.play()
+                    #playsound('selection.mp3', False)
                     return True
                 if playerNum_3.clicked:
                     self.numPlayers = 3
-                    playsound('selection.mp3', False)
+                    selection.play()
+                    #playsound('selection.mp3', False)
                     return True
                 if playerNum_4.clicked:
                     self.numPlayers = 4
-                    playsound('selection.mp3', False)
+                    selection.play()
+                    #playsound('selection.mp3', False)
                     return True
                 if playerNum_5.clicked:
                     self.numPlayers = 5
-                    playsound('selection.mp3', False)
+                    selection.play()
+                    #playsound('selection.mp3', False)
                     return True
                 # other handlers
                 # ...
