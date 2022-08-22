@@ -90,7 +90,7 @@ class LoadingScreen():
         text_info_screen_28 = textDisplay.TextDisplay(
             "correctly will lose the points that the question is worth. To select an  ", 16, 718, 462)
         text_info_screen_29 = textDisplay.TextDisplay(
-            "answer choose A, B, C, and D off to the right.  ", 16, 631, 483)
+            "answer choose A, B, C, or D off to the right.  ", 16, 624, 483)
         # buttons
         play_button = button.Button(
             "PLAY", 32, self.width*(1 - 1/8), self.height - 50)
