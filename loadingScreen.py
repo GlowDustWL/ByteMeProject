@@ -17,6 +17,22 @@ class LoadingScreen():
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.playerList = []
+        self.box_color = (255, 255, 255)
+
+        self.info_screen_1 = pygame.image.load(
+            'images/loading_Screen_Info_1.png').convert()
+        self.loading_screen_pics_1 = pygame.transform.smoothscale(
+            self.info_screen_1, (369, 222))
+
+        self.info_screen_2 = pygame.image.load(
+            'images/questions_Prump.png').convert()
+        self.loading_screen_pics_2 = pygame.transform.smoothscale(
+            self.info_screen_2, (369, 222))
+
+        self.info_screen_3 = pygame.image.load(
+            'images/game_info_Player_info.png').convert()
+        self.loading_screen_pics_3 = pygame.transform.smoothscale(
+            self.info_screen_3, (369, 222))
 
     # main menu
 
@@ -28,9 +44,10 @@ class LoadingScreen():
 
         text = textDisplay.TextDisplay(
             "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)
+
         # # player name entry text
-        playerNameText = textDisplay.TextDisplay(
-            "Enter Player Names", 48, self.width/2, self.height/2 - 220)
+        playerNameText = textDisplay.TextDisplayPink(
+            "Enter Player Names", 48, self.width/2 + 470, self.height/2 - 300)
 
         # list for player names
         for i in range(numPlayers):
@@ -41,14 +58,65 @@ class LoadingScreen():
         nameTextArray = []
         for i in range(numPlayers):
             nameTextArray.append(textDisplay.TextDisplay(
-                ("Player " + str(i+1) + ":"), 26, self.width/2 - 170, self.height - 580 + 100*i))
+                ("Player " + str(i+1) + ":"), 26, self.width/2 + 300, self.height - 660 + 100*i))
 
         # create array of input boxes for each player
         input_boxes = []
         for i in range(numPlayers):
             input_boxes.append(inputBox.InputBox(
-                self.playerList[i], 32, self.width/2 - 70, self.height - 600 + 100*i))
+                self.playerList[i], 32, self.width/2 + 400, self.height - 680 + 100*i))
 
+         # text_info_Screen_1
+        text_info_screen_1 = textDisplay.TextDisplay(
+            "The Wheel and Board are the two main components of this game. ", 16, 710, 68)
+        text_info_screen_12 = textDisplay.TextDisplay(
+            "You will not interact with either of them. The board will be displayed ", 16, 718, 89)
+        text_info_screen_13 = textDisplay.TextDisplay(
+            "on the left of the screen and will begin to spin after you click the spin ", 16, 721, 110)
+        text_info_screen_14 = textDisplay.TextDisplay(
+            "button. The Board will display the categories as well as the value ", 16, 709, 131)
+        text_info_screen_15 = textDisplay.TextDisplay(
+            "for each question. The Board will clear the question upon a correct ", 16, 717, 152)
+        text_info_screen_16 = textDisplay.TextDisplay(
+            "answer being given.  ", 16, 540, 173)
+
+        # text_info_Screen_2
+        text_info_screen_21 = textDisplay.TextDisplay(
+            "To the left shows, the question prompt and questions answer part ", 16, 711, 315)
+        text_info_screen_22 = textDisplay.TextDisplay(
+            "of the game. If the wheel landed on a category and that category ", 16, 705, 336)
+        text_info_screen_23 = textDisplay.TextDisplay(
+            "still shows questions left to answer on the board then a question ", 16, 709, 357)
+        text_info_screen_24 = textDisplay.TextDisplay(
+            "will be shown to you under the question prompt area. The question ", 16, 716, 378)
+        text_info_screen_25 = textDisplay.TextDisplay(
+            "answers will be populated with 4 multiple choice answers.  The player ", 16, 728, 399)
+        text_info_screen_26 = textDisplay.TextDisplay(
+            "who answers the question correctly will earn points based on ", 16, 695, 420)
+        text_info_screen_27 = textDisplay.TextDisplay(
+            "the question amount. The players who do not answer the question ", 16, 716, 441)
+        text_info_screen_28 = textDisplay.TextDisplay(
+            "correctly will lose the points that the question is worth. To select an ", 16, 718, 462)
+        text_info_screen_29 = textDisplay.TextDisplay(
+            "answer choose A, B, C, or D off to the right. ", 16, 624, 483)
+
+        # text_info_Screen_3
+        text_info_screen_31 = textDisplay.TextDisplay(
+            "Each Player will be given a default name if not entered on this screen ", 16, 725, 568)
+        text_info_screen_32 = textDisplay.TextDisplay(
+            "shown to your right.  The default names are as follows Player 1 - 5. ", 16, 713, 589)
+        text_info_screen_33 = textDisplay.TextDisplay(
+            "Shown on the left is what a typical player name display would look ", 16, 716, 610)
+        text_info_screen_34 = textDisplay.TextDisplay(
+            "Like. The arrows pointing inward to “Player 1” on the left show ", 16, 699, 631)
+        text_info_screen_35 = textDisplay.TextDisplay(
+            "who’s turn it is. The prompt to the right of the player’s name ", 16, 687, 652)
+        text_info_screen_36 = textDisplay.TextDisplay(
+            "display shows the game Information throughout the game. To ", 16, 693, 673)
+        text_info_screen_37 = textDisplay.TextDisplay(
+            "start the game player 1 will Click SPIN which will select a category", 16, 708, 694)
+        text_info_screen_38 = textDisplay.TextDisplay(
+            "based on what the wheel has chosen.", 16, 600, 715)
         # buttons
         play_button = button.Button(
             "PLAY", 32, self.width*(1 - 1/8), self.height - 50)
@@ -60,10 +128,42 @@ class LoadingScreen():
 
             # draw elements
             self.screen.blit(self.background, (0, 0))
+            self.screen.blit(self.background, (0, 0))
             play_button.draw(self.screen)
             back_button.draw(self.screen)
-            text.draw(self.screen)
             playerNameText.draw(self.screen)
+            self.screen.blit(self.loading_screen_pics_1, (52, 52))
+            self.screen.blit(self.loading_screen_pics_2, (52, 302))
+            self.screen.blit(self.loading_screen_pics_3, (52, 552))
+
+            # draw info scrren 1 text
+            text_info_screen_1.draw(self.screen)
+            text_info_screen_12.draw(self.screen)
+            text_info_screen_13.draw(self.screen)
+            text_info_screen_14.draw(self.screen)
+            text_info_screen_15.draw(self.screen)
+            text_info_screen_16.draw(self.screen)
+
+            # draw info scrren 2 text
+            text_info_screen_21.draw(self.screen)
+            text_info_screen_22.draw(self.screen)
+            text_info_screen_23.draw(self.screen)
+            text_info_screen_24.draw(self.screen)
+            text_info_screen_25.draw(self.screen)
+            text_info_screen_26.draw(self.screen)
+            text_info_screen_27.draw(self.screen)
+            text_info_screen_28.draw(self.screen)
+            text_info_screen_29.draw(self.screen)
+
+            # draw info scrren 3 text
+            text_info_screen_31.draw(self.screen)
+            text_info_screen_32.draw(self.screen)
+            text_info_screen_33.draw(self.screen)
+            text_info_screen_34.draw(self.screen)
+            text_info_screen_35.draw(self.screen)
+            text_info_screen_36.draw(self.screen)
+            text_info_screen_37.draw(self.screen)
+            text_info_screen_38.draw(self.screen)
 
             # draw player numbers
             for x in nameTextArray:
@@ -122,6 +222,18 @@ class LoadingScreen():
                             else:
                                 self.playerList[player_num] += event.unicode
 
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                50, 50, 375, 225),  2, 3)  # Block #1
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                50, 300, 375, 225),  2, 3)  # Block #2
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                50, 550, 375, 225),  2, 3)  # Block #3
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                450, 50, 550, 225),  2, 3)  # Info for Wheel, Player, Board
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                450, 300, 550, 225),  2, 3)  # Info for Prompt and questions
+            pygame.draw.rect(self.background, self.box_color, pygame.Rect(
+                450, 550, 550, 225),  2, 3)  # Info for Spin wheel and flow info
             # draw input boxes
             for x in input_boxes:
                 x.draw(self.screen, self.playerList[input_boxes.index(x)])
