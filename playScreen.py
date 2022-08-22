@@ -78,9 +78,6 @@ class PlayScreen():
         # parse categories to be displayed
         updateCategoryNames()
 
-        # print(game.questions[0][1][0])
-        # print(game.questions[4][1][0])
-
         # drawing rectangleS
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
             50, 50, 600, 400),  2, 3)  # Wheel section
@@ -100,10 +97,6 @@ class PlayScreen():
             1060, 712, 50, 50),  2, 3)  # asnwer question button: C
         pygame.draw.rect(self.background, self.box_color, pygame.Rect(
             1060, 773, 50, 50),  2, 3)  # asnwer question button: D
-        # pygame.draw.rect(self.background, self.box_color, pygame.Rect(
-        #     1150, 652, 200, 50),  2, 3)  # Spin The Wheel !
-        # pygame.gfxdraw.rectangle(self.background, pygame.Rect(
-        #     50, 50, 600, 400), self.box_color)
 
         # drawing text
         wheelText = textDisplay.TextDisplay(
@@ -266,6 +259,7 @@ class PlayScreen():
                         # reload board
                         updateCategoryNames()
                         board.showAllSquares()
+                        myWheel.update()
                         # todo: change active player to 0 but only after current turn is done
                         self.extraSpinFunctions = False
 
