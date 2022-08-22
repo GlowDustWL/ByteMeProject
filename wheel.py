@@ -11,10 +11,12 @@ class Wheel:
 
     def __init__(self):
         self.wheel_image = pygame.image.load(
-            os.path.join('images', 'wheel_revA.png'))
+            os.path.join('images', 'wheel_rnd1.png'))
 
         self.wheel_image = pygame.transform.smoothscale(
             self.wheel_image, (375, 375))
+
+        self.round = 1
 
         # Number of degrees wheel has spun
         self.cur_angle = 0
@@ -32,6 +34,14 @@ class Wheel:
         self.cat5 = 1*(15+30*10)
         self.spin_again = 1*(15+30*11)
         self.cat6 = 1*(15+30*12)
+
+    def update(self):
+        self.wheel_image = pygame.image.load(
+            os.path.join('images', 'wheel_rnd2.png'))
+        self.wheel_image = pygame.transform.smoothscale(
+            self.wheel_image, (375, 375))
+        self.cur_angle = 0
+        self.round = 2
 
     def drawTick(self, surface):
         pygame.draw.polygon(surface, (0, 0, 0),
@@ -66,17 +76,35 @@ class Wheel:
 
         else:  # spin result  is a category number
             if spin_result == 0:
-                new_angle = self.cat1
+                if self.round == 1:
+                    new_angle = self.cat1
+                else:
+                    new_angle = self.cat6
             elif spin_result == 1:
-                new_angle = self.cat2
+                if self.round == 1:
+                    new_angle = self.cat2
+                else:
+                    new_angle = self.cat1
             elif spin_result == 2:
-                new_angle = self.cat3
+                if self.round == 1:
+                    new_angle = self.cat3
+                else:
+                    new_angle = self.cat2
             elif spin_result == 3:
-                new_angle = self.cat4
+                if self.round == 1:
+                    new_angle = self.cat4
+                else:
+                    new_angle = self.cat3
             elif spin_result == 4:
-                new_angle = self.cat5
+                if self.round == 1:
+                    new_angle = self.cat5
+                else:
+                    new_angle = self.cat4
             elif spin_result == 5:
-                new_angle = self.cat6
+                if self.round == 1:
+                    new_angle = self.cat6
+                else:
+                    new_angle = self.cat5
 
         diff = new_angle - self.cur_angle
         self.degs_to_spin = diff + 360
