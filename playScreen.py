@@ -204,6 +204,7 @@ class PlayScreen():
 
         show_spin = True
         loop = True
+        enterCategorySelection = False
         while loop:
 
             # draw elements
