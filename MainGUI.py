@@ -9,7 +9,7 @@ import playScreen
 import endScreen
 import threading
 #import multiprocessing
-from playsound import playsound
+#from playsound import playsound
 import pyaudio
 import wave
 import time
@@ -77,6 +77,7 @@ class MainGUI():
             m = pygame.mixer.music
             m.load('bkg_music.mp3')
             m.play(-1)
+            m.set_volume(1)
 
             # Attempting to start and stop music using pyaudio instead of playsound
 
@@ -129,6 +130,7 @@ class MainGUI():
                 # p.terminate()
                 if self.loadingScreen.getInput(self.numPlayers):
                     self.playerList = self.loadingScreen.playerList
+                    m.set_volume(0.2)
                     # self.numPlayers = self.loadingScreen.numPlayers
                     # p.terminate()
                     # stream.stop_stream()

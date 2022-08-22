@@ -73,6 +73,7 @@ class EndScreen():
         m = pygame.mixer.music
         m.load('drumroll.wav')
         m.play()
+        m.set_volume(1)
         pygame.display.update()
         pygame.event.pump()
         # while (m.get_busy()):
