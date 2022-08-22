@@ -22,7 +22,7 @@ class MainMenu():
     def getInput(self):
         text = textTitle.TextTitle("Wheel of Jeopardy", self.width/2, 200)
         subtitle = textDisplay.TextDisplay(
-            "Created by The ByteMe Team", 16, 1000, 250)
+            "Created by The ByteMe Team", 16, self.width/2, 250)
         # self.screen.blit(self.background, (0, 0))
         # pygame.display.update()
 
