@@ -22,7 +22,7 @@ class EndScreen():
     def getInput(self, numPlayers, playerList, finalScores):
         # initalizing sounds
         pygame.mixer.init()
-        selection = pygame.mixer.Sound('selection.mp3')
+        selection = pygame.mixer.Sound('sounds/selection.mp3')
 
         text = textMedium.TextMedium(
             "Thank you for Playing!", self.width/2, self.height/2 - 300)
@@ -72,18 +72,19 @@ class EndScreen():
 
         # initializing drumroll
         m = pygame.mixer.music
-        m.load('drumroll.wav')
+        m.load('sounds/drumroll.wav')
         m.play()
         m.set_volume(1)
         pygame.display.update()
         pygame.event.pump()
         # cue next music
-        m.queue('uplifting.mp3')
+        m.queue('sounds/uplifting.mp3')
 
         # wait for drumroll before displaying winner
         pygame.time.wait(5500)
         #self.screen.blit(self.background, (0, 0))
         winnerText.draw(self.screen)
+        pygame.time.wait(500)
 
         loop = True
         while loop:

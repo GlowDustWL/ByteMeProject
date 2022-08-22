@@ -39,8 +39,8 @@ class LoadingScreen():
     def getInput(self, numPlayers):
         # initializing sounds
         pygame.mixer.init()
-        selection = pygame.mixer.Sound('selection.mp3')
-        back = pygame.mixer.Sound('back.mp3')
+        selection = pygame.mixer.Sound('sounds/selection.mp3')
+        back = pygame.mixer.Sound('sounds/back.mp3')
 
         text = textDisplay.TextDisplay(
             "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)

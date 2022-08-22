@@ -23,7 +23,7 @@ class MainMenu():
 
         # initializing sounds
         pygame.mixer.init()
-        selection = pygame.mixer.Sound('selection.mp3')
+        selection = pygame.mixer.Sound('sounds/selection.mp3')
 
         text = textTitle.TextTitle("Wheel of Jeopardy", self.width/2, 200)
         subtitle = textDisplay.TextDisplay(

@@ -60,17 +60,16 @@ class PlayScreen():
             ansCText.setText(question[tmp_list[2]])
             ansDText.setText(question[tmp_list[3]])
 
-
         # initializing sounds
         pygame.mixer.init()
-        back = pygame.mixer.Sound('back.mp3')
-        correct = pygame.mixer.Sound('correct.mp3')
-        free_token = pygame.mixer.Sound('free_token.mp3')
-        incorrect = pygame.mixer.Sound('incorrect_cut.mp3')
-        negative = pygame.mixer.Sound('negative.mp3')
-        q_intro = pygame.mixer.Sound('q_intro.mp3')
-        selection = pygame.mixer.Sound('selection.mp3')
-        wheel_sound = pygame.mixer.Sound('wheel_cut1.mp3')
+        back = pygame.mixer.Sound('sounds/back.mp3')
+        correct = pygame.mixer.Sound('sounds/correct.mp3')
+        free_token = pygame.mixer.Sound('sounds/free_token.mp3')
+        incorrect = pygame.mixer.Sound('sounds/incorrect_cut.mp3')
+        negative = pygame.mixer.Sound('sounds/negative.mp3')
+        q_intro = pygame.mixer.Sound('sounds/q_intro.mp3')
+        selection = pygame.mixer.Sound('sounds/selection.mp3')
+        wheel_sound = pygame.mixer.Sound('sounds/wheel_cut1.mp3')
 
         show_decision = False
         clickable_mem = []
@@ -100,6 +99,7 @@ class PlayScreen():
         def give_all_player_tokens():
             for x in range(len(game.players)):
                 game.players[x].add_token()
+
         def updateCategoryNames():
             # parse categories to be displayed
             self.categories.clear()
@@ -203,6 +203,7 @@ class PlayScreen():
             # draw elements
             self.screen.blit(self.background, (0, 0))
             game_completed_button.draw(self.screen)
+            # game_completed_button.setClickable(True)
             quit_to_main_button.draw(self.screen)
 
             for x in range(0, 4):
@@ -235,7 +236,6 @@ class PlayScreen():
                 yes_button.draw(self.screen)
                 no_button.draw(self.screen)
 
-            
             spun = False
 
             # event handlers
@@ -291,7 +291,8 @@ class PlayScreen():
 
                             else:
                                 spin_button.setClickable(True)
-                                narration.setText("Press \"SPIN\" to spin the wheel.")
+                                narration.setText(
+                                    "Press \"SPIN\" to spin the wheel.")
 
                         else:
                             # prevent incorrect answer from being selected twice
@@ -311,11 +312,13 @@ class PlayScreen():
 
                 if show_decision:
                     if yes_button.clicked:
+                        selection.play()
                         game.players[game.current_player].free_token -= 1
                         narration.setText(
                             game.players[game.current_player].name + " uses a free turn token.")
                         player_decision_resolved()
                     if no_button.clicked:
+                        selection.play()
                         game.next_player()
                         narration.setText(
                             game.players[game.current_player].name + "'s turn.")
@@ -343,7 +346,7 @@ class PlayScreen():
 
                     wheel_sound.play()
                     # attribute = angle in degrees
-                    myWheel.spin(self.screen, 360)
+                    #myWheel.spin(self.screen, 360)
 
                     spin_result = game.spin()
                     myWheel.set_angle(spin_result)
@@ -419,11 +422,13 @@ class PlayScreen():
                                 ansCText.setText("")
                                 ansDText.setText("")
                                 spin_button.setClickable(True)
-                                narration.setText("Press \"SPIN\" to spin the wheel.")
+                                narration.setText(
+                                    "Press \"SPIN\" to spin the wheel.")
 
                         else:
                             spin_button.setClickable(True)
-                            narration.setText("Press \"SPIN\" to spin the wheel.")
+                            narration.setText(
+                                "Press \"SPIN\" to spin the wheel.")
 
                         refresh_all_player_score()
                         refresh_current_player_indicator()
