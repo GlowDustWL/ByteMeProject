@@ -5,7 +5,7 @@ from player import Player
 
 
 class Game:
-    def __init__(self, numPlayers, playerList, spins=50):
+    def __init__(self, numPlayers, playerList, spins=5):
         # internal question & answers data structure. 2D array, [category][value]
         # each 4 string List in a cell consist of: question, correct answer, 2 wrong answers
         self.questions = []
@@ -162,7 +162,8 @@ class Game:
                     pass
                 elif spin_result == 'bankrupt':
                     print("[LOG]: Calling Player.zero_score")
-                    self.players[self.current_player].zero_score()
+                    if (self.players[self.current_player].score > 0):
+                        self.players[self.current_player].zero_score()
                     print("[LOG]: Calling Player.get_score")
                     print("Your new score is: " +
                           str(self.players[self.current_player].get_score()))
