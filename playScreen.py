@@ -144,10 +144,10 @@ class PlayScreen():
 
         # create array full of answer buttons from A to D
         answerButtonArray = [button.Button(
-            "a", 48, 1085, 587 + 22.5, False), button.Button(
-            "b", 48, 1085, 677, False), button.Button(
-            "c", 48, 1085, 735.5, False), button.Button(
-            "d", 48, 1085, 800.5, False)]
+            "A", 48, 1085, 592 + 22.5, False), button.Button(
+            "B", 48, 1085, 677, False), button.Button(
+            "C", 48, 1085, 738.5, False), button.Button(
+            "D", 48, 1085, 800.5, False)]
 
         show_spin = True
         loop = True
