@@ -1,4 +1,5 @@
 # play screen class
+from re import X
 import pygame
 import button
 import pygame.gfxdraw
@@ -315,13 +316,48 @@ class PlayScreen():
                         refresh_current_player_indicator()
 
                 # jeopardy board category selection button handlers
+                # for x in range(6):
+                #     if board.categorySelectionButtons[x].clicked and enterCategorySelection:
+                #         print(str(x) + " CATEGORY BUTTON PRESSED SOMEHOW")
+                #         enterCategorySelection = False
+                #         self.categorySelected = True
+                #         board.showButtons(False)
+                #         spin_button.clicked = True
+                #         spin_result = x
+
+                # jeopardy board category selection button handlers
                 for x in range(6):
                     if board.categorySelectionButtons[x].clicked and enterCategorySelection:
-                        enterCategorySelection = False
-                        self.categorySelected = True
-                        board.showButtons(False)
-                        spin_button.clicked = True
                         spin_result = x
+                        enterCategorySelection = False
+                        board.showButtons(False)
+
+                        question = game.get_category_next_question(x)
+                        print(question)
+                        if question != None:
+                            q_intro.play()
+                            questionText.addText(question[0])
+                            randomly_assign_answers()
+                            # set the four answer buttons to clickable
+                            for x in range(0, 4):
+                                answerButtonArray[x].setClickable(True)
+                        else:
+                            negative.play()
+                            questionText.addText("Category empty, Spin again!")
+                            ansAText.setText("")
+                            ansBText.setText("")
+                            ansCText.setText("")
+                            ansDText.setText("")
+                            spin_button.setClickable(True)
+                            narration.setText(
+                                "Press \"SPIN\" to spin the wheel.")
+
+                        # make sure none of the jeopardy board buttons are set to "clicked"
+                        for x in range(6):
+                            board.categorySelectionButtons[x].clicked = False
+
+                        refresh_all_player_score()
+                        refresh_current_player_indicator()
 
                 # other handlers
                 # ...
@@ -365,18 +401,12 @@ class PlayScreen():
                     # attribute = angle in degrees
                     #myWheel.spin(self.screen, 360)
 
-                    # skip this block of code if the user manually input a category number
-                    # as a result of opponent's or player's choice, which is represented
-                    # by the self.categorySelected variable
-                    if self.categorySelected == False:
-                        spin_result = game.spin()
-                        myWheel.set_angle(spin_result)
-                        myWheel.spin(self.screen)
-                        game.spins_left -= 1
-                        wheelText.setText(str(spin_result))
-                        spinCountNum.setText(str(game.spins_left))
-                    else:
-                        self.categorySelected = False
+                    spin_result = game.spin()
+                    myWheel.set_angle(spin_result)
+                    myWheel.spin(self.screen)
+                    game.spins_left -= 1
+                    wheelText.setText(str(spin_result))
+                    spinCountNum.setText(str(game.spins_left))
 
                     # game logic
                     if type(spin_result) == str:
@@ -463,7 +493,8 @@ class PlayScreen():
                         refresh_all_player_score()
                         refresh_current_player_indicator()
 
-                    else:  # spin result  is a category number
+                    # spin result  is a category number
+                    else:
 
                         question = game.get_category_next_question(spin_result)
                         print(question)
