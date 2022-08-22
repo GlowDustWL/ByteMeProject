@@ -5,6 +5,7 @@
 from pygame.locals import *
 import pygame
 import sys
+import util
 
 # Setup pygame/window ---------------------------------------- #
 mainClock = pygame.time.Clock()
@@ -13,7 +14,7 @@ pygame.display.set_caption('game base')
 screen = pygame.display.set_mode((500, 500), 0, 32)
 
 # make sure you provide your own image
-img = pygame.image.load(r'images\wheel_revA.png').convert()
+img = pygame.image.load(util.resourcePath('images/wheel_revA.png')).convert()
 img.set_colorkey((0, 0, 0))
 
 #angle = 0

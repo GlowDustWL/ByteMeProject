@@ -2,6 +2,7 @@ import random
 import sys
 import json
 from player import Player
+import util
 
 
 class Game:
@@ -32,12 +33,14 @@ class Game:
 
     # read database for questions & answers to populate internal data structures
     def read_database(self):
-        f = open("questions.json", "r", encoding='utf8')
+        f = open(util.resourcePath("questions/questions.json"),
+                 "r", encoding='utf8')
         self.questions = json.loads(f.read())
 
     # read second database for questions & answers to populate internal data structures (again)
     def read_database_two(self):
-        f = open("questions2.json", "r", encoding='utf8')
+        f = open(util.resourcePath("questions/questions2.json"),
+                 "r", encoding='utf8')
         self.questions = json.loads(f.read())
 
     # def initialize_dummy_database(self):

@@ -3,6 +3,7 @@ import pygame
 import button
 import textTitle
 import textDisplay
+import util
 
 
 class MainMenu():
@@ -11,8 +12,8 @@ class MainMenu():
         self.clock = clock
         self.height = height
         self.width = width
-        self.background_input = pygame.image.load(
-            'images/space_background.jpeg').convert()
+        self.background_input = pygame.image.load(util.resourcePath(
+            'images/space_background.jpeg')).convert()
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.numPlayers = 0
@@ -23,7 +24,8 @@ class MainMenu():
 
         # initializing sounds
         pygame.mixer.init()
-        selection = pygame.mixer.Sound('sounds/selection.mp3')
+        selection = pygame.mixer.Sound(
+            util.resourcePath('sounds/selection.mp3'))
 
         text = textTitle.TextTitle("Wheel of Jeopardy", self.width/2, 200)
         subtitle = textDisplay.TextDisplay(

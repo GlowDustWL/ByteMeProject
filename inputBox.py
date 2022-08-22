@@ -1,4 +1,5 @@
 import pygame
+import util
 
 # inputBox class
 
@@ -6,7 +7,8 @@ import pygame
 class InputBox():
     def __init__(self, text_input, font_size, x, y):
         print("in init")
-        self.font = pygame.font.Font('freesansbold.ttf', font_size)
+        self.font = pygame.font.Font(util.resourcePath(
+            'fonts/freesansbold.ttf'), font_size)
         # color for when receiving user input
         self.active_color = (83, 239, 252)
         # color for when in passive state
