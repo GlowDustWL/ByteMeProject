@@ -43,7 +43,7 @@ class MainGUI():
         while True:
             # initialize background music
             m = pygame.mixer.music
-            m.load('bkg_music.mp3')
+            m.load('sounds/bkg_music.mp3')
             m.play(-1)
             m.set_volume(1)
 
