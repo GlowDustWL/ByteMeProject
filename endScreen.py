@@ -20,6 +20,10 @@ class EndScreen():
     # main menu
 
     def getInput(self, numPlayers, playerList, finalScores):
+        # initalizing sounds
+        pygame.mixer.init()
+        selection = pygame.mixer.Sound('selection.mp3')
+
         text = textMedium.TextMedium(
             "Thank you for Playing!", self.width/2, self.height/2 - 300)
         # self.screen.blit(self.background, (0, 0))
@@ -30,8 +34,6 @@ class EndScreen():
         print("[LOG]: " + str(len(finalScores)))
         winner = 0
         for x in range(1, len(finalScores)):
-            print("[LOG]: Player " + str(x) + " " + str(finalScores[x]))
-            #print("[LOG]: Player " + str(x) + " " + str(finalScores[x+1]))
             if (finalScores[winner] == finalScores[x]):
                 winner = 7
                 break
@@ -55,36 +57,52 @@ class EndScreen():
 
         # buttons
         continue_button = button.Button(
-            "CONTINUE", 32, self.width*(1 - 1/8), self.height - 50)
+            "MAIN MENU", 32, self.width*(1 - 1/8), self.height - 50)
+
+        # draw first elements
+        self.screen.blit(self.background, (0, 0))
+        continue_button.draw(self.screen)
+        text.draw(self.screen)
+        playerScoreIntro.draw(self.screen)
+        # draw player names/scores
+        for x in nameTextArray:
+            x.draw(self.screen)
+        for x in scoreTextArray:
+            x.draw(self.screen)
+
+        # initializing drumroll
+        m = pygame.mixer.music
+        m.load('drumroll.wav')
+        m.play()
+        m.set_volume(1)
+        pygame.display.update()
+        pygame.event.pump()
+        # cue next music
+        m.queue('uplifting.mp3')
+
+        # wait for drumroll before displaying winner
+        pygame.time.wait(5500)
+        #self.screen.blit(self.background, (0, 0))
+        winnerText.draw(self.screen)
 
         loop = True
         while loop:
 
-            # draw elements
-            self.screen.blit(self.background, (0, 0))
             continue_button.draw(self.screen)
-            text.draw(self.screen)
-            playerScoreIntro.draw(self.screen)
-            winnerText.draw(self.screen)
 
-            # draw player names/scores
-            for x in nameTextArray:
-                x.draw(self.screen)
-            for x in scoreTextArray:
-                x.draw(self.screen)
-
-            # event handlers
+        # event handlers
             for event in pygame.event.get():
                 # game window handlers
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     exit()
                 if continue_button.clicked:
+                    selection.play()
                     return
 
-                # other handlers
-                # ...
+        # other handlers
+        # ...
 
-            # update the game state
+        # update the game state
             pygame.display.update()
             self.clock.tick(60)

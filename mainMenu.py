@@ -20,9 +20,15 @@ class MainMenu():
     # main menu
 
     def getInput(self):
+
+        # initializing sounds
+        pygame.mixer.init()
+        selection = pygame.mixer.Sound('selection.mp3')
+
         text = textTitle.TextTitle("Wheel of Jeopardy", self.width/2, 200)
         subtitle = textDisplay.TextDisplay(
             "Created by The ByteMe Team", 16, self.width/2, 250)
+
         # self.screen.blit(self.background, (0, 0))
         # pygame.display.update()
 
@@ -74,15 +80,19 @@ class MainMenu():
                     exit()
                 if playerNum_2.clicked:
                     self.numPlayers = 2
+                    selection.play()
                     return True
                 if playerNum_3.clicked:
                     self.numPlayers = 3
+                    selection.play()
                     return True
                 if playerNum_4.clicked:
                     self.numPlayers = 4
+                    selection.play()
                     return True
                 if playerNum_5.clicked:
                     self.numPlayers = 5
+                    selection.play()
                     return True
                 # other handlers
                 # ...

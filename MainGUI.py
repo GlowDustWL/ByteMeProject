@@ -41,14 +41,23 @@ class MainGUI():
         pygame.init()
 
         while True:
+            # initialize background music
+            m = pygame.mixer.music
+            m.load('bkg_music.mp3')
+            m.play(-1)
+            m.set_volume(1)
+
             if self.menuScreen.getInput():
                 self.numPlayers = self.menuScreen.numPlayers
                 if self.loadingScreen.getInput(self.numPlayers):
                     self.playerList = self.loadingScreen.playerList
-                    # self.numPlayers = self.loadingScreen.numPlayers
+                    # lower volume of background music
+                    m.set_volume(0.2)
                     if self.playScreen.getInput(self.numPlayers,
                                                 self.playerList):
                         self.playerScores = self.playScreen.finalScores
+                        # stop background music
+                        m.stop()
                         self.endScreen.getInput(self.numPlayers, self.playerList,
                                                 self.playerScores)
 

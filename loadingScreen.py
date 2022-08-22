@@ -37,6 +37,14 @@ class LoadingScreen():
     # main menu
 
     def getInput(self, numPlayers):
+        # initializing sounds
+        pygame.mixer.init()
+        selection = pygame.mixer.Sound('selection.mp3')
+        back = pygame.mixer.Sound('back.mp3')
+
+        text = textDisplay.TextDisplay(
+            "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)
+
         # # player name entry text
         playerNameText = textDisplay.TextDisplayPink(
             "Enter Player Names", 48, self.width/2 + 470, self.height/2 - 300)
@@ -168,8 +176,10 @@ class LoadingScreen():
                     pygame.quit()
                     exit()
                 if play_button.clicked:
+                    selection.play()
                     return True
                 if back_button.clicked:
+                    back.play()
                     loop = False
                 # check if input box clicked
                 if event.type == pygame.MOUSEBUTTONDOWN:

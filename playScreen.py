@@ -60,6 +60,18 @@ class PlayScreen():
             ansCText.setText(question[tmp_list[2]])
             ansDText.setText(question[tmp_list[3]])
 
+
+        # initializing sounds
+        pygame.mixer.init()
+        back = pygame.mixer.Sound('back.mp3')
+        correct = pygame.mixer.Sound('correct.mp3')
+        free_token = pygame.mixer.Sound('free_token.mp3')
+        incorrect = pygame.mixer.Sound('incorrect_cut.mp3')
+        negative = pygame.mixer.Sound('negative.mp3')
+        q_intro = pygame.mixer.Sound('q_intro.mp3')
+        selection = pygame.mixer.Sound('selection.mp3')
+        wheel_sound = pygame.mixer.Sound('wheel_cut1.mp3')
+
         show_decision = False
         clickable_mem = []
 
@@ -233,14 +245,17 @@ class PlayScreen():
                     pygame.quit()
                     exit()
                 if game_completed_button.clicked:
+                    selection.play()
                     return True
                 if quit_to_main_button.clicked:
+                    back.play()
                     loop = False
 
                 # answer selection handlers
                 for x in range(0, 4):
                     if answerButtonArray[x].clicked and isinstance(spin_result, int):
                         if x == game.correctAnswer:
+                            correct.play()
                             game.players[game.current_player].add_score(
                                 game.current_question_value)
                             board.removeSquare(
@@ -281,6 +296,7 @@ class PlayScreen():
                         else:
                             # prevent incorrect answer from being selected twice
                             answerButtonArray[x].setClickable(False)
+                            incorrect.play()
                             game.players[game.current_player].sub_score(
                                 game.current_question_value)
                             if game.players[game.current_player].free_token > 0:
@@ -324,6 +340,11 @@ class PlayScreen():
                     # spun = True
                     # set the spin button to unclickable
                     spin_button.setClickable(False)
+
+                    wheel_sound.play()
+                    # attribute = angle in degrees
+                    myWheel.spin(self.screen, 360)
+
                     spin_result = game.spin()
                     myWheel.set_angle(spin_result)
                     myWheel.spin(self.screen)
@@ -334,27 +355,38 @@ class PlayScreen():
                     # game logic
                     if type(spin_result) == str:
                         if spin_result == 'lose turn':
+
+                            negative.play()
+                            game.next_player()
+                            print(game.current_player)
+
                             spin_button.setClickable(True)
                             if game.players[game.current_player].free_token > 0:
                                 wait_for_player_decision()
                             else:
                                 game.next_player()
                             # print(game.current_player)
+
                         elif spin_result == 'free turn':
+                            free_token.play()
                             game.players[game.current_player].add_token()
                             narration.setText(
                                 game.players[game.current_player].name + " gets a free turn token.")
                         elif spin_result == 'bankrupt':
+                            negative.play()
                             if (game.players[game.current_player].score > 0):
                                 game.players[game.current_player].zero_score()
                             # refresh_all_player_score()
                             # print(str(game.players[game.current_player].score))
                             game.next_player()
                         elif spin_result == 'player\'s choice':
+                            q_intro.play()
                             pass
                         elif spin_result == "opponent's choice":
+                            q_intro.play()
                             pass
                         elif spin_result == "spin again":
+                            q_intro.play()
                             pass
 
                         questionText.addText("")
@@ -401,12 +433,14 @@ class PlayScreen():
                         question = game.get_category_next_question(spin_result)
                         print(question)
                         if question != None:
+                            q_intro.play()
                             questionText.addText(question[0])
                             randomly_assign_answers()
                             # set the four answer buttons to clickable
                             for x in range(0, 4):
                                 answerButtonArray[x].setClickable(True)
                         else:
+                            negative.play()
                             questionText.addText("Category empty, Spin again!")
                             ansAText.setText("")
                             ansBText.setText("")
