@@ -395,6 +395,7 @@ class PlayScreen():
                         updateCategoryNames()
                         board.showAllSquares()
                         myWheel.update()
+                        board.round2()
                         # todo: change active player to 0 but only after current turn is done
                         self.extraSpinFunctions = False
 

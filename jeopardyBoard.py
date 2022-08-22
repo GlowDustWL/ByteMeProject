@@ -53,6 +53,7 @@ class JeopardyBoard:
                 button_jeopardy_board.ButtonJeopardyBoard(x, 0))
 
         self.show_buttons = False
+        self.round = 1
 
     def draw(self, surface, categories):
 
@@ -114,3 +115,6 @@ class JeopardyBoard:
             if self.showMatrix[x][y]:
                 return False
         return True
+
+    def round2(self):
+        self.dollar = ['$400', '$800', '$1200', '$1600', '$2000']
