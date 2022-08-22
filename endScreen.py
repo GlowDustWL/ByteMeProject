@@ -3,7 +3,6 @@ import pygame
 import button
 import textMedium
 import textDisplay
-#from playsound import playsound
 
 
 class EndScreen():
@@ -21,7 +20,10 @@ class EndScreen():
     # main menu
 
     def getInput(self, numPlayers, playerList, finalScores):
-        #playsound('uplifting.mp3', False)
+        # initalizing sounds
+        pygame.mixer.init()
+        selection = pygame.mixer.Sound('selection.mp3')
+
         text = textMedium.TextMedium(
             "Thank you for Playing!", self.width/2, self.height/2 - 300)
         # self.screen.blit(self.background, (0, 0))
@@ -32,8 +34,6 @@ class EndScreen():
         print("[LOG]: " + str(len(finalScores)))
         winner = 0
         for x in range(1, len(finalScores)):
-            print("[LOG]: Player " + str(x) + " " + str(finalScores[x]))
-            #print("[LOG]: Player " + str(x) + " " + str(finalScores[x+1]))
             if (finalScores[winner] == finalScores[x]):
                 winner = 7
                 break
@@ -56,12 +56,12 @@ class EndScreen():
                 str(finalScores[x]), 26, self.width/2 + 100, self.height - 550 + 70*x))
 
         # buttons
-        return_to_main = button.Button(
+        continue_button = button.Button(
             "MAIN MENU", 32, self.width*(1 - 1/8), self.height - 50)
 
         # draw first elements
         self.screen.blit(self.background, (0, 0))
-        return_to_main.draw(self.screen)
+        continue_button.draw(self.screen)
         text.draw(self.screen)
         playerScoreIntro.draw(self.screen)
         # draw player names/scores
@@ -70,43 +70,25 @@ class EndScreen():
         for x in scoreTextArray:
             x.draw(self.screen)
 
+        # initializing drumroll
         m = pygame.mixer.music
         m.load('drumroll.wav')
         m.play()
         m.set_volume(1)
         pygame.display.update()
         pygame.event.pump()
-        # while (m.get_busy()):
-        #    pygame.time.wait(10)
+        # cue next music
         m.queue('uplifting.mp3')
-        # m.play()
+
+        # wait for drumroll before displaying winner
         pygame.time.wait(5500)
         #self.screen.blit(self.background, (0, 0))
         winnerText.draw(self.screen)
-        # pygame.display.update()
-        # pygame.event.pump()
-        # pygame.time.wait(50000)
-
-        # pygame.display.update()
-        # pygame.time.wait(50000)
-        # pygame.display.update()
-        # pygame.mixer.init()
-        #drumroll = pygame.mixer.Sound('drumroll.wav')
-        #congrats = pygame.mixer.Sound('uplifting.mp3')
-        #channel = drumroll.play()
-        # while (channel.get_busy()):
-        #    pygame.time.wait(100)
-        #self.screen.blit(self.background, (0, 0))
-        # congrats.play()
-        # winnerText.draw(self.screen)
-        # pygame.time.wait(1000)
-        # return
-        # pygame.display.update()
 
         loop = True
         while loop:
 
-            return_to_main.draw(self.screen)
+            continue_button.draw(self.screen)
 
         # event handlers
             for event in pygame.event.get():
@@ -114,7 +96,8 @@ class EndScreen():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     exit()
-                if return_to_main.clicked:
+                if continue_button.clicked:
+                    selection.play()
                     return
 
         # other handlers

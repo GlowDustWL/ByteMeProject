@@ -3,7 +3,6 @@ import pygame
 import button
 import textTitle
 import textDisplay
-#from playsound import playsound
 
 
 class MainMenu():
@@ -17,11 +16,11 @@ class MainMenu():
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.numPlayers = 0
-        #self.selection = pygame.mixer.Sound('selection.mp3')
 
     # main menu
 
     def getInput(self):
+        # initializing sounds
         pygame.mixer.init()
         selection = pygame.mixer.Sound('selection.mp3')
 
@@ -76,24 +75,19 @@ class MainMenu():
                     exit()
                 if playerNum_2.clicked:
                     self.numPlayers = 2
-                    # s.play(self.selection)
                     selection.play()
-                    #playsound('selection.mp3', False)
                     return True
                 if playerNum_3.clicked:
                     self.numPlayers = 3
                     selection.play()
-                    #playsound('selection.mp3', False)
                     return True
                 if playerNum_4.clicked:
                     self.numPlayers = 4
                     selection.play()
-                    #playsound('selection.mp3', False)
                     return True
                 if playerNum_5.clicked:
                     self.numPlayers = 5
                     selection.play()
-                    #playsound('selection.mp3', False)
                     return True
                 # other handlers
                 # ...

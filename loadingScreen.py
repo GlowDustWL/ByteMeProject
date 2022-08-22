@@ -4,7 +4,6 @@ import button
 import inputBox
 import textMedium
 import textDisplay
-#from playsound import playsound
 
 
 class LoadingScreen():
@@ -22,6 +21,7 @@ class LoadingScreen():
     # main menu
 
     def getInput(self, numPlayers):
+        # initializing sounds
         pygame.mixer.init()
         selection = pygame.mixer.Sound('selection.mp3')
         back = pygame.mixer.Sound('back.mp3')
@@ -77,11 +77,9 @@ class LoadingScreen():
                     exit()
                 if play_button.clicked:
                     selection.play()
-                    #playsound('selection.mp3', False)
                     return True
                 if back_button.clicked:
                     back.play()
-                    #playsound('back.mp3', False)
                     loop = False
                 # check if input box clicked
                 if event.type == pygame.MOUSEBUTTONDOWN:
