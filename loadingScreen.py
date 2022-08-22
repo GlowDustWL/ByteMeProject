@@ -76,21 +76,39 @@ class LoadingScreen():
         text_info_screen_21 = textDisplay.TextDisplay(
             "To the left shows, the question prompt and questions answer part ", 16, 711, 315)
         text_info_screen_22 = textDisplay.TextDisplay(
-            "of the game. If the wheel landed on a category and that category  ", 16, 708, 336)
+            "of the game. If the wheel landed on a category and that category ", 16, 705, 336)
         text_info_screen_23 = textDisplay.TextDisplay(
-            "still shows questions left to answer on the board then a question  ", 16, 710, 357)
+            "still shows questions left to answer on the board then a question ", 16, 709, 357)
         text_info_screen_24 = textDisplay.TextDisplay(
-            "will be shown to you under the question prompt area. The question ", 16, 715, 378)
+            "will be shown to you under the question prompt area. The question ", 16, 716, 378)
         text_info_screen_25 = textDisplay.TextDisplay(
-            "answers will be populated with 4 multiple choice answers.  The player  ", 16, 730, 399)
+            "answers will be populated with 4 multiple choice answers.  The player ", 16, 728, 399)
         text_info_screen_26 = textDisplay.TextDisplay(
-            "who answers the question correctly will earn points based on ", 16, 693, 420)
+            "who answers the question correctly will earn points based on ", 16, 695, 420)
         text_info_screen_27 = textDisplay.TextDisplay(
-            "the question amount. The players who do not answer the question  ", 16, 716, 441)
+            "the question amount. The players who do not answer the question ", 16, 716, 441)
         text_info_screen_28 = textDisplay.TextDisplay(
-            "correctly will lose the points that the question is worth. To select an  ", 16, 718, 462)
+            "correctly will lose the points that the question is worth. To select an ", 16, 718, 462)
         text_info_screen_29 = textDisplay.TextDisplay(
-            "answer choose A, B, C, or D off to the right.  ", 16, 624, 483)
+            "answer choose A, B, C, or D off to the right. ", 16, 624, 483)
+
+        # text_info_Screen_3
+        text_info_screen_31 = textDisplay.TextDisplay(
+            "Each Player will be given a default name if not entered on this screen ", 16, 725, 568)
+        text_info_screen_32 = textDisplay.TextDisplay(
+            "shown to your right.  The default names are as follows Player 1 - 5. ", 16, 713, 589)
+        text_info_screen_33 = textDisplay.TextDisplay(
+            "Shown on the left is what a typical player name display would look ", 16, 716, 610)
+        text_info_screen_34 = textDisplay.TextDisplay(
+            "Like. The arrows pointing inward to “Player 1” on the left show ", 16, 699, 631)
+        text_info_screen_35 = textDisplay.TextDisplay(
+            "who’s turn it is. The prompt to the right of the player’s name ", 16, 687, 652)
+        text_info_screen_36 = textDisplay.TextDisplay(
+            "display shows the game Information throughout the game. To ", 16, 693, 673)
+        text_info_screen_37 = textDisplay.TextDisplay(
+            "start the game player 1 will Click SPIN which will select a category", 16, 708, 694)
+        text_info_screen_38 = textDisplay.TextDisplay(
+            "based on what the wheel has chosen.", 16, 600, 715)
         # buttons
         play_button = button.Button(
             "PLAY", 32, self.width*(1 - 1/8), self.height - 50)
@@ -109,6 +127,7 @@ class LoadingScreen():
             self.screen.blit(self.loading_screen_pics_1, (52, 52))
             self.screen.blit(self.loading_screen_pics_2, (52, 302))
             self.screen.blit(self.loading_screen_pics_3, (52, 552))
+
             # draw info scrren 1 text
             text_info_screen_1.draw(self.screen)
             text_info_screen_12.draw(self.screen)
@@ -116,6 +135,7 @@ class LoadingScreen():
             text_info_screen_14.draw(self.screen)
             text_info_screen_15.draw(self.screen)
             text_info_screen_16.draw(self.screen)
+
             # draw info scrren 2 text
             text_info_screen_21.draw(self.screen)
             text_info_screen_22.draw(self.screen)
@@ -126,6 +146,16 @@ class LoadingScreen():
             text_info_screen_27.draw(self.screen)
             text_info_screen_28.draw(self.screen)
             text_info_screen_29.draw(self.screen)
+
+            # draw info scrren 3 text
+            text_info_screen_31.draw(self.screen)
+            text_info_screen_32.draw(self.screen)
+            text_info_screen_33.draw(self.screen)
+            text_info_screen_34.draw(self.screen)
+            text_info_screen_35.draw(self.screen)
+            text_info_screen_36.draw(self.screen)
+            text_info_screen_37.draw(self.screen)
+            text_info_screen_38.draw(self.screen)
 
             # draw player numbers
             for x in nameTextArray:
