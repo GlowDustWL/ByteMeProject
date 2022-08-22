@@ -84,6 +84,7 @@ class EndScreen():
         pygame.time.wait(5500)
         #self.screen.blit(self.background, (0, 0))
         winnerText.draw(self.screen)
+        pygame.time.wait(500)
 
         loop = True
         while loop:

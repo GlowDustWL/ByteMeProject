@@ -203,6 +203,7 @@ class PlayScreen():
             # draw elements
             self.screen.blit(self.background, (0, 0))
             game_completed_button.draw(self.screen)
+            # game_completed_button.setClickable(True)
             quit_to_main_button.draw(self.screen)
 
             for x in range(0, 4):
@@ -311,11 +312,13 @@ class PlayScreen():
 
                 if show_decision:
                     if yes_button.clicked:
+                        selection.play()
                         game.players[game.current_player].free_token -= 1
                         narration.setText(
                             game.players[game.current_player].name + " uses a free turn token.")
                         player_decision_resolved()
                     if no_button.clicked:
+                        selection.play()
                         game.next_player()
                         narration.setText(
                             game.players[game.current_player].name + "'s turn.")
