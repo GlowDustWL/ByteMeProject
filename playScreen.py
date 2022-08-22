@@ -173,9 +173,9 @@ class PlayScreen():
         spin_button = button.Button(
             "SPIN", 50, 1320, 727)
         yes_button = button.Button(
-            "Yes", 50, 1120, 527)
+            "Yes", 32, 1220, 627)
         no_button = button.Button(
-            "No", 50, 1520, 527)
+            "No", 32, 1420, 627)
 
         # create array full of answer buttons from A to D
         answerButtonArray = [button.Button(
@@ -185,7 +185,7 @@ class PlayScreen():
             "d", 48, 1085, 800.5, False)]
 
         # DEBUG
-        give_all_player_tokens()
+        # give_all_player_tokens()
 
         show_spin = True
         loop = True
@@ -224,7 +224,7 @@ class PlayScreen():
 
             if show_decision:
                 narration.setText(
-                    "Do you want to use a free turn token?")
+                    "Use a free turn token?")
                 yes_button.draw(self.screen)
                 no_button.draw(self.screen)
 
