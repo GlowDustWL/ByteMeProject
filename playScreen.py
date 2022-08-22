@@ -506,15 +506,43 @@ class PlayScreen():
                             for x in range(0, 4):
                                 answerButtonArray[x].setClickable(True)
                         else:
-                            negative.play()
-                            questionText.addText("Category empty, Spin again!")
-                            ansAText.setText("")
-                            ansBText.setText("")
-                            ansCText.setText("")
-                            ansDText.setText("")
-                            spin_button.setClickable(True)
-                            narration.setText(
-                                "Press \"SPIN\" to spin the wheel.")
+                            # round 2 logic
+                            if game.spins_left <= 0 or game.board_empty:
+                                game.current_round += 1
+
+                                if game.current_round > 2:
+                                    # TODO: complete game and load final score board screen
+                                    questionText.addText(
+                                        "Game over! Press \"SEE RESULTS\" to view game results.")
+                                    ansAText.setText("")
+                                    ansBText.setText("")
+                                    ansCText.setText("")
+                                    ansDText.setText("")
+                                    spin_button.setClickable(False)
+                                    game_completed_button.setClickable(True)
+                                    quit_to_main_button.setClickable(False)
+                                else:
+                                    self.extraSpinFunctions = True
+                                    questionText.addText(
+                                        "Round 1 over! Press \"SPIN\" to begin Round 2.")
+                                    ansAText.setText("")
+                                    ansBText.setText("")
+                                    ansCText.setText("")
+                                    ansDText.setText("")
+                                    spin_button.setClickable(True)
+                                    narration.setText(
+                                        "Press \"SPIN\" to spin the wheel.")
+                            else:
+                                negative.play()
+                                questionText.addText(
+                                    "Category empty, Spin again!")
+                                ansAText.setText("")
+                                ansBText.setText("")
+                                ansCText.setText("")
+                                ansDText.setText("")
+                                spin_button.setClickable(True)
+                                narration.setText(
+                                    "Press \"SPIN\" to spin the wheel.")
 
                         refresh_all_player_score()
                         refresh_current_player_indicator()
