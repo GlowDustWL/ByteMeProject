@@ -1,13 +1,15 @@
 from ctypes import alignment
 from turtle import left
 import pygame
+import util
 
 # title text class
 
 
 class WrapTextDisplay():
     def __init__(self, text_input, fontSize, x, y):
-        self.font = pygame.font.Font('freesansbold.ttf', fontSize)
+        self.font = pygame.font.Font(
+            util.resourcePath('fonts/freesansbold.ttf'), fontSize)
         self.white = (255, 255, 255)
         self.blue = (0, 0, 128)
         self.x_pos = x

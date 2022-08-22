@@ -3,7 +3,7 @@ from random import randint
 from typing import final
 import random
 import pygame
-import os
+import util
 clock = pygame.time.Clock()
 
 
@@ -11,7 +11,7 @@ class Wheel:
 
     def __init__(self):
         self.wheel_image = pygame.image.load(
-            os.path.join('images', 'wheel_rnd1.png'))
+            util.resourcePath('images/wheel_rnd1.png'))
 
         self.wheel_image = pygame.transform.smoothscale(
             self.wheel_image, (375, 375))
@@ -37,7 +37,7 @@ class Wheel:
 
     def update(self):
         self.wheel_image = pygame.image.load(
-            os.path.join('images', 'wheel_rnd2.png'))
+            util.resourcePath('images/wheel_rnd2.png'))
         self.wheel_image = pygame.transform.smoothscale(
             self.wheel_image, (375, 375))
         self.cur_angle = 0

@@ -3,6 +3,7 @@ import pygame
 import button
 import textMedium
 import textDisplay
+import util
 
 
 class EndScreen():
@@ -11,8 +12,8 @@ class EndScreen():
         self.clock = clock
         self.height = height
         self.width = width
-        self.background_input = pygame.image.load(
-            'images/space_background.jpeg').convert()
+        self.background_input = pygame.image.load(util.resourcePath(
+            'images/space_background.jpeg')).convert()
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.playerList = []
@@ -22,7 +23,8 @@ class EndScreen():
     def getInput(self, numPlayers, playerList, finalScores):
         # initalizing sounds
         pygame.mixer.init()
-        selection = pygame.mixer.Sound('sounds/selection.mp3')
+        selection = pygame.mixer.Sound(
+            util.resourcePath('sounds/selection.mp3'))
 
         text = textMedium.TextMedium(
             "Thank you for Playing!", self.width/2, self.height/2 - 300)
@@ -72,13 +74,13 @@ class EndScreen():
 
         # initializing drumroll
         m = pygame.mixer.music
-        m.load('sounds/drumroll.wav')
+        m.load(util.resourcePath('sounds/drumroll.wav'))
         m.play()
         m.set_volume(1)
         pygame.display.update()
         pygame.event.pump()
         # cue next music
-        m.queue('sounds/uplifting.mp3')
+        m.queue(util.resourcePath('sounds/uplifting.mp3'))
 
         # wait for drumroll before displaying winner
         pygame.time.wait(5500)

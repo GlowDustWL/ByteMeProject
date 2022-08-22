@@ -11,6 +11,7 @@ import random
 from flattenList import flattenList
 import textDisplayLeft
 import textDisplayQuestionWrap
+import util
 
 
 class PlayScreen():
@@ -19,8 +20,8 @@ class PlayScreen():
         self.clock = clock
         self.height = height
         self.width = width
-        self.background_input = pygame.image.load(
-            'images/space_background.jpeg').convert()
+        self.background_input = pygame.image.load(util.resourcePath(
+            'images/space_background.jpeg')).convert()
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.box_color = (255, 255, 255)
@@ -62,14 +63,18 @@ class PlayScreen():
 
         # initializing sounds
         pygame.mixer.init()
-        back = pygame.mixer.Sound('sounds/back.mp3')
-        correct = pygame.mixer.Sound('sounds/correct.mp3')
-        free_token = pygame.mixer.Sound('sounds/free_token.mp3')
-        incorrect = pygame.mixer.Sound('sounds/incorrect_cut.mp3')
-        negative = pygame.mixer.Sound('sounds/negative.mp3')
-        q_intro = pygame.mixer.Sound('sounds/q_intro.mp3')
-        selection = pygame.mixer.Sound('sounds/selection.mp3')
-        wheel_sound = pygame.mixer.Sound('sounds/wheel_cut1.mp3')
+        back = pygame.mixer.Sound(util.resourcePath('sounds/back.mp3'))
+        correct = pygame.mixer.Sound(util.resourcePath('sounds/correct.mp3'))
+        free_token = pygame.mixer.Sound(
+            util.resourcePath('sounds/free_token.mp3'))
+        incorrect = pygame.mixer.Sound(
+            util.resourcePath('sounds/incorrect_cut.mp3'))
+        negative = pygame.mixer.Sound(util.resourcePath('sounds/negative.mp3'))
+        q_intro = pygame.mixer.Sound(util.resourcePath('sounds/q_intro.mp3'))
+        selection = pygame.mixer.Sound(
+            util.resourcePath('sounds/selection.mp3'))
+        wheel_sound = pygame.mixer.Sound(
+            util.resourcePath('sounds/wheel_cut1.mp3'))
 
         show_decision = False
         clickable_mem = []

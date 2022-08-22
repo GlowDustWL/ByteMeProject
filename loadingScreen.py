@@ -4,6 +4,7 @@ import button
 import inputBox
 import textMedium
 import textDisplay
+import util
 
 
 class LoadingScreen():
@@ -12,25 +13,25 @@ class LoadingScreen():
         self.clock = clock
         self.height = height
         self.width = width
-        self.background_input = pygame.image.load(
-            'images/space_background.jpeg').convert()
+        self.background_input = pygame.image.load(util.resourcePath(
+            'images/space_background.jpeg')).convert()
         self.background = pygame.transform.smoothscale(
             self.background_input, (self.width, self.height))
         self.playerList = []
         self.box_color = (255, 255, 255)
 
-        self.info_screen_1 = pygame.image.load(
-            'images/loading_Screen_Info_1.png').convert()
+        self.info_screen_1 = pygame.image.load(util.resourcePath(
+            'images/loading_Screen_Info_1.png')).convert()
         self.loading_screen_pics_1 = pygame.transform.smoothscale(
             self.info_screen_1, (369, 222))
 
-        self.info_screen_2 = pygame.image.load(
-            'images/questions_Prump.png').convert()
+        self.info_screen_2 = pygame.image.load(util.resourcePath(
+            'images/questions_Prump.png')).convert()
         self.loading_screen_pics_2 = pygame.transform.smoothscale(
             self.info_screen_2, (369, 222))
 
-        self.info_screen_3 = pygame.image.load(
-            'images/game_info_Player_info.png').convert()
+        self.info_screen_3 = pygame.image.load(util.resourcePath(
+            'images/game_info_Player_info.png')).convert()
         self.loading_screen_pics_3 = pygame.transform.smoothscale(
             self.info_screen_3, (369, 222))
 
@@ -39,8 +40,9 @@ class LoadingScreen():
     def getInput(self, numPlayers):
         # initializing sounds
         pygame.mixer.init()
-        selection = pygame.mixer.Sound('sounds/selection.mp3')
-        back = pygame.mixer.Sound('sounds/back.mp3')
+        selection = pygame.mixer.Sound(
+            util.resourcePath('sounds/selection.mp3'))
+        back = pygame.mixer.Sound(util.resourcePath('sounds/back.mp3'))
 
         text = textDisplay.TextDisplay(
             "Brought to you by Team ByteMe", 32, self.width/2, self.height/2 - 400)

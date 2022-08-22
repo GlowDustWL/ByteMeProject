@@ -1,11 +1,13 @@
 import pygame
+import util
 
 # button class
 
 
 class Button():
     def __init__(self, text_input, font_size, x, y, clickable=True):
-        font = pygame.font.Font('freesansbold.ttf', font_size)
+        font = pygame.font.Font(util.resourcePath(
+            'fonts/freesansbold.ttf'), font_size)
         white = (255, 255, 255)
         blue = (0, 0, 128)
         grey = (115, 115, 115)
