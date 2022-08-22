@@ -57,6 +57,35 @@ class PlayScreen():
             ansCText.setText(question[tmp_list[2]])
             ansDText.setText(question[tmp_list[3]])
 
+        show_decision = False
+        clickable_mem = []
+
+        def wait_for_player_decision():
+            nonlocal show_decision
+            show_decision = True
+            for x in range(0, 4):
+                clickable_mem.append(answerButtonArray[x].clickable)
+                answerButtonArray[x].setClickable(False)
+            clickable_mem.append(spin_button.clickable)
+            spin_button.setClickable(False)
+
+        def player_decision_resolved():
+            nonlocal show_decision
+            show_decision = False
+            for x in range(0, 4):
+                answerButtonArray[x].setClickable(clickable_mem[x])
+            spin_button.setClickable(clickable_mem[4])
+            clickable_mem.clear()
+            # force set clicked to false
+            no_button.clicked = False
+            yes_button.clicked = False
+            refresh_all_player_score()
+            refresh_current_player_indicator()
+
+        def give_all_player_tokens():
+            for x in range(len(game.players)):
+                game.players[x].add_token()
+
         # initialize game instance
         game = MainDriver.Game(numPlayers, playerList)
 
@@ -143,6 +172,10 @@ class PlayScreen():
             "QUIT TO MAIN", 32, self.width/10, self.height - 50)
         spin_button = button.Button(
             "SPIN", 50, 1320, 727)
+        yes_button = button.Button(
+            "Yes", 50, 1120, 527)
+        no_button = button.Button(
+            "No", 50, 1520, 527)
 
         # create array full of answer buttons from A to D
         answerButtonArray = [button.Button(
@@ -150,6 +183,9 @@ class PlayScreen():
             "b", 48, 1085, 677, False), button.Button(
             "c", 48, 1085, 735.5, False), button.Button(
             "d", 48, 1085, 800.5, False)]
+
+        # DEBUG
+        give_all_player_tokens()
 
         show_spin = True
         loop = True
@@ -185,6 +221,12 @@ class PlayScreen():
 
             if show_spin:
                 spin_button.draw(self.screen)
+
+            if show_decision:
+                narration.setText(
+                    "Do you want to use a free turn token?")
+                yes_button.draw(self.screen)
+                no_button.draw(self.screen)
 
             # round 2 logic
             if game.spins_left <= 0 or game.board_empty:
@@ -228,15 +270,15 @@ class PlayScreen():
                                 answerButtonArray[x].setClickable(False)
                             # set the spin button to clickable
                             spin_button.setClickable(True)
+                            narration.setText(
+                                "Press \"SPIN\" to spin the wheel.")
                         else:
                             # prevent incorrect answer from being selected twice
                             answerButtonArray[x].setClickable(False)
                             game.players[game.current_player].sub_score(
                                 game.current_question_value)
                             if game.players[game.current_player].free_token > 0:
-                                narration.setText(
-                                    game.players[game.current_player].name + " uses a free turn token.")
-                                game.players[game.current_player].free_token -= 1
+                                wait_for_player_decision()
                             else:
                                 game.next_player()
                         refresh_all_player_score()
@@ -244,6 +286,18 @@ class PlayScreen():
 
                 # other handlers
                 # ...
+
+                if show_decision:
+                    if yes_button.clicked:
+                        game.players[game.current_player].free_token -= 1
+                        narration.setText(
+                            game.players[game.current_player].name + " uses a free turn token.")
+                        player_decision_resolved()
+                    if no_button.clicked:
+                        game.next_player()
+                        narration.setText(
+                            game.players[game.current_player].name + "'s turn.")
+                        player_decision_resolved()
 
                 if spin_button.clicked:
                     # spun = True
@@ -260,10 +314,9 @@ class PlayScreen():
                     # game logic
                     if type(spin_result) == str:
                         if spin_result == 'lose turn':
+                            spin_button.setClickable(True)
                             if game.players[game.current_player].free_token > 0:
-                                narration.setText(
-                                    game.players[game.current_player].name + " uses a free turn token.")
-                                game.players[game.current_player].free_token -= 1
+                                wait_for_player_decision()
                             else:
                                 game.next_player()
                             print(game.current_player)
@@ -283,6 +336,7 @@ class PlayScreen():
                         elif spin_result == "spin again":
                             pass
                         spin_button.setClickable(True)
+                        narration.setText("Press \"SPIN\" to spin the wheel.")
                         refresh_all_player_score()
                         refresh_current_player_indicator()
 
@@ -302,6 +356,8 @@ class PlayScreen():
                             ansCText.setText("")
                             ansDText.setText("")
                             spin_button.setClickable(True)
+                            narration.setText(
+                                "Press \"SPIN\" to spin the wheel.")
 
                         refresh_all_player_score()
                         refresh_current_player_indicator()
