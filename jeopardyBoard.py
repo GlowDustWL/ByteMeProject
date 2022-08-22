@@ -1,6 +1,7 @@
 # import statements
 import pygame
 import textDisplayBoardWrap
+import button_jeopardy_board
 
 
 class JeopardyBoard:
@@ -45,6 +46,14 @@ class JeopardyBoard:
             for y in range(5):
                 self.showMatrix[x][y] = True
 
+        # create array of buttons to be used when selecting categories in the event of either player's choice or opponent's choice
+        self.categorySelectionButtons = []
+        for x in range(6):
+            self.categorySelectionButtons.append(
+                button_jeopardy_board.ButtonJeopardyBoard(x, 0))
+
+        self.show_buttons = False
+
     def draw(self, surface, categories):
 
         # get mouse position
@@ -71,9 +80,13 @@ class JeopardyBoard:
                         center=rect_obj.center)
                     surface.blit(text_surface_object, text_rect)
 
+        # draw category selection buttons if needed
+        if self.show_buttons:
+            for x in range(6):
+                if self.columnEmpty(x) == False:
+                    self.categorySelectionButtons[x].draw(surface)
+
     def removeSquare(self, surface, x, y):
-        # rect_obj = pygame.draw.rect(surface, self.light_blue, pygame.Rect(self.title_x_start+self.x_pad+self.x_dim*x+self.x_pad*x,
-        #                                                                   self.title_y_start+self.y_pad+self.y_dim*y+self.y_pad*y+self.y_dim+3*self.y_pad, self.x_dim, self.y_dim))
         self.showMatrix[x][y] = False
 
     def highlightSquare(self, surface, x, y):
@@ -89,3 +102,15 @@ class JeopardyBoard:
         for x in range(6):
             for y in range(5):
                 self.showMatrix[x][y] = True
+
+    def showButtons(self, show):
+        if show:
+            self.show_buttons = True
+        elif show == False:
+            self.show_buttons = False
+
+    def columnEmpty(self, x):
+        for y in range(5):
+            if self.showMatrix[x][y]:
+                return False
+        return True
