@@ -414,7 +414,7 @@ class PlayScreen():
                         if spin_result == 'lose turn':
 
                             negative.play()
-                            game.next_player()
+                            # game.next_player()
                             print(game.current_player)
 
                             spin_button.setClickable(True)
