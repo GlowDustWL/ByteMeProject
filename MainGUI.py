@@ -1,13 +1,15 @@
 # MainGUI class
 
-# import statements
-from turtle import screensize
-import pygame
-import mainMenu
-import loadingScreen
-import playScreen
-import endScreen
 import util
+import endScreen
+import playScreen
+import loadingScreen
+import mainMenu
+import pygame
+from turtle import screensize
+import sys
+
+# import statements
 
 
 class MainGUI():
