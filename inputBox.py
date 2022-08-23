@@ -29,6 +29,6 @@ class InputBox():
         text_surface = self.font.render(
             text_input, True, (255, 255, 255))
         # show input
-        surface.blit(text_surface, (self.input_rect.x+5, self.input_rect.y+5))
+        surface.blit(text_surface, (self.input_rect.x+5, self.input_rect.y-1))
         self.input_rect.w = max(100, text_surface.get_width()+10)
         self.text_surface_width = text_surface.get_width()

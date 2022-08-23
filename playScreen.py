@@ -342,7 +342,7 @@ class PlayScreen():
                             for x in range(0, 4):
                                 answerButtonArray[x].setClickable(True)
                         else:
-                            negative.play()
+                            # negative.play()
                             questionText.addText("Category empty, Spin again!")
                             ansAText.setText("")
                             ansBText.setText("")
@@ -534,7 +534,7 @@ class PlayScreen():
                                     narration.setText(
                                         "Press \"SPIN\" to spin the wheel.")
                             else:
-                                negative.play()
+                                # negative.play()
                                 questionText.addText(
                                     "Category empty, Spin again!")
                                 ansAText.setText("")
